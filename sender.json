@@ -1,0 +1,6 @@
+{
+  "name": "sender",
+  "description": "Example host for native messaging",
+  "path": "/Users/samuel/My Drive/NeuroTech/Project-22",
+  "type": "stdio"
+}

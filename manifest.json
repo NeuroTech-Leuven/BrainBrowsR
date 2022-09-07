@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "BrainBrowsR",
+  "version": "1.0",
+
+  "description": "A program that lets users with disabilities use social media with EEG signals.",
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.instagram.com/*"],
+      "js": ["content_script.js"]
+    }
+  ],
+
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "48": "icons/border-48.png"
+    },
+    "default_title": "BrainBrowsR",
+    "default_popup": "/overlay.html"
+  },
+
+  "permissions": ["activeTab", "storage", "tabs", "nativeMessaging"]
+}
