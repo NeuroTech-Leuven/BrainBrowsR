@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <style>
+    body {
+    background-color: rgb(255, 255, 255);
+    min-width: 400px; 
+    /* max-width: 100%; */
+    min-height: 400px; 
+}
+    .flicker10hz {
+      animation: blink .1s steps(1, end) infinite;
+    }
+    .flicker15hz {
+    animation: blink .067s steps(1, end) infinite;
+    }
+
+    .flicker5hz {
+      animation: blink .2s steps(1, end) infinite;
+    }
+
+    .flicker2hz {
+      animation: blink .5s steps(1, end) infinite;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    </style>
+    
+    <body>
+        <div class="flicker2hz">
+          <img src="icons/like_darkblue.png" width="150" height="150" style="position:absolute;  left:10px; top:10px;">
+        </div>
+        <div class="flicker5hz">
+          <img src="icons/comment_green.png" width="150" height="150" style="position:absolute;  left:10px; bottom:10px;">
+        </div>
+        <div class="flicker10hz">              
+          <img src="icons/up_lightblue.png" width="150" height="150" style="position:absolute;  right:10px; top:10px;">
+        </div>
+        <div class="flicker15hz">
+          <img src="icons/down_red.png" width="150" height="150" style= "position:absolute;  right:10px; bottom:10px;">
+        </div>
+    </body>
+
+</html>
