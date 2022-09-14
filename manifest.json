@@ -15,7 +15,7 @@
   "browser_action": {
     "browser_style": true,
     "default_icon": {
-      "48": "icons/border-48.png"
+      "48": "icons/logo.png"
     },
     "default_title": "BrainBrowsR",
     "default_popup": "/overlay.html"

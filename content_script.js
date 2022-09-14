@@ -1,7 +1,9 @@
 // Hide the menu bar
-hideElement(document.getElementsByClassName("_acum")[0]);
+// hideElement(document.getElementsByClassName("_acum")[0]);
 // Hide the sidebar
-hideElement(document.getElementsByClassName("_aak6 _aak9")[0]);
+// hideElement(document.getElementsByClassName("_aak6 _aak9")[0]);
+
+// hideElement(document.getElementsByClassName("_aauo")[0]);
 // hideElement(document.getElementsByClassName("_ab6k _ab6m _aatb _aatc _aatd _aatf")[0]);
 // new_html = "dit is toch al iet anders"
 // editElement(document.getElementsByClassName("_ab8w  _ab94 _ab99 _ab9h _ab9m _ab9p _abcm")[0]);
@@ -17,55 +19,70 @@ var inter_p = find_interactive(posts);
 
 editInteractive(inter_p);
 
-// let fullURL = browser.runtime.getURL("icons/like_darkblue.png");
-
-// var like_element = document.createElement('img');
-// var like_element = document.createElement('div');
-// like_element.className = "like_class";
-// like_element.setAttribute("src", beastURL);
-// // like_element.innerHTML = '<object type="text/html" data= fullURL ></object>';
-// // like_element.innerHTML = "<img src=\"icons/like_darkblue.png\" width=\"150\" height=\"150\">";
-// // clock_element.style.cssText = 'font-size:25px;position:fixed;width:105px;height:35px;left:1000px;top:100px;opacity:0.3;z-index:900;color:#d0d0d0;background:#404040';
-// like_element.style.cssText = 'position:fixed;width:150;height:150;left:1000px;top:100px;z-index:900;color:#d0d0d0;background:#404040';
+// Attempt to add stylesheet this way
 
 // document.body.appendChild(like_element);
+// const css = document.styleSheets[0];
+// css.insertRule(`
+// @keyframes blink {
+//   0% {
+//     opacity: 1;
+//   }
+//   50% {
+//     opacity: 0;
+//   }
+//   100% {
+//     opacity: 1;
+//   }`, css.cssRules.length);
 
 
 
-// let url = browser.runtime.getURL("beasts/frog.jpg");
-addImage(makeURL("icons/like_darkblue.png"));
+var like_element = document.createElement('img');
+like_element.style.cssText = 'position:fixed;width:150px;height:150px;left:950px;top:200px'; // comment this to work with css stylesheet
 
-let comment = document.createElement('img');
+var link = document.createElement('link'); // link element to add stylesheet to img
+// link.rel = 'stylesheet';
+// link.type = 'text/css';
+// link.href = makeURL('stimuli.css');
+like_element.setAttribute("src", makeURL("icons/like_darkblue.png"));
+// like_element.appendChild(link)
+like_element.className = "like";
+document.body.appendChild(like_element);
+
+
+
+// var link = document.createElement('link');
+// link.rel = 'stylesheet';   
+// link.type = 'text/css';
+// link.href = makeURL("stimuli.css");
+var comment = document.createElement('img');
 comment.setAttribute("src", makeURL("icons/comment_green.png"));
-comment.style.cssText = 'position:fixed;width:150px;height:150px;left:900px;top:400px';
-comment.className = "comment-image";
+comment.style.cssText = 'position:fixed;width:150px;height:150px;left:950px;top:400px';
+// comment.appendChild(link);
+comment.className = "comment";
 document.body.appendChild(comment);
 
-let arrow_up = document.createElement('img');
+
+var arrow_up = document.createElement('img');
 arrow_up.setAttribute("src", makeURL("icons/up_red.png"));
-arrow_up.style.cssText = 'position:fixed;width:150px;height:150px;left:1100px;top:200px';
+arrow_up.style.cssText = 'position:fixed;width:150px;height:150px;left:1150px;top:200px';
 arrow_up.className = "arrow_up-image";
 document.body.appendChild(arrow_up);
 
 
-let arrow_down = document.createElement('img');
+var arrow_down = document.createElement('img');
 arrow_down.setAttribute("src", makeURL("icons/down_lightblue.png"));
-arrow_down.style.cssText = 'position:fixed;width:150px;height:150px;left:1100px;top:400px';
+arrow_down.style.cssText = 'position:fixed;width:150px;height:150px;left:1150px;top:400px';
 arrow_down.className = "arrow_down-image";
 document.body.appendChild(arrow_down);
+
 
 
 function makeURL(img_path) {
   return browser.runtime.getURL(img_path);
 }
 
-function addImage(img_url) {
-  let like_element = document.createElement('img');
-  like_element.setAttribute("src", img_url);
-  like_element.style.cssText = 'position:fixed;width:150px;height:150px;left:900px;top:200px';
-  like_element.className = "like-image";
-  document.body.appendChild(like_element);
-}
+
 function hideElement(element) {
   element.style.display = "none";
 
