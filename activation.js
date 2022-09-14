@@ -11,9 +11,3 @@ activation.addEventListener("click", function () {
 browser.tabs.executeScript({
   file: "/content_script.js",
 });
-
-// The listener
-var port = browser.runtime.connectNative("sender");
-port.onMessage.addListener((response) => {
-  console.log(response);
-});
