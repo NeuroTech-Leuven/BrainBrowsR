@@ -8,68 +8,16 @@ setUp();
 hideElement(document.getElementsByClassName("_acum")[0]);
 // Hide the sidebar
 hideElement(document.getElementsByClassName("_aak6 _aak9")[0]);
+// insert the stimuli
+insertStimuli();
 // set the counter
 var counter = 0;
 // Get the first post
 var first_post = getPostByIndex(counter);
 processPost(first_post);
 
-// Attempt to add stylesheet this way
-
-// document.body.appendChild(like_element);
-// const css = document.styleSheets[0];
-// css.insertRule(`
-// @keyframes blink {
-//   0% {
-//     opacity: 1;
-//   }
-//   50% {
-//     opacity: 0;
-//   }
-//   100% {
-//     opacity: 1;
-//   }`, css.cssRules.length);
-
-var like_element = document.createElement("img");
-like_element.style.cssText =
-  "position:fixed;width:150px;height:150px;left:950px;top:200px"; // comment this to work with css stylesheet
-
-var link = document.createElement("link"); // link element to add stylesheet to img
-// link.rel = 'stylesheet';
-// link.type = 'text/css';
-// link.href = makeURL('stimuli.css');
-like_element.setAttribute("src", makeURL("icons/like_darkblue.png"));
-// like_element.appendChild(link)
-like_element.className = "like";
-document.body.appendChild(like_element);
-
-// var link = document.createElement('link');
-// link.rel = 'stylesheet';
-// link.type = 'text/css';
-// link.href = makeURL("stimuli.css");
-var comment = document.createElement("img");
-comment.setAttribute("src", makeURL("icons/comment_green.png"));
-comment.style.cssText =
-  "position:fixed;width:150px;height:150px;left:950px;top:400px";
-// comment.appendChild(link);
-comment.className = "comment";
-document.body.appendChild(comment);
-
-var arrow_up = document.createElement("img");
-arrow_up.setAttribute("src", makeURL("icons/up_red.png"));
-arrow_up.style.cssText =
-  "position:fixed;width:150px;height:150px;left:1150px;top:200px";
-arrow_up.className = "arrow_up-image";
-document.body.appendChild(arrow_up);
-
-var arrow_down = document.createElement("img");
-arrow_down.setAttribute("src", makeURL("icons/down_lightblue.png"));
-arrow_down.style.cssText =
-  "position:fixed;width:150px;height:150px;left:1150px;top:400px";
-arrow_down.className = "arrow_down-image";
-document.body.appendChild(arrow_down);
-
 function makeURL(img_path) {
+  // eslint-disable-next-line no-undef
   return browser.runtime.getURL(img_path);
 }
 
@@ -77,15 +25,41 @@ function hideElement(element) {
   element.style.display = "none";
 }
 
-function editElement(element) {
-  // element.innerHTML = '<object type="text/html" data="popup.html" ></object>';;
-  element.innerHTML = "hier was een post";
+function insertStimuli() {
+  var like_element = document.createElement("img");
+  like_element.setAttribute("src", makeURL("icons/like_red.png"));
+  like_element.style.cssText =
+    "position:fixed;width:150px;height:150px;left:950px;top:200px"; // comment this to work with css stylesheet
+  like_element.className = "like";
+  document.body.appendChild(like_element);
+
+  var comment = document.createElement("img");
+  comment.setAttribute("src", makeURL("icons/comment_green.png"));
+  comment.style.cssText =
+    "position:fixed;width:150px;height:150px;left:950px;top:400px";
+  comment.className = "comment";
+  document.body.appendChild(comment);
+
+  var arrow_up = document.createElement("img");
+  arrow_up.setAttribute("src", makeURL("icons/up_red.png"));
+  arrow_up.style.cssText =
+    "position:fixed;width:150px;height:150px;left:1150px;top:200px";
+  arrow_up.className = "up";
+  document.body.appendChild(arrow_up);
+
+  var arrow_down = document.createElement("img");
+  arrow_down.setAttribute("src", makeURL("icons/down_lightblue.png"));
+  arrow_down.style.cssText =
+    "position:fixed;width:150px;height:150px;left:1150px;top:400px";
+  arrow_down.className = "down";
+  document.body.appendChild(arrow_down);
 }
 
 function next() {
   console.log("Go to the next post");
   counter++;
 }
+
 function previous() {
   console.log("Go to the previous post");
   counter = counter ? counter - 1 : counter;
@@ -112,7 +86,8 @@ function setUp() {
 }
 
 function processPost(post) {
-  const interactive_elements = document.getElementsByClassName("_abl-");
+  const interactive_elements = post.getElementsByClassName("_abl-");
+  console.log(interactive_elements);
   formatInteractiveElements(interactive_elements);
   post.scrollIntoView();
 }

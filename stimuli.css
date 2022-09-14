@@ -1,38 +1,37 @@
 .like {
   position: fixed;
   width: 150px;
-  height: 150px; 
-  left: 100px; 
+  height: 150px;
+  left: 100px;
   top: 200px;
-  /* animation: blink .1s steps(1, end) infinite;  */
-
+  animation: blink 0.1s steps(1, end) infinite;
 }
 
 .comment {
-    position: fixed;
-    width: 150px;
-    height: 150px; 
-    left: 900px; 
-    top: 400px;
-    animation: blink .067s steps(1, end) infinite;
-  }
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  left: 900px;
+  top: 400px;
+  animation: blink 0.067s steps(1, end) infinite;
+}
 
 .up {
   position: fixed;
   width: 150px;
-  height: 150px; 
-  left: 1300px; 
+  height: 150px;
+  left: 1300px;
   top: 200px;
-  /* animation: blink .2s steps(1, end) infinite; */
+  animation: blink 0.2s steps(1, end) infinite;
 }
 
 .down {
   position: fixed;
   width: 150px;
-  height: 150px; 
-  left: 1300px; 
+  height: 150px;
+  left: 1300px;
   top: 400px;
-  /* animation: blink .5s steps(1, end) infinite; */
+  animation: blink 0.5s steps(1, end) infinite;
 }
 
 @keyframes blink {
@@ -46,5 +45,3 @@
     opacity: 1;
   }
 }
-
-  

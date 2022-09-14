@@ -8,7 +8,8 @@
   "content_scripts": [
     {
       "matches": ["*://*.instagram.com/*"],
-      "js": ["content_script.js"]
+      "js": ["content_script.js"],
+      "css": ["stimuli.css"]
     }
   ],
 
@@ -20,6 +21,7 @@
     "default_title": "BrainBrowsR",
     "default_popup": "/overlay.html"
   },
+  "web_accessible_resources": ["fix.css"],
 
   "permissions": ["activeTab", "storage", "tabs", "nativeMessaging"]
 }
