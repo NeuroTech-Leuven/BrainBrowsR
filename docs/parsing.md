@@ -1,5 +1,7 @@
 # Parsing
 
+Written by: Samuel Berton
+
 ## Goal
 
 With parsing we try to extract certain elements of the html-code that each website is build on. The extracted data is then used by other blocks to create the desired effect of the extension.
