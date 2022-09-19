@@ -8,7 +8,7 @@ With parsing we try to extract certain elements of the html-code that each websi
 
 Each website consists of three fundamental technologies:
 
-1. [HTML][^1], hyper text markup language
+1. [HTML][1], hyper text markup language
 2. [CSS][2] cascading style sheets
 3. [Javascript][3]
 
