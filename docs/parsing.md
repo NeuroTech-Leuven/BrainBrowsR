@@ -28,9 +28,9 @@ To find the posts in the html code, it's is recommended to use developer tools i
 
 ## Sources
 
-[1] https://en.wikipedia.org/wiki/HTML
-[2] https://en.wikipedia.org/wiki/CSS
-[3] https://en.wikipedia.org/wiki/JavaScript
-[4] https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
-[5] https://developer.chrome.com/docs/devtools/
-[6] https://developer.mozilla.org/en-US/docs/Tools
+[1]: https://en.wikipedia.org/wiki/HTML "HTML"
+[2]: https://en.wikipedia.org/wiki/CSS "CSS"
+[3]: https://en.wikipedia.org/wiki/JavaScript "Javascript"
+[4]: https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById "Get element by id"
+[5]: https://developer.chrome.com/docs/devtools/ "Chrome devtools"
+[6]: https://developer.mozilla.org/en-US/docs/Tools "Mozilla devtools"
