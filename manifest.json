@@ -19,7 +19,7 @@
       "48": "icons/logo.png"
     },
     "default_title": "BrainBrowsR",
-    "default_popup": "/overlay.html"
+    "default_popup": "overlay.html"
   },
   "web_accessible_resources": ["fix.css"],
 

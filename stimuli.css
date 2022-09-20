@@ -2,8 +2,8 @@
   position: fixed;
   width: 150px;
   height: 150px;
-  left: 100px;
-  top: 200px;
+  left: 10px;
+  top: 10px;
   animation: blink 0.1s steps(1, end) infinite;
 }
 
@@ -11,8 +11,8 @@
   position: fixed;
   width: 150px;
   height: 150px;
-  left: 900px;
-  top: 400px;
+  left: 10px;
+  bottom: 10px;
   animation: blink 0.067s steps(1, end) infinite;
 }
 
@@ -20,8 +20,8 @@
   position: fixed;
   width: 150px;
   height: 150px;
-  left: 1300px;
-  top: 200px;
+  right: 10px;
+  top: 10px;
   animation: blink 0.2s steps(1, end) infinite;
 }
 
@@ -29,8 +29,8 @@
   position: fixed;
   width: 150px;
   height: 150px;
-  left: 1300px;
-  top: 400px;
+  right: 10px;
+  bottom: 10px;
   animation: blink 0.5s steps(1, end) infinite;
 }
 
@@ -39,7 +39,7 @@
     opacity: 1;
   }
   50% {
-    opacity: 0;
+    opacity: 0.25;
   }
   100% {
     opacity: 1;
