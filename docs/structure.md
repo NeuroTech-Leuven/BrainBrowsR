@@ -2,6 +2,8 @@
 
 Written by: Samuel Berton
 
+## Documentation guidelines
+
 In the documentation we try to keep a similar structure, so that it is both easy to write as well as read.  
 The goal of the documentation is the following:
 
@@ -22,3 +24,11 @@ Underneath follow the sections:
 3. How/ implementation: here you explain your implementation, try to reason with the author why you did certain actions or used certain packages/ technologies. Make sure to use links and citations.
 4. Results: what is the result of your implementation. This could be a graph, video, picture. This is particularly important for data-team.
 5. Sources: where can people find more info on the discussed topic.
+
+## How to markdown
+
+Since all the documentation will be written in markdown, I have added some information on how this works. As always, the internet is you greatest source, so if you don't know something you can always find it there.
+
+According to wikipedia, [markdown](https://en.wikipedia.org/wiki/Markdown) is a lightweitght markup language for creating formatted text using a plain-text editor. This allows for it to be written on any computer, without special tools and programs. In github, which we will be using to host our documentation, markdown is formatted to look nice and easier to read.
+
+To write markdown, you can use any editor. For a titles and headings, use `#` with the number indicating the level. Ordered lists can be created using `1.`. Lastly links can be added using `[text](link)`. More details can be found on the [markdown guide page](https://www.markdownguide.org/).
