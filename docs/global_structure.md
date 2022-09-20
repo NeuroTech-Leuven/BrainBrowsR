@@ -32,6 +32,4 @@ In the following part a diagram is given to discuss the implementation of the so
         like -->wait
 
     style Start fill:#26bf24
-    click connect href "./websockets.md"
-
 ```
