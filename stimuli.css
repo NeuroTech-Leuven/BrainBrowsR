@@ -1,47 +1,58 @@
-.like {
+.stimuli {
+  --border-radius: 3rem;
+  --border-size: 0.3rem;
+  /* --border-bg: conic-gradient(red , white ,  white, white, red); */
+  --padding: .2rem;
+  --offset: 15px;
+
   position: fixed;
   width: 150px;
   height: 150px;
-  left: 10px;
-  top: 10px;
-  animation: blink 0.1s steps(1, end) infinite;
+
+  /* animation: blink var(--freq) steps(1, end) infinite; */
+  animation: blink var(--freq) linear infinite; 
+  padding: calc(var(--padding) + var(--border-size));
+  border-radius: var(--border-radius);
+  /* background: var(--border-bg); */
+  background-color: var(--color); 
 }
 
-.comment {
-  position: fixed;
-  width: 150px;
-  height: 150px;
-  left: 10px;
-  bottom: 10px;
-  animation: blink 0.067s steps(1, end) infinite;
+.like{
+  --color: rgb(255, 0, 0); 
+  --freq : .125s;
+  left: var(--offset);
+  top: var(--offset);
 }
 
-.up {
-  position: fixed;
-  width: 150px;
-  height: 150px;
-  right: 10px;
-  top: 10px;
-  animation: blink 0.2s steps(1, end) infinite;
+.comment{
+  --color: rgb(63, 189, 63);  
+  --freq : .1s;
+  left: var(--offset);
+  bottom: var(--offset);
 }
 
-.down {
-  position: fixed;
-  width: 150px;
-  height: 150px;
-  right: 10px;
-  bottom: 10px;
-  animation: blink 0.5s steps(1, end) infinite;
+.up{
+  --color: rgb(0, 0, 255);  
+  --freq : .083s;  
+  right: var(--offset);
+  top: var(--offset); 
+}
+
+.down{
+  --color: rgb(161, 36, 185);  
+  --freq : .071s;  
+  right: var(--offset);
+  bottom: var(--offset);
 }
 
 @keyframes blink {
   0% {
-    opacity: 1;
+    opacity: 1.0;
   }
   50% {
     opacity: 0.25;
   }
   100% {
-    opacity: 1;
+    opacity: 1.0;
   }
 }

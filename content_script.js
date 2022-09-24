@@ -1,5 +1,5 @@
 // Make it clear that the extension has loaded
-document.body.style.border = "5px solid red";
+document.body.style.border = "6px solid pink";
 
 // Set up the websockets
 setUp();

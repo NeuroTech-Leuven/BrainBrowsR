@@ -13,22 +13,22 @@ function hideElement(element) {
 
 function insertStimuli() {
   var like = document.createElement("img");
-  like.setAttribute("src", makeURL("icons/like_darkblue.png"));
-  like.className = "like";
+  like.setAttribute("src", makeURL("icons/invert_like.png"));
+  like.className = "stimuli like";
   document.body.appendChild(like);
 
   var comment = document.createElement("img");
-  comment.setAttribute("src", makeURL("icons/comment_green.png"));
-  comment.className = "comment";
+  comment.setAttribute("src", makeURL("icons/invert_comment.png"));
+  comment.className = "stimuli comment";
   document.body.appendChild(comment);
 
   var up = document.createElement("img");
-  up.setAttribute("src", makeURL("icons/up_red.png"));
-  up.className = "up";
+  up.setAttribute("src", makeURL("icons/invert_up.png"));
+  up.className = "stimuli up";
   document.body.appendChild(up);
 
   var down = document.createElement("img");
-  down.setAttribute("src", makeURL("icons/down_lightblue.png"));
-  down.className = "down";
+  down.setAttribute("src", makeURL("icons/invert_down.png"));
+  down.className = "stimuli down";
   document.body.appendChild(down);
 }
