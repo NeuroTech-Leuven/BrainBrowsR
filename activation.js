@@ -1,20 +1,41 @@
-let activation = document.getElementById("activation_button");
-let hello = "I'm defined in a page script!";
+let activation_button = document.getElementById("activation_button");
 
-activation.addEventListener("click", function () {
-  if (activation.value == 0) {
-    activation.value = 1;
+
+
+var currentActivation = localStorage.getItem('activation_value');
+
+// console.log(currentActivation);
+
+
+if (currentActivation == 0) {
+  activation_button.innerHTML = "Activate overlay";
+}
+else {
+  activation_button.innerHTML = "Deactivate overlay";
+}
+
+activation_button.addEventListener("click", function () {
+  if (currentActivation == 0) {
+    currentActivation = 1;
+    localStorage.setItem('activation_value',currentActivation);
     browser.tabs.executeScript({
       file: "/display_stimuli.js",
     });
-    activation.innerHTML = "Deactivate overlay"
+    activation_button.innerHTML = "Deactivate overlay";
+    console.log(currentActivation);
   } else {
-    activation.value = 0;
+    currentActivation = 0;
+    localStorage.setItem('activation_value',currentActivation);
     browser.tabs.executeScript({
       file: "/hide_stimuli.js",
     });
-    activation.innerHTML = "Activate overlay"
+    activation_button.innerHTML = "Activate overlay";
   }
 })
+
+
+
+
+
 
 

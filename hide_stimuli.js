@@ -1,5 +1,6 @@
 hideStimuli();
 
+
 function removeElement(element) {
     element.remove();
   }

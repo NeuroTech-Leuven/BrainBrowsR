@@ -45,6 +45,14 @@
   bottom: var(--offset);
 }
 
+.logo{
+  position: fixed;
+  width: 150px;
+  height: 200px;  
+  right: 20px;
+  bottom: 200px;
+}
+
 @keyframes blink {
   0% {
     opacity: 1.0;
