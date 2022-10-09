@@ -1,14 +1,9 @@
 // insert the stimuli
 insertStimuli();
 
-
 function makeURL(img_path) {
   // eslint-disable-next-line no-undef
   return browser.runtime.getURL(img_path);
-}
-
-function hideElement(element) {
-  element.style.display = "none";
 }
 
 function insertStimuli() {

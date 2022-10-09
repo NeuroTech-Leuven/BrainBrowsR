@@ -44,9 +44,6 @@ document.body.appendChild(logo);
 
 // set the counter
 var counter = 0;
-// Get the first post
-var first_post = getPostByIndex(counter);
-processPost(first_post);
 
 function makeURL(img_path) {
   // eslint-disable-next-line no-undef
