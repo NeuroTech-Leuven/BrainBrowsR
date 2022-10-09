@@ -1,15 +1,47 @@
 // Make it clear that the extension has loaded
-document.body.style.border = "5px solid red";
+document.body.style.border = "6px solid pink";
+
+// wait a bit
+setTimeout(editPage, 300);
+
+function editPage() {
+  // hide the menubar
+  getAndHideElementByClassName("_acum");
+  // hide the story menu
+  getAndHideElementByClassName("_aac4 _aac5 _aac6");
+  // hide the sidebar
+  getAndHideElementByClassName("_aak6 _aak9");
+  // hide the top bar
+  getAndHideElementByClassName("_acbl");
+  // scroll to the first post
+  getAndProcessPost(0);
+}
+
+/*
+Hides an html element
+*/
+function hideElement(element) {
+  element.style.display = "none";
+}
+
+/*
+Gets an element by classname and then hides it if it exists
+*/
+function getAndHideElementByClassName(className) {
+  var element = document.getElementsByClassName(className)[0];
+  if (element) {
+    hideElement(element);
+  }
+}
 
 // Set up the websockets
 setUp();
 
-// Hide the menu bar
-hideElement(document.getElementsByClassName("_acum")[0]);
-// Hide the sidebar
-hideElement(document.getElementsByClassName("_aak6 _aak9")[0]);
-// insert the stimuli
-insertStimuli();
+var logo = document.createElement("img");
+logo.setAttribute("src", makeURL("icons/logonutl.png"));
+logo.className = "logo";
+document.body.appendChild(logo);
+
 // set the counter
 var counter = 0;
 // Get the first post
@@ -19,40 +51,6 @@ processPost(first_post);
 function makeURL(img_path) {
   // eslint-disable-next-line no-undef
   return browser.runtime.getURL(img_path);
-}
-
-function hideElement(element) {
-  element.style.display = "none";
-}
-
-function insertStimuli() {
-  var like_element = document.createElement("img");
-  like_element.setAttribute("src", makeURL("icons/like_red.png"));
-  like_element.style.cssText =
-    "position:fixed;width:150px;height:150px;left:950px;top:200px"; // comment this to work with css stylesheet
-  like_element.className = "like";
-  document.body.appendChild(like_element);
-
-  var comment = document.createElement("img");
-  comment.setAttribute("src", makeURL("icons/comment_green.png"));
-  comment.style.cssText =
-    "position:fixed;width:150px;height:150px;left:950px;top:400px";
-  comment.className = "comment";
-  document.body.appendChild(comment);
-
-  var arrow_up = document.createElement("img");
-  arrow_up.setAttribute("src", makeURL("icons/up_red.png"));
-  arrow_up.style.cssText =
-    "position:fixed;width:150px;height:150px;left:1150px;top:200px";
-  arrow_up.className = "up";
-  document.body.appendChild(arrow_up);
-
-  var arrow_down = document.createElement("img");
-  arrow_down.setAttribute("src", makeURL("icons/down_lightblue.png"));
-  arrow_down.style.cssText =
-    "position:fixed;width:150px;height:150px;left:1150px;top:400px";
-  arrow_down.className = "down";
-  document.body.appendChild(arrow_down);
 }
 
 function next() {
@@ -66,30 +64,36 @@ function previous() {
 }
 
 function setUp() {
-  const websocket = new WebSocket("ws://localhost:8002/");
-  websocket.addEventListener("message", ({ data }) => {
-    const event = JSON.parse(data);
-    console.log(event);
-    switch (event) {
-      case "N":
-        next();
-        break;
-      case "P":
-        previous();
-        break;
-    }
-    console.log(counter);
-    let post = getPostByIndex(counter);
-    console.log(post);
-    processPost(post);
-  });
+  try {
+    const websocket = new WebSocket("ws://localhost:8002/");
+    websocket.addEventListener("message", ({ data }) => {
+      const event = JSON.parse(data);
+      console.log(event);
+      switch (event) {
+        case "N":
+          next();
+          break;
+        case "P":
+          previous();
+          break;
+      }
+      console.log(counter);
+      getAndProcessPost(counter);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function getAndProcessPost(index) {
+  var post = getPostByIndex(index);
+  processPost(post);
 }
 
 function processPost(post) {
   const interactive_elements = post.getElementsByClassName("_abl-");
-  console.log(interactive_elements);
   formatInteractiveElements(interactive_elements);
-  post.scrollIntoView();
+  post.scrollIntoView({ behaviour: "smooth" });
 }
 
 function formatInteractiveElements(interactive_elements) {
@@ -102,10 +106,4 @@ function formatInteractiveElements(interactive_elements) {
 function getPostByIndex(index) {
   const temp_posts = document.getElementsByTagName("article");
   return temp_posts[index];
-}
-
-function toArray(collection) {
-  const a = [];
-  for (let i = 0; i < collection.length; i++) a.push(collection[i]);
-  return a;
 }
