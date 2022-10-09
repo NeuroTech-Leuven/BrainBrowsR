@@ -1,20 +1,42 @@
 // Make it clear that the extension has loaded
 document.body.style.border = "6px solid pink";
 
+// wait a bit
+setTimeout(editPage, 300);
 
+function editPage() {
+  // hide the menubar
+  getAndHideElementByClassName("_acum");
+  // hide the story menu
+  getAndHideElementByClassName("_aac4 _aac5 _aac6");
+  // hide the sidebar
+  getAndHideElementByClassName("_aak6 _aak9");
+  // hide the top bar
+  getAndHideElementByClassName("_acbl");
+  // scroll to the first post
+  getAndProcessPost(0);
+}
 
-hideElement(document.getElementsByClassName("_aak6 _aak9")[0]);
+/*
+Hides an html element
+*/
+function hideElement(element) {
+  element.style.display = "none";
+}
 
-hideElement(document.getElementsByClassName("_aac4 _aac5 _aac6")[0]);
-
-hideElement(document.getElementsByClassName("bdao358l nu7423ey alzwoclg cmg2g80i lk0hwhjd nfcwbgbd mivixfar i54nktwv z2vv26z9 c7y9u1f0 jez8cy9q cqf1kptm oq7qnk0t o9w3sbdw mx6umkf4 t5n4vrf6 jjot6st7 ff443qle ekq1a7f9 km253p1d afopkvs9")[0]);
+/*
+Gets an element by classname and then hides it if it exists
+*/
+function getAndHideElementByClassName(className) {
+  var element = document.getElementsByClassName(className)[0];
+  if (element) {
+    hideElement(element);
+  }
+}
 
 // Set up the websockets
 setUp();
 
-// Hide the menu bar
-// hideElement(document.getElementsByClassName("_acum")[0]);
-// Hide the sidebar
 var logo = document.createElement("img");
 logo.setAttribute("src", makeURL("icons/logonutl.png"));
 logo.className = "logo";
@@ -26,18 +48,10 @@ var counter = 0;
 var first_post = getPostByIndex(counter);
 processPost(first_post);
 
-
 function makeURL(img_path) {
   // eslint-disable-next-line no-undef
   return browser.runtime.getURL(img_path);
 }
-
-function hideElement(element) {
-  element.style.display = "none";
-}
-
-
-
 
 function next() {
   console.log("Go to the next post");
@@ -50,30 +64,36 @@ function previous() {
 }
 
 function setUp() {
-  const websocket = new WebSocket("ws://localhost:8002/");
-  websocket.addEventListener("message", ({ data }) => {
-    const event = JSON.parse(data);
-    console.log(event);
-    switch (event) {
-      case "N":
-        next();
-        break;
-      case "P":
-        previous();
-        break;
-    }
-    console.log(counter);
-    let post = getPostByIndex(counter);
-    console.log(post);
-    processPost(post);
-  });
+  try {
+    const websocket = new WebSocket("ws://localhost:8002/");
+    websocket.addEventListener("message", ({ data }) => {
+      const event = JSON.parse(data);
+      console.log(event);
+      switch (event) {
+        case "N":
+          next();
+          break;
+        case "P":
+          previous();
+          break;
+      }
+      console.log(counter);
+      getAndProcessPost(counter);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function getAndProcessPost(index) {
+  var post = getPostByIndex(index);
+  processPost(post);
 }
 
 function processPost(post) {
   const interactive_elements = post.getElementsByClassName("_abl-");
-  console.log(interactive_elements);
   formatInteractiveElements(interactive_elements);
-  post.scrollIntoView();
+  post.scrollIntoView({ behaviour: "smooth" });
 }
 
 function formatInteractiveElements(interactive_elements) {
@@ -86,10 +106,4 @@ function formatInteractiveElements(interactive_elements) {
 function getPostByIndex(index) {
   const temp_posts = document.getElementsByTagName("article");
   return temp_posts[index];
-}
-
-function toArray(collection) {
-  const a = [];
-  for (let i = 0; i < collection.length; i++) a.push(collection[i]);
-  return a;
 }
