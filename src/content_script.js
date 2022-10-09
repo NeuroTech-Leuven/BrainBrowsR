@@ -3,62 +3,10 @@ document.body.style.border = "6px solid pink";
 
 // wait a bit
 setTimeout(editPage, 300);
-
-function editPage() {
-  // hide the menubar
-  getAndHideElementByClassName("_acum");
-  // hide the story menu
-  getAndHideElementByClassName("_aac4 _aac5 _aac6");
-  // hide the sidebar
-  getAndHideElementByClassName("_aak6 _aak9");
-  // hide the top bar
-  getAndHideElementByClassName("_acbl");
-  // scroll to the first post
-  getAndProcessPost(0);
-}
-
-/*
-Hides an html element
-*/
-function hideElement(element) {
-  element.style.display = "none";
-}
-
-/*
-Gets an element by classname and then hides it if it exists
-*/
-function getAndHideElementByClassName(className) {
-  var element = document.getElementsByClassName(className)[0];
-  if (element) {
-    hideElement(element);
-  }
-}
-
 // Set up the websockets
 setUp();
-
-var logo = document.createElement("img");
-logo.setAttribute("src", makeURL("icons/logonutl.png"));
-logo.className = "logo";
-document.body.appendChild(logo);
-
 // set the counter
 var counter = 0;
-
-function makeURL(img_path) {
-  // eslint-disable-next-line no-undef
-  return browser.runtime.getURL(img_path);
-}
-
-function next() {
-  console.log("Go to the next post");
-  counter++;
-}
-
-function previous() {
-  console.log("Go to the previous post");
-  counter = counter ? counter - 1 : counter;
-}
 
 function setUp() {
   try {
@@ -80,6 +28,56 @@ function setUp() {
   } catch (e) {
     console.log(e);
   }
+}
+
+function editPage() {
+  // hide the menubar
+  getAndHideElementByClassName("_acum");
+  // hide the story menu
+  getAndHideElementByClassName("_aac4 _aac5 _aac6");
+  // hide the sidebar
+  getAndHideElementByClassName("_aak6 _aak9");
+  // hide the top bar
+  getAndHideElementByClassName("_acbl");
+  // scroll to the first post
+  getAndProcessPost(0);
+  // add the logo
+  var logo = document.createElement("img");
+  logo.setAttribute("src", makeURL("icons/logonutl.png"));
+  logo.className = "logo";
+  document.body.appendChild(logo);
+}
+
+/*
+Hides an html element
+*/
+function hideElement(element) {
+  element.style.display = "none";
+}
+
+/*
+Gets an element by classname and then hides it if it exists
+*/
+function getAndHideElementByClassName(className) {
+  var element = document.getElementsByClassName(className)[0];
+  if (element) {
+    hideElement(element);
+  }
+}
+
+function makeURL(img_path) {
+  // eslint-disable-next-line no-undef
+  return browser.runtime.getURL(img_path);
+}
+
+function next() {
+  console.log("Go to the next post");
+  counter++;
+}
+
+function previous() {
+  console.log("Go to the previous post");
+  counter = counter ? counter - 1 : counter;
 }
 
 function getAndProcessPost(index) {
