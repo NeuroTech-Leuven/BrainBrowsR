@@ -30,6 +30,8 @@ function setUp() {
   }
 }
 
+// TODO clean up the code below with imports
+
 function editPage() {
   // hide the menubar
   getAndHideElementByClassName("_acum");
