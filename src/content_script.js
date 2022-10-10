@@ -2,13 +2,10 @@
 document.body.style.border = "6px solid pink";
 
 // wait a bit
-setTimeout(editPage, 300);
-// Set up the websockets
-setUp();
-// set the counter
-var counter = 0;
+setTimeout(main, 300);
 
 function setUp() {
+  var currentPost = getAndProcessPost(0);
   try {
     const websocket = new WebSocket("ws://localhost:8002/");
     websocket.addEventListener("message", ({ data }) => {
@@ -16,14 +13,12 @@ function setUp() {
       console.log(event);
       switch (event) {
         case "N":
-          next();
+          currentPost = nextFromCurrent(currentPost);
           break;
         case "P":
-          previous();
+          currentPost = previousFromCurrent(currentPost);
           break;
       }
-      console.log(counter);
-      getAndProcessPost(counter);
     });
   } catch (e) {
     console.log(e);
@@ -31,6 +26,11 @@ function setUp() {
 }
 
 // TODO clean up the code below with imports
+
+function main() {
+  editPage();
+  setUp();
+}
 
 function editPage() {
   // hide the menubar
@@ -72,19 +72,37 @@ function makeURL(img_path) {
   return browser.runtime.getURL(img_path);
 }
 
-function next() {
-  console.log("Go to the next post");
-  counter++;
+function nextFromCurrent(current) {
+  if (!current) {
+    return getPostByIndex(0);
+  }
+  let tempPosts = getPosts();
+  let ind = findByIndex(tempPosts, current);
+  let newCurrent = tempPosts[ind + 1];
+  processPost(newCurrent);
+  return newCurrent;
 }
 
-function previous() {
-  console.log("Go to the previous post");
-  counter = counter ? counter - 1 : counter;
+function previousFromCurrent(current) {
+  if (!current) {
+    return getPostByIndex(0);
+  }
+  let tempPosts = getPosts();
+  let ind = findByIndex(tempPosts, current);
+  let newCurrent;
+  if (ind) {
+    newCurrent = tempPosts[ind - 1];
+  } else {
+    newCurrent = current;
+  }
+  processPost(newCurrent);
+  return newCurrent;
 }
 
 function getAndProcessPost(index) {
   var post = getPostByIndex(index);
   processPost(post);
+  return post;
 }
 
 function processPost(post) {
@@ -100,7 +118,20 @@ function formatInteractiveElements(interactive_elements) {
   hideElement(interactive_elements[5]);
 }
 
+function getPosts() {
+  return document.getElementsByTagName("article");
+}
+
 function getPostByIndex(index) {
   const temp_posts = document.getElementsByTagName("article");
   return temp_posts[index];
+}
+
+function findByIndex(posts, current) {
+  for (let i = 0; i < posts.length; i++) {
+    if (current === posts[i]) {
+      return i;
+    }
+  }
+  return 0;
 }
