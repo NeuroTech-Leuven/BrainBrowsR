@@ -164,12 +164,11 @@ function findByIndex(posts, current) {
 }
 
 function likePost(post) {
-  try {
-    post.querySelectorAll('svg[aria-label="Vind ik leuk"]').forEach(svg => svg.closest("button").click());
-  }
-  catch {
-    post.querySelectorAll('svg[aria-label="Vind ik niet meer leuk"]').forEach(svg => svg.closest("button").click());
-  }
+  
+  post.querySelectorAll('svg[aria-label="Vind ik leuk"]').forEach(svg => svg.closest("button").click());
+
+  post.querySelectorAll('svg[aria-label="Vind ik niet meer leuk"]').forEach(svg => svg.closest("button").click());
+
 }
 
 
