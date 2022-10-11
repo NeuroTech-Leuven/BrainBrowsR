@@ -47,11 +47,13 @@
 
 .logo{
   position: fixed;
-  width: 150px;
+  width: 200px;
   height: 200px;  
   right: 20px;
-  bottom: 200px;
+  top: 40%;
+  opacity: 0.4;
 }
+
 
 @keyframes blink {
   0% {

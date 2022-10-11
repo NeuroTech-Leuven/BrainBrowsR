@@ -1,8 +1,10 @@
 // Make it clear that the extension has loaded
-document.body.style.border = "6px solid pink";
+document.body.style.border = "10px solid lightblue";
+
 
 // wait a bit
 setTimeout(main, 300);
+// main();
 
 function setUp() {
   var currentPost = getAndProcessPost(0);
@@ -14,11 +16,17 @@ function setUp() {
       switch (event) {
         case "N":
           currentPost = nextFromCurrent(currentPost);
+          confirmAction("green");
           break;
         case "P":
           currentPost = previousFromCurrent(currentPost);
+          confirmAction("green");
           break;
-      }
+        case "L" :
+          likePost(currentPost);
+          confirmAction("green");
+          break;
+      } 
     });
   } catch (e) {
     console.log(e);
@@ -41,13 +49,20 @@ function editPage() {
   getAndHideElementByClassName("_aak6 _aak9");
   // hide the top bar
   getAndHideElementByClassName("_acbl");
+  // hide the side menu
+  getAndHideElementByClassName("x1vjfegm xvb8j5");
+
   // scroll to the first post
   getAndProcessPost(0);
+
   // add the logo
   var logo = document.createElement("img");
   logo.setAttribute("src", makeURL("icons/logonutl.png"));
   logo.className = "logo";
   document.body.appendChild(logo);
+
+  // document.body.style.backgroundColor = "lightblue";
+  setBackground("lightblue");
 }
 
 /*
@@ -62,10 +77,22 @@ Gets an element by classname and then hides it if it exists
 */
 function getAndHideElementByClassName(className) {
   var element = document.getElementsByClassName(className)[0];
+
   if (element) {
     hideElement(element);
-  }
+  } 
+  // Attempt at less hardcoded way to hide elements
+
+  // else {
+    // count ++;
+  //   console.log(className, count);
+  //   if (count > 20){
+  //     return;
+  //   }
+  //   setTimeout(getAndHideElementByClassName(className, count), 1000); // try again in 300 milliseconds
+  // }
 }
+
 
 function makeURL(img_path) {
   // eslint-disable-next-line no-undef
@@ -135,3 +162,29 @@ function findByIndex(posts, current) {
   }
   return 0;
 }
+
+function likePost(post) {
+  try {
+    post.querySelectorAll('svg[aria-label="Vind ik leuk"]').forEach(svg => svg.closest("button").click());
+  }
+  catch {
+    post.querySelectorAll('svg[aria-label="Vind ik niet meer leuk"]').forEach(svg => svg.closest("button").click());
+  }
+}
+
+
+async function confirmAction(color) {
+  setBackground(color)
+  await sleep(500);
+  setBackground("lightblue")
+
+}
+
+function setBackground(color) {
+  document.body.style.backgroundColor = color;
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+

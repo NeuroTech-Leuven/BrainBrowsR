@@ -13,13 +13,13 @@ async def handler(websocket):
 
 async def runningApplication(websocket):
     for i in range(100):
-        temp = input('N P or Q :').capitalize()
+        temp = input('N P L or Q :').capitalize()
         if temp == 'Q':
             break
-        elif temp == 'N' or temp == 'P':
+        elif temp == 'N' or temp == 'P' or temp == 'L':
             await websocket.send(json.dumps(temp))
         else:
-            print('Enter p, q or n ')
+            print('Enter p, q, l or n ')
 
 
 async def main():
