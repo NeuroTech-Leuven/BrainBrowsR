@@ -4,7 +4,9 @@ Hides an html element
 function hideElement(element) {
     element.style.display = "none";
   }
-  
+function displayElement(element) {
+    element.style.display = "initial";
+}
 /*
 Gets an element by classname and then hides it if it exists
 */

@@ -1,5 +1,5 @@
 // insert the stimuli
-insertStimuli();
+// insertStimuli();
 
 function makeURL(img_path) {
   // eslint-disable-next-line no-undef
@@ -26,4 +26,15 @@ function insertStimuli() {
   down.setAttribute("src", makeURL("icons/invert_down.png"));
   down.className = "stimuli down";
   document.body.appendChild(down);
+}
+
+function removeElement(element) {
+  element.remove();
+}
+
+function hideStimuli() {
+  removeElement(document.getElementsByClassName("like")[0]);
+  removeElement(document.getElementsByClassName("comment")[0]);
+  removeElement(document.getElementsByClassName("up")[0]);
+  removeElement(document.getElementsByClassName("down")[0]);
 }

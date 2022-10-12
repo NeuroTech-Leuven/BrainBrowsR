@@ -2,11 +2,14 @@
 document.body.style.border = "10px solid lightblue";
 
 // wait a bit
-setTimeout(main, 500);
+setTimeout(main, 1000);
+var stimuli_on = 0;
 
 function main() {
   editPage();
+  stimuli_on = 1;
   setUp();
+  
 }
 
 
@@ -17,6 +20,7 @@ function setUp() {
     websocket.addEventListener("message", ({ data }) => {
       const event = JSON.parse(data);
       console.log(event);
+      console.log(stimuli_on, "dit is het ect he")   
       switch (event) {
         case "N":
           currentPost = nextFromCurrent(currentPost);
@@ -28,6 +32,19 @@ function setUp() {
           break;
         case "L" :
           likePost(currentPost);
+          confirmAction("green");
+          break;
+        case "O" :
+          if (stimuli_on == 0) {
+            stimuli_on = 1;
+            displayStimuli();  
+            console.log(stimuli_on, "nu zit ik bij insert")           
+          } else {
+            stimuli_on = 0;
+            hideStimuli();
+            console.log(stimuli_on, "nu zit ik bij hide")            
+          } 
+                   
           confirmAction("green");
           break;
       } 
@@ -58,6 +75,11 @@ function editPage() {
 
   // document.body.style.backgroundColor = "lightblue";
   setBackground("lightblue");
+
+  setTimeout(insertStimuli, 1000);
+
+
+  // documentget.style.removeProperty('zoom');
 }
 
 

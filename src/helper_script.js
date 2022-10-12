@@ -27,8 +27,11 @@ function previousFromCurrent(current) {
 
 function getAndProcessPost(index) {
     var post = getPostByIndex(index);
-    processPost(post);
-    return post;
+    if (post) {
+        processPost(post);
+        return post;
+    }
+
 }
 
 function processPost(post) {
@@ -69,7 +72,6 @@ function likePost(post) {
     post.querySelectorAll('svg[aria-label="Vind ik niet meer leuk"]').forEach(svg => svg.closest("button").click());
 
 }
-
 
 
 async function confirmAction(color) {
