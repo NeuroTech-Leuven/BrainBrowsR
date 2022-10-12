@@ -43,3 +43,10 @@ function addLogo(logo_png) {
 function setBackground(color) {
     document.body.style.backgroundColor = color;
 }
+
+
+function centerPost(post){
+    post.style.position = "relative";
+    post.style.left = "35%";
+}
+    

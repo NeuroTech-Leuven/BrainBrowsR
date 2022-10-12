@@ -38,6 +38,12 @@ function processPost(post) {
     const interactive_elements = post.getElementsByClassName("_abl-");
     formatInteractiveElements(interactive_elements);
     post.scrollIntoView({ behaviour: "smooth" });
+    centerPost(post)
+}
+
+function centerPost(post){
+    post.style.position = "relative";
+    post.style.left = "35%";
 }
 
 function formatInteractiveElements(interactive_elements) {

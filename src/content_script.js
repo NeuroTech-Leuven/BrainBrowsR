@@ -20,7 +20,6 @@ function setUp() {
     websocket.addEventListener("message", ({ data }) => {
       const event = JSON.parse(data);
       console.log(event);
-      console.log(stimuli_on, "dit is het ect he")   
       switch (event) {
         case "N":
           currentPost = nextFromCurrent(currentPost);
@@ -37,12 +36,10 @@ function setUp() {
         case "O" :
           if (stimuli_on == 0) {
             stimuli_on = 1;
-            displayStimuli();  
-            console.log(stimuli_on, "nu zit ik bij insert")           
+            displayStimuli();           
           } else {
             stimuli_on = 0;
-            hideStimuli();
-            console.log(stimuli_on, "nu zit ik bij hide")            
+            hideStimuli();          
           } 
                    
           confirmAction("green");
@@ -78,6 +75,7 @@ function editPage() {
 
   setTimeout(insertStimuli, 1000);
 
+  // centerPosts();
 
   // documentget.style.removeProperty('zoom');
 }
