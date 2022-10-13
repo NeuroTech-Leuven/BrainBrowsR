@@ -45,8 +45,5 @@ function setBackground(color) {
 }
 
 
-function centerPost(post){
-    post.style.position = "relative";
-    post.style.left = "35%";
-}
+
     

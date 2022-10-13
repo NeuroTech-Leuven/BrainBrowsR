@@ -51,6 +51,10 @@ function formatInteractiveElements(interactive_elements) {
     hideElement(interactive_elements[3]);
     hideElement(interactive_elements[4]);
     hideElement(interactive_elements[5]);
+    // interactive_elements[0].classList.add("stimuli like")
+    // interactive_elements[3].classList.add("stimuli like")
+    // interactive_elements[4].classList.add("stimuli like")
+    // interactive_elements[5].classList.add("stimuli like")
 }
 
 function getPosts() {
@@ -90,3 +94,10 @@ async function confirmAction(color) {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+function enableFlicker() {
+    var elts = document.getElementsByClassName('_8ykn');
+    for(i = 0; i < elts.length; i++) {      
+      elts[i].style.removeProperty('animation-name');
+    }
+  }

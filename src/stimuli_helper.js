@@ -1,5 +1,3 @@
-// insertStimuli();
-
 function makeURL(img_path) {
     return browser.runtime.getURL(img_path);
   }

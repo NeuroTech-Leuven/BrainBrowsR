@@ -74,10 +74,7 @@ function editPage() {
   setBackground("lightblue");
 
   setTimeout(insertStimuli, 1000);
-
-  // centerPosts();
-
-  // documentget.style.removeProperty('zoom');
+  enableFlicker();
 }
 
 
