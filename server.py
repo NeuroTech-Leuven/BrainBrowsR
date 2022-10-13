@@ -10,7 +10,7 @@ from email import message
 import json
 import websockets
 from cca_functions import *
-
+from online_pipeline import *
 
 # intialization of variables
 # set here if you are using the simulated dataset or the mentalab recorded dataset
@@ -62,29 +62,30 @@ async def handler(websocket):
 
 async def runningApplication(websocket):
     for i in range(10):
-        input('klik maar')
-        epoch = epochs[i, :, :]
-        scores = perform_CCA(epoch, frequencies, fs)
-        print(scores)
-        prediction = choose_best_match(scores)[0] 
-        if prediction == 9 :
-            await websocket.send(json.dumps('N'))
-            print("N")
-        if prediction == 11 :
-            await websocket.send(json.dumps('P'))
-            print("P")
-        if prediction == 13 :
-            await websocket.send(json.dumps('L'))
-            print("L")
-        if prediction == 15 :
-            await websocket.send(json.dumps('O')) 
-            print("O")            
-        # if temp == 'Q':
-        #     break
-        # elif temp == 'N' or temp == 'P' or temp == 'L' or temp == 'O':
-        #     await websocket.send(json.dumps(temp))
-        # else:
-        #     print('Enter p, q, l or n ')
+        # input('klik maar')
+        # epoch = epochs[i, :, :]
+        # scores = perform_CCA(epoch, frequencies, fs)
+        # print(scores)
+        # prediction = choose_best_match(scores)[0] 
+        # if prediction == 9 :
+        #     await websocket.send(json.dumps('N'))
+        #     print("N")
+        # if prediction == 11 :
+        #     await websocket.send(json.dumps('P'))
+        #     print("P")
+        # if prediction == 13 :
+        #     await websocket.send(json.dumps('L'))
+        #     print("L")
+        # if prediction == 15 :
+        #     await websocket.send(json.dumps('O')) 
+        #     print("O")      
+        temp = input("Enter N P L or O").capitalize()   
+        if temp == 'Q':
+            break
+        elif temp == 'N' or temp == 'P' or temp == 'L' or temp == 'O':
+            await websocket.send(json.dumps(temp))
+        else:
+            print('Enter p, q, l or n ')
         # time.sleep(4)
 
 

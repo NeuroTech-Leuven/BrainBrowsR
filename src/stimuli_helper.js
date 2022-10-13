@@ -12,8 +12,8 @@ function makeURL(img_path) {
     var comment = document.createElement("img");
     // comment.setAttribute("src", makeURL("icons/invert_on.png"));
     // comment.setAttribute("src", makeURL("icons/invert_comment.png"));
-    // comment.setAttribute("src", makeURL("icons/test_comment.png"));
-    comment.setAttribute("src", makeURL("icons/test_on.png"));
+    comment.setAttribute("src", makeURL("icons/test_comment.png"));
+    // comment.setAttribute("src", makeURL("icons/test_on.png"));
     comment.className = "stimuli comment";
     document.body.appendChild(comment);
   

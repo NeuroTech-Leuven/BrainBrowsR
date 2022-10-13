@@ -75,6 +75,7 @@ function editPage() {
 
   setTimeout(insertStimuli, 1000);
   enableFlicker();
+  centerPosts();
 }
 
 

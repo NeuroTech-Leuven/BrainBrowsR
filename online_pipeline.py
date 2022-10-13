@@ -13,7 +13,7 @@ import sys
 
 if __name__ == '__main__':
     main()
-    
+
 ###########
 # Classes #
 ###########
@@ -81,7 +81,19 @@ class Preprocessor:
         b, a = signal.butter(N, [lf / (sr/2), hf / (sr/2)], type_of_filter)
         self.stored_data = signal.filtfilt(b, a, self.stored_data)
 
+    def notch_filter(self, notch_freq):
+
+        """
+        Applies notch filter around 50 Hz
+        """
+        sr = self.SAMPLING_RATE
+        notch_freq = notch_freq
+        quality_factor = 20.0
+        # Design a notch filter using signal.iirnotch
+        b_notch, a_notch = signal.iirnotch(notch_freq, quality_factor, sr)
+        self.stored_data = signal.filtfilt(b_notch,a_notch, self.stored_data)
     def channel_selection(self, channel_mask):
+
         stored_data = np.array(self.stored_data)[channel_mask]
         self.stored_data = stored_data.squeeze()
 
@@ -135,6 +147,7 @@ def main():
         preprocessor.channel_selection(CHANNEL_MASK)
         preprocessor.channel_average()
         preprocessor.filter_band(low_freq=0.5, high_freq=35, type_of_filter="bandpass", order_of_filter=4)
+        preprocessor.notch_filter(notch_freq=50)
         print(np.shape(preprocessor.stored_data))
 
     explore.disconnect()   # disconnect the headset
