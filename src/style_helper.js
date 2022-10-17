@@ -10,23 +10,23 @@ function displayElement(element) {
 /*
 Gets an element by classname and then hides it if it exists
 */
-function getAndHideElementByClassName(className) {
+function getAndHideElementByClassName(className, count=0) {
 var element = document.getElementsByClassName(className)[0];
 
 if (element) {
     hideElement(element);
 } 
 // Attempt at less hardcoded way to hide elements
-
+}
 // else {
-    // count ++;
+//     count ++;
 //   console.log(className, count);
 //   if (count > 20){
 //     return;
 //   }
 //   setTimeout(getAndHideElementByClassName(className, count), 1000); // try again in 300 milliseconds
 // }
-}
+// }
   
 function makeURL(img_path) {
     return browser.runtime.getURL(img_path);

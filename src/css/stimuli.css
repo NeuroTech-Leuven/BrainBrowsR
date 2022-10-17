@@ -6,8 +6,8 @@
   --offset: 15px;
 
   position: fixed;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   animation: blink var(--freq) steps(1, end) infinite !important;
   /* animation-name : blink !important; */
   /* animation: sine_blink var(--freq) linear infinite;  */
@@ -59,21 +59,26 @@
 }
 
 
+.test_headset{
+  position: fixed;
+  left: 20px;
+  top: 35%;
+}
 @keyframes sine_blink {
   0% {
-    opacity: 1.0;
+    opacity: 0.5;
   }
   25% {
-    opacity: 0.5;
+    opacity: 1;
   }
   50% {
-    opacity: 0;
-  }
-  75% {
     opacity: 0.5;
   }
+  75% {
+    opacity: 0;
+  }
   100% {
-    opacity: 1.0;
+    opacity: 0.5;
   }
 }
 

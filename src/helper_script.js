@@ -38,15 +38,10 @@ function processPost(post) {
     const interactive_elements = post.querySelectorAll("._abl-");
     formatInteractiveElements(interactive_elements);
     post.scrollIntoView({ behaviour: "smooth" });
-    // centerPost(post)
+    centerPost(post)
 }
 
-function centerPosts(){
-    const posts = document.querySelectorAll("article");
-    for(i = 0; i < posts.length; i++) {      
-        posts[i].style.position = "relative";
-        posts[i].style.left = "35%";    
-      }
+function centerPost(post){
     post.style.position = "relative";
     post.style.left = "35%";
 }
@@ -109,3 +104,7 @@ function enableFlicker() {
       elts[i].classList.remove('_8ykn');
     }
   }
+
+function testHeadset(data) {
+    document.getElementsByClassName("test_headset")[0].innerHTML = data
+}

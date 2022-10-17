@@ -2,7 +2,7 @@ let activation_button = document.getElementById("activation_button");
 var currentActivation = localStorage.getItem("activation_value");
 
 // if (currentActivation == 0) {
-  activation_button.innerHTML = "Start Experiment";
+  activation_button.innerHTML = "Start Training session";
 // } else {
   // activation_button.innerHTML = "Deactivate overlay";
 // }

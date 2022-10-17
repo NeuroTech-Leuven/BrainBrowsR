@@ -24,14 +24,17 @@ function setUp() {
         case "N":
           currentPost = nextFromCurrent(currentPost);
           confirmAction("green");
+          testHeadset(event);
           break;
         case "P":
           currentPost = previousFromCurrent(currentPost);
           confirmAction("green");
+          testHeadset(event);
           break;
         case "L" :
           likePost(currentPost);
           confirmAction("green");
+          testHeadset(event);
           break;
         case "O" :
           if (stimuli_on == 0) {
@@ -41,6 +44,7 @@ function setUp() {
             stimuli_on = 0;
             hideStimuli();          
           } 
+          testHeadset(event);
                    
           confirmAction("green");
           break;
@@ -75,7 +79,12 @@ function editPage() {
 
   setTimeout(insertStimuli, 1000);
   enableFlicker();
-  centerPosts();
+  // centerPosts();
+
+  var test_headset = document.createElement("div");
+  test_headset.innerHTML = "Waiting for headset data"
+  test_headset.className = "test_headset";
+  document.body.appendChild(test_headset);
 }
 
 
