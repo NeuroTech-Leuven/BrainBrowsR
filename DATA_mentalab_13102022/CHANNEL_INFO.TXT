@@ -1,12 +1,12 @@
 Channel	Location	
-1	TP10	reference
-2	O2	
-3	O1	
-4	disabled	
-5	Oz	
-6	TP9	reference
-7	disabled	
-8	disabled	
+8	TP10	reference
+7	O2	
+6	O1	
+5	disabled	
+4	Oz	
+3	TP9	reference
+2	disabled	
+1	disabled	
 	GND	
 		
 	250 Hz	
