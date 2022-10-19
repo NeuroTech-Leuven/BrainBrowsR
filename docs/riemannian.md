@@ -21,6 +21,7 @@ The covariance captures the degree of linear dependence between several random v
 Covariance matrices are symmetric positive-definite (SPD) and are thus constrained to lie strictly inside a convex cone, which is the Riemannian manifold.
 
 ![alt text for screen readers](./images/riemannian_manifold.png "Text to show on mouseover")
+
 Figure 1. Riemannian manifold. The Euclidean distance is the red dahed line (which does not consider the curvature of the space) and Riemannian distance is in plain blue and Log-Euclidean in dashed-dotted green (which follows the geodesic , therefore taking into account the shape of the space where covariance matries lie).
 
 Picture taken from [Chevallier, 2018](https://www.researchgate.net/publication/323358565_Riemannian_Classification_for_SSVEP-Based_BCI_Offline_versus_Online_Implementations)
