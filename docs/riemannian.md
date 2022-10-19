@@ -20,7 +20,7 @@ The covariance captures the degree of linear dependence between several random v
 
 Covariance matrices are symmetric positive-definite (SPD) and are thus constrained to lie strictly inside a convex cone, which is the Riemannian manifold.
 ![alt text](docs/images/riemannian manifold.png)
-
+![alt text for screen readers](./images/riemannian_manifold.png "Text to show on mouseover").
 A Riemannian manifold is a differentiable manifold in which tangent space at each point is a finite-dimensional Euclidean space. Euclidean space is a space in any finite number of dimensions, in which points are designated by coordinates (one for each dimension) and the distance between two points is given by a distance formula [Definition](https://www.britannica.com/science/Euclidean-space).
 
 The Euclidian distance does not consider the curvature of the space, while Riemannian distances follows the geodesic and are thus taking into account the shape of the space where covariance matrices lie.
