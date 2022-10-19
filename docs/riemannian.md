@@ -50,19 +50,31 @@ The general procedure is as follows:
 
 ```mermaid
 flowchart LR;
-first[Load<br>data] --> second[Apply a <br>filter bank] --> third[Stack the <br>filtered signals] --> fourth[Cut epochs] --> sixth[Estimate <br>covariance <br>matrics] --> seven[Estimate centroids] -->
-eight[Predict]
+first[<br>Processing] --> second[Training<br>] --> third[<br>Prediction]
 class first cssClass
 ```
 
-1. **Loading EEG data and initializing variables**. First the EEG training data from the subject and the online data from the same subject are loaded in.
-2. **Apply a filter bank**. A filter bank composed of bandpass filters for each stimulation frequency is applied. This is done using the scipy library, of which the functions [butter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html) and [filtfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html) were. The `SSVEPFilterBank()` function accepts the EEG signal as a numpy array of shape (number of channels, number of samples) and returns the filtered signal of the form (number of frequencies, number of channels, number of samples))
-3. **Stack the filtered signals to build an extended signal**. As the filtered signal is a 3-dimensional tensor, it needs to be modified in order to be 2-dimensional (number of frequencies x number of channels, number of samples) in order to compute the covariance matrices.
-4. **Cut epochs**. The epochs are cut in a time length of 4-6 seconds of data that will be processed further. This will return a signal of shape (number of epochs, number of frequencies x number of channels, number of samples).
-5. **Estimate covariance matrices by using Ledoit-Wolf shrinkage estimator on the extended signal**. For this, the [pyriemann](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.estimation.Covariances.html#pyriemann.estimation.Covariances) was used.
-6. **Estimate centroids for MDM classification model**. The classification is done by Minimum Distance to the Mean, which works as follows: during training a set of SPD matrices encoding BCI trials for the available classes are created. For each class a center of mass of the available trials is estimated. During test mode, a BCI trial is estimated in the same way as in training, and is assigned to the class whose center of mass is the closest.
-7. **Predict**. Return predictions for each matrix according to the closest centroid. The detail is in [pyriemann](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM.fit)
+1. **Processing**.
+Some processing of the data should be done after the preprocessing steps to accomodate the signal as required. 
+Processing consists of two steps that are handled together with the function extend signal. 
+First step is a **Filter bank**  
+The filter bank is composed of bandpass filters for each stimulation frequency that is applied. This is done using the scipy library, of which the functions [butter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html) and [filtfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html) were. The `SSVEPFilterBank()` function accepts the EEG signal as a numpy array of shape (number of channels, number of samples) and returns the filtered signal of the form (number of frequencies, number of channels, number of samples))
+For the second step we **Stack the filtered signals to build an extended signal**. 
+As the filtered signal is a 3-dimensional tensor, it needs to be modified in order to be 2-dimensional (number of frequencies x number of channels, number of samples) in order to compute the covariance matrices. Therefore it will output a signal in a numpy array of shape (number of frequencies* number of channels, number of samples). 
+
+
+2. **Training**
+Further we train our model, for that we will first **Estimate covariance matrices by using Ledoit-Wolf shrinkage estimator on the extended signal**. 
+For this, the [pyriemann](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.estimation.Covariances.html#pyriemann.estimation.Covariances) was used.
+This function performs a covariance matrix estimation for each given input, it accepts the epoched extended signal and returns the covariance matrix. 
+
+From this we **Estimate the centroids for MDM classification model**. 
+The classification is done by Minimum Distance to the Mean, which works as follows: during training a set of SPD matrices encoding BCI trials for the available classes are created. For each class a center of mass of the available trials is estimated. 
+
+3. **Prediction**. 
+The BCI trial is estimated in the same way as in training, and is assigned to the class whose center of mass is the closest. Return predictions for each matrix according to the closest centroid. The detail is in [pyriemann](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM.fit)
 
 ## Results
+The prediction result provides the class to which it belongs with a percentage of certainty. 
 
-The evaluation of performance is done by cross validation, K-fold and Leave-One-Out. So far, we have 98.4% accuary when using Arno dataset 2.
+The evaluation of performance is done by cross validation, K-fold and Leave-One-Out.
