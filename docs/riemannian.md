@@ -19,8 +19,9 @@ EEG data can be manipulated through their spatial covariances, then detected and
 The covariance captures the degree of linear dependence between several random variables, i.e. how the brain signals change relatively to each other. If two signals show the same variations, they are dependent. [read more](https://hal.uvsq.fr/hal-01710089)
 
 Covariance matrices are symmetric positive-definite (SPD) and are thus constrained to lie strictly inside a convex cone, which is the Riemannian manifold.
+[!image](docs/images/riemannian manifold.png)
 
-A Riemannian manifold is a differentiable manifold in which tangent space at each point is a finite-dimensional Euclidean space. Euclidean space is a space in any finite number of dimensions, in which points are designated by coordinates (one for each dimension) and the distance between two points is given by a distance formula ([Definition](https://www.britannica.com/science/Euclidean-space)).
+A Riemannian manifold is a differentiable manifold in which tangent space at each point is a finite-dimensional Euclidean space. Euclidean space is a space in any finite number of dimensions, in which points are designated by coordinates (one for each dimension) and the distance between two points is given by a distance formula [Definition](https://www.britannica.com/science/Euclidean-space).
 
 The Euclidian distance does not consider the curvature of the space, while Riemannian distances follows the geodesic and are thus taking into account the shape of the space where covariance matrices lie.
 
@@ -67,7 +68,6 @@ As the filtered signal is a 3-dimensional tensor, it needs to be modified in ord
 Further we train our model, for that we will first **Estimate covariance matrices by using Ledoit-Wolf shrinkage estimator on the extended signal**. 
 For this, the [pyriemann](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.estimation.Covariances.html#pyriemann.estimation.Covariances) was used.
 This function performs a covariance matrix estimation for each given input, it accepts the epoched extended signal and returns the covariance matrix. 
-
 From this we **Estimate the centroids for MDM classification model**. 
 The classification is done by Minimum Distance to the Mean, which works as follows: during training a set of SPD matrices encoding BCI trials for the available classes are created. For each class a center of mass of the available trials is estimated. 
 
