@@ -38,11 +38,11 @@ $$
 
 The shortest path between two points in the Riemannian space of SPD matrices is defined by the geodesic $\gamma(t)$ with $t\in [0,1]$
 
-![alt text](./images/geodesic.png "Text to show on mouseover").
-
 $$
 \gamma(t)=P_1^{1/2}(P_1^{-1/2}P_2P_1^{-1/2})^tP_1^{1/2}
 $$
+
+![alt text](./images/geodesic.png "Text to show on mouseover").
 
 The mean of SPD matrices can be obtained by using the concept of tangent space, which is the space defined by the whole set of tangent vectors, is identified to the Euclidian space of symmetric matrices.
 
