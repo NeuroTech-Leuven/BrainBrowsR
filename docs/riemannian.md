@@ -20,10 +20,9 @@ The covariance captures the degree of linear dependence between several random v
 
 Covariance matrices are symmetric positive-definite (SPD) and are thus constrained to lie strictly inside a convex cone, which is the Riemannian manifold.
 
-![alt text for screen readers](./images/riemannian_manifold.png "Text to show on mouseover").
-Picture taken from [Chevallier, 2018](https://www.researchgate.net/publication/323358565_Riemannian_Classification_for_SSVEP-Based_BCI_Offline_versus_Online_Implementations)
-
+![alt text for screen readers](./images/riemannian_manifold.png "Text to show on mouseover")
 Figure 1. Riemannian manifold. The Euclidean distance is the red dahed line (which does not consider the curvature of the space) and Riemannian distance is in plain blue and Log-Euclidean in dashed-dotted green (which follows the geodesic , therefore taking into account the shape of the space where covariance matries lie).
+Picture taken from [Chevallier, 2018](https://www.researchgate.net/publication/323358565_Riemannian_Classification_for_SSVEP-Based_BCI_Offline_versus_Online_Implementations)
 
 
 A Riemannian manifold is a differentiable manifold in which tangent space at each point is a finite-dimensional Euclidean space. Euclidean space is a space in any finite number of dimensions, in which points are designated by coordinates (one for each dimension) and the distance between two points is given by a distance formula [Definition](https://www.britannica.com/science/Euclidean-space).
@@ -46,7 +45,7 @@ $$
 \gamma(t)=P_1^{1/2}(P_1^{-1/2}P_2P_1^{-1/2})^tP_1^{1/2}
 $$
 
-![alt text](./images/geodesic.png "Text to show on mouseover").
+![alt text](./images/geodesic.png "Text to show on mouseover")
 Figure 2. Tangent space of the manifold M at point P, Si the tangent vector of Pi and \gamma(t) the geodesic between P and Pi. 
 Figure taken from [Barachant, 2010](https://hal.archives-ouvertes.fr/hal-00602700/document)
 
