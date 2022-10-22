@@ -9,51 +9,51 @@ import asyncio
 from email import message
 import json
 import websockets
-from cca_functions import *
-from online_pipeline import *
+# from cca_functions import *
+# from online_pipeline import *
 
-# intialization of variables
-# set here if you are using the simulated dataset or the mentalab recorded dataset
-path = "."
-fname_data = "/csv/SSVEP1_data.csv"
-fname_markers = "/csv/SSVEP1_markers.csv"
+# # intialization of variables
+# # set here if you are using the simulated dataset or the mentalab recorded dataset
+# path = "."
+# fname_data = "/csv/SSVEP1_data.csv"
+# fname_markers = "/csv/SSVEP1_markers.csv"
 
-gt_dict = {1:9, 2:9, 3:11, 4:11, 5:13, 6:13, 7:15, 8:15}
-fs = 500  # Hz, sampling frequency
-t_min = 0  # Start time of epoch since marker (seconds)
-t_max = 2  # End time of epoch since marker (seconds)
-screen_refresh_rate = 60
-ch_names = ["O1","Oz","O2","PO3","PO4","P7","P3","Pz","P4","P8"] # list of channel names
-lf = .5    # low frequency for bandpass filtering
-hf = 100  # high frequency for bandpass filtering
-electrodes = {  # dictionary of electrode names
-    2: "Oz",
-    3: "O2",
-    4: "PO3",
-    5: "PO4",
-}
+# gt_dict = {1:9, 2:9, 3:11, 4:11, 5:13, 6:13, 7:15, 8:15}
+# fs = 500  # Hz, sampling frequency
+# t_min = 0  # Start time of epoch since marker (seconds)
+# t_max = 2  # End time of epoch since marker (seconds)
+# screen_refresh_rate = 60
+# ch_names = ["O1","Oz","O2","PO3","PO4","P7","P3","Pz","P4","P8"] # list of channel names
+# lf = .5    # low frequency for bandpass filtering
+# hf = 100  # high frequency for bandpass filtering
+# electrodes = {  # dictionary of electrode names
+#     2: "Oz",
+#     3: "O2",
+#     4: "PO3",
+#     5: "PO4",
+# }
 
-# read in the data
-data = pd.read_csv(path + fname_data, delimiter=",")  # EEG data
-sig = data[ch_names].to_numpy().T  # EEG signals, channels by data samples
-markers = pd.read_csv(path + fname_markers)  # event markers
-# time signature of the EEG signal
-ts_sig = (data['TimeStamp'] - data['TimeStamp'][0]).to_numpy()
-# array of time signature of the markers
-ts_markers = (markers['TimeStamp'] - markers['TimeStamp'][0]).to_numpy()
-groundtruth = markers['Code'].to_numpy()  # array of marker IDs
-
-
-# Preprocessing
-# Band-pass filter
-# filt_sig = custom_filter_band(sig, lf, hf, fs, 'bandpass')
-# extract epochs based on marker IDs
-epochs, ts_epoch = extract_epochs(sig, ts_sig, ts_markers, t_min, t_max, fs)
+# # read in the data
+# data = pd.read_csv(path + fname_data, delimiter=",")  # EEG data
+# sig = data[ch_names].to_numpy().T  # EEG signals, channels by data samples
+# markers = pd.read_csv(path + fname_markers)  # event markers
+# # time signature of the EEG signal
+# ts_sig = (data['TimeStamp'] - data['TimeStamp'][0]).to_numpy()
+# # array of time signature of the markers
+# ts_markers = (markers['TimeStamp'] - markers['TimeStamp'][0]).to_numpy()
+# groundtruth = markers['Code'].to_numpy()  # array of marker IDs
 
 
+# # Preprocessing
+# # Band-pass filter
+# # filt_sig = custom_filter_band(sig, lf, hf, fs, 'bandpass')
+# # extract epochs based on marker IDs
+# epochs, ts_epoch = extract_epochs(sig, ts_sig, ts_markers, t_min, t_max, fs)
 
-n_epochs = np.shape(epochs)[0]
-frequencies = list(set(gt_dict.values()))
+
+
+# n_epochs = np.shape(epochs)[0]
+# frequencies = list(set(gt_dict.values()))
 
 
 async def handler(websocket):
@@ -61,7 +61,6 @@ async def handler(websocket):
 
 
 async def runningApplication(websocket):
-    for i in range(10):
         # input('klik maar')
         # epoch = epochs[i, :, :]
         # scores = perform_CCA(epoch, frequencies, fs)
@@ -79,7 +78,10 @@ async def runningApplication(websocket):
         # if prediction == 15 :
         #     await websocket.send(json.dumps('O')) 
         #     print("O")      
-        temp = input("Enter N P L or O").capitalize()   
+
+
+    for i in range(100):
+        temp = input('N P L or Q :').capitalize()
         if temp == 'Q':
             break
         elif temp == 'N' or temp == 'P' or temp == 'L' or temp == 'O':

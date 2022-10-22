@@ -149,7 +149,7 @@ def main():
         preprocessor.filter_band(low_freq=0.5, high_freq=35, type_of_filter="bandpass", order_of_filter=4)
         preprocessor.notch_filter(notch_freq=50)
         print(np.shape(preprocessor.stored_data))
-
+        
     explore.disconnect()   # disconnect the headset
     sys.exit()             # shut down Python
 
