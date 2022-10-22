@@ -383,7 +383,6 @@ def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CHANNEL_
     start_time = time.time()
 
     scores_stored = np.zeros((FOCUS_LENGTH, len(FREQS)))
-    iter = 0
 
     while time.time() - start_time < STREAM_DURATION:
         eeg.gather_data(explore, CHANNEL_MASK)
@@ -402,7 +401,6 @@ def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CHANNEL_
         scores_stored = np.vstack([scores_stored,scores])
         scores_stored = np.delete(scores_stored,1,0)
         [certainty, index] = Thresholding(scores_stored)
-        iter += 1
 
         
 execute_ANALYZR("Explore_849D",2,250,60,"011001000", [8,10,12,14], 3)
