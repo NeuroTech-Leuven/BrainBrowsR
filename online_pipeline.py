@@ -399,7 +399,8 @@ def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CHANNEL_
         n_samples = np.shape(stored_data)[1]
         cca.update_number_of_samples(n_samples)
         scores = cca.classify_single_regular(stored_data, return_scores=True)
-        scores_stored[iter % FOCUS_LENGTH] = scores
+        scores_stored = np.vstack([scores_stored,scores])
+        scores_stored = np.delete(scores_stored,1,0)
         [certainty, index] = Thresholding(scores_stored)
         iter += 1
 
