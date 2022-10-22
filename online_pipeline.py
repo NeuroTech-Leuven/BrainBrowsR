@@ -401,7 +401,7 @@ def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CHANNEL_
         scores = cca.classify_single_regular(stored_data, return_scores=True)
         scores_stored[iter % FOCUS_LENGTH] = scores
         [certainty, index] = Thresholding(scores_stored)
-
+        iter += 1
 
         
 execute_ANALYZR("Explore_849D",2,250,60,"011001000", [8,10,12,14], 3)
