@@ -32,6 +32,9 @@ The idea of CCA is to find $W_x$ and $W_y$ such that the correlation between the
 
 ### Extended CCA
 
+[Extended CCA diagram](./images/extended_CCA_diagram.JPG "Text to show on mouseover")
+
+
 To explain extended you first have to understand the basic principles of Individual template CCA (IT-CC).
 
 This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template $\bar{\mathcal X} = \frac{1}{N_t} \sum_{h=1}^{N_t} \mathcal X $ signals when using code modulated visual evoked potential.
@@ -42,6 +45,12 @@ Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients betwee
 
 ## Implementation
 
-Canonical Correlation Analysis (CCA) is a statistical method to derive information about the relationship between two sets of variables. In the case of SSVEP detection.
+The implementation can be explained by the following flowchart.
 
-Given two sets of variables $X = (\vec{X_1}, ... , \vec{X_n})$ and $Y = (\vec{Y_1},...,\vec{Y_m})$, CCA finds vectors $\vec{a}, \vec{b} \in {\rm I\!R}$ that maximise the correlation $\rho = \text{corr}(\vec{a}^TX, \vec{b}^TY)$, where $$ \rho = corr(X,Y) = \frac{cov(X,Y)}{\sigma_X \sigma_Y} = \frac{E[(X -\mu_X)(Y-\mu_Y)]}{E[X-\mu_X]E[Y-\mu_Y]} $$
+[CCA implementation diagram](./images/CCA_diagram.JPG "CCA implementation diagram")
+
+The filtered data from the preprocessing together with a template containing sine and cosine signals from one reference frequency and its harmonics is put into the CCA module. The CCA module is imported from the sklearn library [link](https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.CCA.html). This function returns the corresponding weighting vectors explained above. Afterwards, we apply these weighting vectors on the template and the data. Finally, we van calculate the correlation between the signals and the template, this value is stored. The process is repeated for every reference signal. The reference with the highest correlation value is picked as the winner. 
+
+The dots indicate how we could upgrade the regular CCA to the extended CCA. By adding training data to the template matrix, we could increase the accuracy of the method. This data is first averaged for each frequency while keeping the different channels separated. The final template will have dimensions: number of frequencies x number of channels x number of samples. 
+
+
