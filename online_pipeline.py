@@ -355,7 +355,7 @@ def Thresholding(threshold, data):
         second_dominant_frequency = np.partition(data[i], -2)[-2]
         Certainty[i][np.where(data[i] == dominant_frequency)] = dominant_frequency - second_dominant_frequency
         if i > 0:
-            Certainty[i] = Certainty[i]+Certainty[i-1]
+            Certainty[i] = (Certainty[i]*(1+Certainty[i-1]))+Certainty[i-1]
         for final_certainty in Certainty[-1]:
             if final_certainty > threshold*i:
                 return [final_certainty, np.where(Certainty[-1] == final_certainty)[0][0]]
@@ -372,7 +372,7 @@ def Thresholding(threshold, data):
 #####################
 
 
-async def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CHANNEL_MASK, FREQS):   
+def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CHANNEL_MASK, FREQS, FOCUS_LENGTH):   
     CHANNELS = CHANNEL_MASK.count('1') # get number of active channels
     explore = explorepy.Explore() # headset object
     explore.connect(device_name=NAME) # connect to headset
@@ -382,6 +382,9 @@ async def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CH
     # start the timer
     start_time = time.time()
 
+    scores_stored = np.zeros((FOCUS_LENGTH, len(FREQS)))
+    iter = 0
+
     while time.time() - start_time < STREAM_DURATION:
         eeg.gather_data(explore, CHANNEL_MASK)
        
@@ -390,17 +393,18 @@ async def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CH
         preprocessor.notch_filter(notch_freq=50) #set notch according to region
         preprocessor.filter_band(low_freq=0.5, high_freq=35, type_of_filter="bandpass", order_of_filter=5) #bandpass ROI
         stored_data = preprocessor.get_data()
-    
+
         
         # classifying the window
         n_samples = np.shape(stored_data)[1]
         cca.update_number_of_samples(n_samples)
         scores = cca.classify_single_regular(stored_data, return_scores=True)
-        [certainty, index] = Thresholding(scores)
+        scores_stored[iter % FOCUS_LENGTH] = scores
+        [certainty, index] = Thresholding(scores_stored)
 
 
         
-execute_ANALYZR("Explore_849D",2,250,60,"011001000", [8,10,12,14])
+execute_ANALYZR("Explore_849D",2,250,60,"011001000", [8,10,12,14], 3)
 
 
 
