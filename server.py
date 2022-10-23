@@ -4,11 +4,12 @@ import explorepy
 import asyncio
 import json
 import websockets
+import numpy as np
 
-from data_processing.eeg import EEG
-from data_processing.preprocessing import Preprocessor
-from data_processing.cca import Classifier
-
+from src.data_processing.eeg import EEG
+from src.data_processing.preprocessing import Preprocessor
+from src.data_processing.cca import Classifier
+from src.data_processing.thresholding import Thresholding
 
 class BrainServR:
 
