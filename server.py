@@ -22,7 +22,7 @@ class BrainServR:
         self.SAMPLING_RATE = 250
         self.STREAM_DURATION = 60
         self.FOCUS_LENGTH = 2
-        self.THRESHOLD = 0.7
+        self.THRESHOLD = 0.15
         self.CHANNELS = self.CHANNEL_MASK.count('1') # get number of active channels
         self.FREQS = [8,10,12,14]
 
@@ -61,11 +61,10 @@ class BrainServR:
             scores = cca.classify_single_regular(stored_data, return_scores=True)
             scores_stored = np.vstack([scores_stored,scores])
             scores_stored = np.delete(scores_stored,0,0)
-            print(scores_stored)
-            index = Thresholding(self.THRESHOLD, scores_stored)
+            #print(scores_stored)
+            final_certainty, index = Thresholding(self.THRESHOLD, scores_stored)
             if index != -1:
-                print(index)
-                await websocket.send(json.dumps(index))
+                await websocket.send(json.dumps(str(index)))
 
     async def start(self):
         async with websockets.serve(self.connect,"",8002):
