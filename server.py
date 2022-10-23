@@ -4,6 +4,7 @@ import explorepy
 import asyncio
 import json
 import websockets
+import numpy as np
 
 from data_processing.eeg import EEG
 from data_processing.preprocessing import Preprocessor
