@@ -31,6 +31,7 @@ class EEG:
         explore.stream_processor.subscribe(callback=self.read_stream, topic=TOPICS.raw_ExG)
         # will keep running until time.sleep stops.
         time.sleep(self.WINDOW_LENGTH)
+        explore.stream_processor.unsubscribe(callback=self.read_stream, topic=TOPICS.raw_ExG)
 
     def get_data(self):
         return (self.stored_data, self.timestamps)

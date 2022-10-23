@@ -1,59 +1,59 @@
 #!/usr/bin/env python
 from distutils.command.config import config
+from tkinter import N
 import explorepy
 import asyncio
 import json
 import websockets
 import numpy as np
+from scipy import signal
 
-from data_processing.eeg import EEG
-from data_processing.preprocessing import Preprocessor
-from data_processing.cca import Classifier
-
+from src.data_processing.eeg import EEG
+from src.data_processing.preprocessing import Preprocessor
+from src.data_processing.cca import Classifier
+from src.data_processing.thresholding import Thresholding
 
 class BrainServR:
 
     def __init__(self) -> None:
-        DEVICENAME = "Explore_849D"
-        CHANNEL_MASK = "01101000"
-        WINDOW_LENGTH = 2
-        SAMPLING_RATE = 250
-        STREAM_DURATION = 60
-        FOCUS_LENGTH = 2
-        THRESHOLD = 0.7
-        CHANNELS = CHANNEL_MASK.count('1') # get number of active channels
-        FREQS = [8,10,12,14]
+        self.DEVICENAME = "Explore_849D"
+        self.CHANNEL_MASK = "01101000"
+        self.WINDOW_LENGTH = 2
+        self.SAMPLING_RATE = 250
+        self.STREAM_DURATION = 60
+        self.FOCUS_LENGTH = 2
+        self.THRESHOLD = 0.7
+        self.CHANNELS = self.CHANNEL_MASK.count('1') # get number of active channels
+        self.FREQS = [8,10,12,14]
 
-        self.explore = self.connectHeadset(DEVICENAME,CHANNEL_MASK)
-        self.eeg = EEG(CHANNELS, WINDOW_LENGTH, SAMPLING_RATE)
-        self.preprocessor = Preprocessor(SAMPLING_RATE)
-        self.cca = Classifier(FREQS,CHANNELS,0,WINDOW_LENGTH,SAMPLING_RATE)
+        self.explore = self.connectHeadset()
+        self.eeg = EEG(self.CHANNELS, self.WINDOW_LENGTH, self.SAMPLING_RATE)
+        self.preprocessor = Preprocessor(self.SAMPLING_RATE)
+        self.cca = Classifier(self.FREQS,self.CHANNELS,0,self.WINDOW_LENGTH,self.SAMPLING_RATE)
 
-    def connectHeadset(self,deviceName,channelMask):
-        self.explore = self.connectHeadset(DEVICENAME)
-        #self.eeg = EEG(CHANNELS, WINDOW_LENGTH, SAMPLING_RATE)
-        #self.preprocessor = Preprocessor(SAMPLING_RATE)
-        #self.cca = Classifier(freqs,n_chan,t_min,t_max,SAMPLING_RATE)
-
-    def connectHeadset(self,deviceName):
+    
+    def connectHeadset(self):
         explore = explorepy.Explore()
-        explore.connect(device_name=deviceName)
+        explore.connect(device_name=self.DEVICENAME)
+        explore.set_channels(channel_mask=self.CHANNEL_MASK)
+
         return explore
 
     async def connect(self, websocket):
-        scores_stored = np.zeros((FOCUS_LENGTH, len(FREQS)))
+        await websocket.send(json.dumps("test"))
+        scores_stored = np.zeros((self.FOCUS_LENGTH, len(self.FREQS)))
         eeg = self.eeg
         preprocessor = self.preprocessor
         cca = self.cca
 
         while True:
-            eeg.gather_data(self.explore, CHANNEL_MASK)
-       
+            eeg.gather_data(self.explore)
             # preprocessing the window 
             preprocessor.update_stored_data(eeg.stored_data)
-            preprocessor.notch_filter(notch_freq=50) #set notch according to region
-            preprocessor.filter_band(low_freq=0.5, high_freq=35, type_of_filter="bandpass", order_of_filter=5) #bandpass ROI
+            preprocessor.notch_filter(50) #set notch according to region
+            preprocessor.filter_band(0.5,35,"bandpass", 5) #bandpass ROI
             stored_data = preprocessor.get_data()
+         
         
             # classifying the window
             n_samples = np.shape(stored_data)[1]
@@ -62,9 +62,10 @@ class BrainServR:
             scores_stored = np.vstack([scores_stored,scores])
             scores_stored = np.delete(scores_stored,0,0)
             print(scores_stored)
-            index = Thresholding(THRESHOLD, scores_stored)
-            if Thresholding != False:
+            index = Thresholding(self.THRESHOLD, scores_stored)
+            if index != -1:
                 print(index)
+                await websocket.send(json.dumps(index))
 
     async def start(self):
         async with websockets.serve(self.connect,"",8002):
