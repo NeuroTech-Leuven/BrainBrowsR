@@ -1,4 +1,4 @@
-import signal
+from scipy import signal
 import numpy as np
 
 class Preprocessor:
@@ -8,6 +8,7 @@ class Preprocessor:
 
     def update_stored_data(self, stored_data):
         self.stored_data = stored_data
+
 
     def filter_band(self, low_freq, high_freq,
                           type_of_filter, order_of_filter):
@@ -35,16 +36,18 @@ class Preprocessor:
         Applies notch filter around 50 Hz
 
         """
+        print('13')
         sr = self.SAMPLING_RATE
         notch_freq = notch_freq
         quality_factor = 20.0
         # Design a notch filter using signal.iirnotch
+        print('10')
         b_notch, a_notch = signal.iirnotch(notch_freq, quality_factor, sr)
+        print('11')
         self.stored_data = signal.filtfilt(b_notch, a_notch, self.stored_data)
+        print('12')
 
-    def channel_selection(self, channel_mask):
-        stored_data = np.array(self.stored_data)[channel_mask]
-        self.stored_data = stored_data.squeeze()
+
 
     def channel_average(self): 
         self.stored_data = np.mean(self.stored_data, 0)

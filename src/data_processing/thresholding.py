@@ -1,4 +1,4 @@
-
+import numpy as np
 ###############
 # Threshold #
 ###############
@@ -15,4 +15,4 @@ def Thresholding(threshold, data):
                 index = np.where(Certainty[-1] == final_certainty)[0][0]
                 return [final_certainty, index]
             else:
-                return False
+                return -1
