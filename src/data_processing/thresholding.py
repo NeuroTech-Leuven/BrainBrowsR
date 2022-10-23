@@ -7,13 +7,13 @@ def Thresholding(threshold, data):
     for i in range(np.shape(data)[0]):
         dominant_frequency = np.partition(data[i], -2)[-1]
         second_dominant_frequency = np.partition(data[i], -2)[-2]
-        Certainty[i][np.where(data[i] == dominant_frequency)[0][0]] = dominant_frequency - second_dominant_frequency
+        Certainty[i,(np.where(data[i] == dominant_frequency)[0][0])] = dominant_frequency - second_dominant_frequency
         if i > 0:
             Certainty[i] = (Certainty[i]*(1+Certainty[i-1]))+Certainty[i-1]
     print(Certainty)
-    for final_certainty in Certainty[-1]:
-        if final_certainty > threshold*i:
-            index = np.where(Certainty[-1] == final_certainty)[0][0]
-            return final_certainty, index
-        else:
-            return -1,-1
+    print(threshold)
+    for j in range(len(Certainty[-1])):
+        if Certainty[-1,j] > threshold:
+            return Certainty[-1,j], j
+    
+    return -1,-1

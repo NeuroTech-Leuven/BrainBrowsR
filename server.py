@@ -7,6 +7,7 @@ import json
 import websockets
 import numpy as np
 from scipy import signal
+import time
 
 from src.data_processing.eeg import EEG
 from src.data_processing.preprocessing import Preprocessor
@@ -18,13 +19,12 @@ class BrainServR:
     def __init__(self) -> None:
         self.DEVICENAME = "Explore_849D"
         self.CHANNEL_MASK = "01101000"
-        self.WINDOW_LENGTH = 2
+        self.WINDOW_LENGTH = 4
         self.SAMPLING_RATE = 250
-        self.STREAM_DURATION = 60
-        self.FOCUS_LENGTH = 2
+        self.FOCUS_LENGTH = 3
         self.THRESHOLD = 0.15
         self.CHANNELS = self.CHANNEL_MASK.count('1') # get number of active channels
-        self.FREQS = [8,10,12,14]
+        self.FREQS = [6,12,10,8]
 
         self.explore = self.connectHeadset()
         self.eeg = EEG(self.CHANNELS, self.WINDOW_LENGTH, self.SAMPLING_RATE)
@@ -61,11 +61,15 @@ class BrainServR:
             scores = cca.classify_single_regular(stored_data, return_scores=True)
             scores_stored = np.vstack([scores_stored,scores])
             scores_stored = np.delete(scores_stored,0,0)
-            #print(scores_stored)
+            print(scores_stored)
             final_certainty, index = Thresholding(self.THRESHOLD, scores_stored)
+            print(index)
+            print(final_certainty)
+            await websocket.send(json.dumps('FU'))
             if index != -1:
                 await websocket.send(json.dumps(str(index)))
-
+                scores_stored = np.zeros((self.FOCUS_LENGTH, len(self.FREQS)))
+                time.sleep(4)
     async def start(self):
         async with websockets.serve(self.connect,"",8002):
             await asyncio.Future()

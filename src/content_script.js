@@ -21,22 +21,22 @@ function setUp() {
       const event = JSON.parse(data);
       console.log(event);
       switch (event) {
-        case "N":
+        case "3":
           currentPost = nextFromCurrent(currentPost);
           confirmAction("green");
           testHeadset(event);
           break;
-        case "P":
+        case "2":
           currentPost = previousFromCurrent(currentPost);
           confirmAction("green");
           testHeadset(event);
           break;
-        case "L" :
+        case "0" :
           likePost(currentPost);
           confirmAction("green");
           testHeadset(event);
           break;
-        case "O" :
+        case "1" :
           if (stimuli_on == 0) {
             stimuli_on = 1;
             displayStimuli();           

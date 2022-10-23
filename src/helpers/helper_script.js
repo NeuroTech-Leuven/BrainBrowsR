@@ -42,7 +42,7 @@ function processPost(post) {
 }
 
 function centerPost(post){
-    post.style.position = "relative";
+    post.style.position = "static";
     post.style.left = "35%";
 }
 

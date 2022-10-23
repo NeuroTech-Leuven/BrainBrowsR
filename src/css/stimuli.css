@@ -19,7 +19,7 @@
 .like{
   --color: rgb(255, 0, 0); 
   /* --color: rgb(0, 0, 0);  */
-  --freq : .125s;
+  --freq : 0.16666666666666666666s;
   /* --freq : 1s; */
   left: var(--offset);
   top: var(--offset);
@@ -28,7 +28,7 @@
 .comment{
   --color: rgb(63, 189, 63);  
   /* --color: rgb(0, 0, 0);  */
-  --freq : .1s;
+  --freq : .08333333s;
   left: var(--offset);
   bottom: var(--offset);
 }
@@ -36,15 +36,15 @@
 .up{
   --color: rgb(0, 0, 255);  
   /* --color: rgb(0, 0, 0);  */
-  --freq : .08333s;  
+  --freq : .1s;  
   right: var(--offset);
   top: var(--offset); 
 }
 
 .down{
-  --color: rgb(161, 36, 185);  
+  --color: rgb(0, 0, 0);  
   /* --color: rgb(0, 0, 0);  */
-  --freq : .071s;  
+  --freq : .125s;  
   right: var(--offset);
   bottom: var(--offset);
 }
