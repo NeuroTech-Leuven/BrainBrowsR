@@ -4,12 +4,10 @@ import explorepy
 import asyncio
 import json
 import websockets
-import numpy as np
 
-
-#from src.data_processing.eeg import EEG
-#from src.data_processing.preprocessing import Preprocessor
-#from src.data_processing.cca import Classifier
+from data_processing.eeg import EEG
+from data_processing.preprocessing import Preprocessor
+from data_processing.cca import Classifier
 
 
 class BrainServR:
@@ -31,8 +29,13 @@ class BrainServR:
         self.cca = Classifier(FREQS,CHANNELS,0,WINDOW_LENGTH,SAMPLING_RATE)
 
     def connectHeadset(self,deviceName,channelMask):
+        self.explore = self.connectHeadset(DEVICENAME)
+        #self.eeg = EEG(CHANNELS, WINDOW_LENGTH, SAMPLING_RATE)
+        #self.preprocessor = Preprocessor(SAMPLING_RATE)
+        #self.cca = Classifier(freqs,n_chan,t_min,t_max,SAMPLING_RATE)
+
+    def connectHeadset(self,deviceName):
         explore = explorepy.Explore()
-        explore.set_channels(channel_mask=channelMask)
         explore.connect(device_name=deviceName)
         return explore
 
