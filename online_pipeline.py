@@ -6,7 +6,7 @@ def import_or_install(package):
     except ImportError:
         pip.main(['install', package])    
 
-for package in ["json","websockets","pandas", "seaborn", "sklearn", "explorepy", "argparse", "time", "asyncio", "numpy", "scipy", "matplotlib", "sys"]:
+for package in ["asyncio","json","websockets","pandas", "seaborn", "sklearn", "explorepy", "argparse", "time", "asyncio", "numpy", "scipy", "matplotlib", "sys"]:
     import_or_install(package)
     
 ####################################################
@@ -24,6 +24,7 @@ import sklearn
 from sklearn.cross_decomposition import CCA
 import seaborn as sns
 import pandas as pd
+import asyncio
 
 
 ###########
@@ -346,7 +347,7 @@ class Classifier():
 
 
 ###############
-# Definitions #
+# Threshold #
 ###############
 def Thresholding(threshold, data):
     Certainty = np.zeros(np.shape(data))
@@ -361,29 +362,53 @@ def Thresholding(threshold, data):
                 return [final_certainty, np.where(Certainty[-1] == final_certainty)[0][0]]
             else:
                 return False
-############################
-# Websocket async functions#
-############################
 
 
+
+#####################
+# Conncetion setup  #
+#####################
+
+def setup_connection():
+    parser = argparse.ArgumentParser(description="online pipeline for BrainBrowsR")
+    parser.add_argument("-n", "--name", dest="name", type=str, help="Name of the device.")
+    parser.add_argument("-w", "--win", dest="win", type=int, help="window length")
+    parser.add_argument("-s", "--sr", dest="sr", type=int, help="sampling rate in Hz")
+    parser.add_argument("-d", "--dur", dest="dur", type=int, help="duration to stream")
+    parser.add_argument("-c", "--chan", dest="chan", type=int, help="Channelmask as 0 off and 1 on")
+    parser.add_argument("-f", "--foc", dest="foc", type=int, help="focus length for eeg buffer")
+    parser.add_argument("-t", "--thres", dest="thres", type=int, help="thresholding factor")
+    args = parser.parse_args()
+    explore = explorepy.Explore()
+    explore.connect(device_name=args.name) 
+    CHANNELS = args.chan
+    WINDOW_LENGTH = args.win
+    SAMPLING_RATE = args.sr
+    STREAM_DURATION = args.dur
+    FOCUS_LENGTH = args.foc
+    THRESHOLD = args.thres
+    return (explore, CHANNELS, WINDOW_LENGTH, SAMPLING_RATE, STREAM_DURATION,FOCUS_LENGTH,THRESHOLD)
 
 #####################
 # Program execution #
 #####################
+############################
+# Websocket async functions#
+############################
 
-
-def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CHANNEL_MASK, FREQS, FOCUS_LENGTH):   
-    CHANNELS = CHANNEL_MASK.count('1') # get number of active channels
-    explore = explorepy.Explore() # headset object
-    explore.connect(device_name=NAME) # connect to headset
-    eeg = EEG(CHANNELS, WINDOW_LENGTH, SAMPLING_RATE)       # eeg receiver class
+async def runningApplication(websocket):
+    explore, CHANNEL_MASK, WINDOW_LENGTH, SAMPLING_RATE, \
+        STREAM_DURATION,FOCUS_LENGTH,THRESHOLD = setup_connection()  
+    eeg = EEG(CHANNEL_MASK, WINDOW_LENGTH, SAMPLING_RATE)       # eeg receiver class
     preprocessor = Preprocessor(SAMPLING_RATE)              # preprocessor class
+    CHANNELS = CHANNEL_MASK.count('1') # get number of active channels
+
     cca = Classifier(FREQS, n_chan = CHANNELS, t_min = 0, t_max = WINDOW_LENGTH, fs=SAMPLING_RATE)  # classifier class
+    
+    FREQS = [8,10,12,14]
+    scores_stored = np.zeros((FOCUS_LENGTH, len(FREQS)))
     # start the timer
     start_time = time.time()
-
-    scores_stored = np.zeros((FOCUS_LENGTH, len(FREQS)))
-
     while time.time() - start_time < STREAM_DURATION:
         eeg.gather_data(explore, CHANNEL_MASK)
        
@@ -401,10 +426,23 @@ def execute_ANALYZR(NAME, WINDOW_LENGTH, SAMPLING_RATE,STREAM_DURATION, CHANNEL_
         scores_stored = np.vstack([scores_stored,scores])
         scores_stored = np.delete(scores_stored,1,0)
         [certainty, index] = Thresholding(scores_stored)
+        if Thresholding != False:
+            await websocket.send(json.dumps(index))
+    
 
-        
-execute_ANALYZR("Explore_849D",2,250,60,"011001000", [8,10,12,14], 3)
 
+async def handler(websocket):
+    await runningApplication(websocket)
+
+
+async def main():
+    async with websockets.serve(handler, "localhost", 8002):
+        await asyncio.Future()  # run forever
+
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
 
 
