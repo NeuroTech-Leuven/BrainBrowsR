@@ -1,7 +1,3 @@
-
-###############
-# Threshold #
-###############
 def Thresholding(threshold, data):
     Certainty = np.zeros(np.shape(data))
     for i in range(np.shape(data)[0]):

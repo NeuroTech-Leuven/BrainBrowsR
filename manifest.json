@@ -8,7 +8,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.instagram.com/*"],
-      "js": ["src/helper_script.js","src/helpers/style_helper.js", "src/helpers/stimuli_helper.js", "src/helpers/content_script.js"],
+      "js": ["src/helpers/helper_script.js","src/helpers/style_helper.js", "src/helpers/stimuli_helper.js", "src/content_script.js"],
       "css": ["src/css/stimuli.css"]
     }
   ],
