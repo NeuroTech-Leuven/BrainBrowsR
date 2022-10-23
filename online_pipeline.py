@@ -34,8 +34,9 @@ import asyncio
 
 class EEG:
 
-    def __init__(self, CHANNELS, WINDOW_LENGTH, SAMPLING_RATE):
+    def __init__(self, CHANNELS,CHANNEL_MASK, WINDOW_LENGTH, SAMPLING_RATE):
         self.CHANNELS = CHANNELS
+        self.CHANNEL_MASK = CHANNEL_MASK
         self.WINDOW_LENGTH = WINDOW_LENGTH  # in seconds
         self.SAMPLING_RATE = SAMPLING_RATE  # in Hz
         self.WINDOW_SAMPLES = WINDOW_LENGTH * SAMPLING_RATE
@@ -354,12 +355,13 @@ def Thresholding(threshold, data):
     for i in range(np.shape(data)[0]):
         dominant_frequency = np.partition(data[i], -2)[-1]
         second_dominant_frequency = np.partition(data[i], -2)[-2]
-        Certainty[i][np.where(data[i] == dominant_frequency)] = dominant_frequency - second_dominant_frequency
+        Certainty[i][np.where(data[i] == dominant_frequency)[0][0]] = dominant_frequency - second_dominant_frequency
         if i > 0:
             Certainty[i] = (Certainty[i]*(1+Certainty[i-1]))+Certainty[i-1]
         for final_certainty in Certainty[-1]:
             if final_certainty > threshold*i:
-                return [final_certainty, np.where(Certainty[-1] == final_certainty)[0][0]]
+                index = np.where(Certainty[-1] == final_certainty)[0][0]
+                return [final_certainty, index]
             else:
                 return False
 
@@ -375,9 +377,9 @@ def setup_connection():
     parser.add_argument("-w", "--win", dest="win", type=int, help="window length")
     parser.add_argument("-s", "--sr", dest="sr", type=int, help="sampling rate in Hz")
     parser.add_argument("-d", "--dur", dest="dur", type=int, help="duration to stream")
-    parser.add_argument("-c", "--chan", dest="chan", type=int, help="Channelmask as 0 off and 1 on")
+    parser.add_argument("-c", "--chan", dest="chan", type=str, help="Channelmask as 0 off and 1 on")
     parser.add_argument("-f", "--foc", dest="foc", type=int, help="focus length for eeg buffer")
-    parser.add_argument("-t", "--thres", dest="thres", type=int, help="thresholding factor")
+    parser.add_argument("-t", "--thres", dest="thres", type=float, help="thresholding factor")
     args = parser.parse_args()
     explore = explorepy.Explore()
     explore.connect(device_name=args.name) 
@@ -395,17 +397,19 @@ def setup_connection():
 ############################
 # Websocket async functions#
 ############################
-
-async def runningApplication(websocket):
+#python online_pipeline.py -n Explore_849D -w 2 -s 250 -d 100 -c 01101000 -f 2 -t 0.6
+def main():
     explore, CHANNEL_MASK, WINDOW_LENGTH, SAMPLING_RATE, \
         STREAM_DURATION,FOCUS_LENGTH,THRESHOLD = setup_connection()  
-    eeg = EEG(CHANNEL_MASK, WINDOW_LENGTH, SAMPLING_RATE)       # eeg receiver class
-    preprocessor = Preprocessor(SAMPLING_RATE)              # preprocessor class
     CHANNELS = CHANNEL_MASK.count('1') # get number of active channels
+
+    FREQS = [8,10,12,14]
+
+    eeg = EEG(CHANNELS,CHANNEL_MASK, WINDOW_LENGTH, SAMPLING_RATE)       # eeg receiver class
+    preprocessor = Preprocessor(SAMPLING_RATE)              # preprocessor class
 
     cca = Classifier(FREQS, n_chan = CHANNELS, t_min = 0, t_max = WINDOW_LENGTH, fs=SAMPLING_RATE)  # classifier class
     
-    FREQS = [8,10,12,14]
     scores_stored = np.zeros((FOCUS_LENGTH, len(FREQS)))
     # start the timer
     start_time = time.time()
@@ -417,32 +421,20 @@ async def runningApplication(websocket):
         preprocessor.notch_filter(notch_freq=50) #set notch according to region
         preprocessor.filter_band(low_freq=0.5, high_freq=35, type_of_filter="bandpass", order_of_filter=5) #bandpass ROI
         stored_data = preprocessor.get_data()
-
         
         # classifying the window
         n_samples = np.shape(stored_data)[1]
         cca.update_number_of_samples(n_samples)
         scores = cca.classify_single_regular(stored_data, return_scores=True)
         scores_stored = np.vstack([scores_stored,scores])
-        scores_stored = np.delete(scores_stored,1,0)
-        [certainty, index] = Thresholding(scores_stored)
+        scores_stored = np.delete(scores_stored,0,0)
+        print(scores_stored)
+        index = Thresholding(THRESHOLD, scores_stored)
         if Thresholding != False:
-            await websocket.send(json.dumps(index))
+            print(index)
     
 
 
-async def handler(websocket):
-    await runningApplication(websocket)
-
-
-async def main():
-    async with websockets.serve(handler, "localhost", 8002):
-        await asyncio.Future()  # run forever
-
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
 
 
 
@@ -450,3 +442,7 @@ if __name__ == "__main__":
 
 
 
+
+
+if __name__ == '__main__':
+    main()
