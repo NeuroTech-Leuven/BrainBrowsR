@@ -1,129 +1,75 @@
 #!/usr/bin/env python
-import time
-import numpy as np
-import pandas as pd
-from scipy import signal
-from scipy.fft import fft, fftfreq
-import matplotlib.pyplot as plt
+from distutils.command.config import config
+import explorepy
 import asyncio
-from email import message
 import json
 import websockets
-# from cca_functions import *
-# from online_pipeline import *
-
-# # intialization of variables
-# # set here if you are using the simulated dataset or the mentalab recorded dataset
-# path = "."
-# fname_data = "/csv/SSVEP1_data.csv"
-# fname_markers = "/csv/SSVEP1_markers.csv"
-
-# gt_dict = {1:9, 2:9, 3:11, 4:11, 5:13, 6:13, 7:15, 8:15}
-# fs = 500  # Hz, sampling frequency
-# t_min = 0  # Start time of epoch since marker (seconds)
-# t_max = 2  # End time of epoch since marker (seconds)
-# screen_refresh_rate = 60
-# ch_names = ["O1","Oz","O2","PO3","PO4","P7","P3","Pz","P4","P8"] # list of channel names
-# lf = .5    # low frequency for bandpass filtering
-# hf = 100  # high frequency for bandpass filtering
-# electrodes = {  # dictionary of electrode names
-#     2: "Oz",
-#     3: "O2",
-#     4: "PO3",
-#     5: "PO4",
-# }
-
-# # read in the data
-# data = pd.read_csv(path + fname_data, delimiter=",")  # EEG data
-# sig = data[ch_names].to_numpy().T  # EEG signals, channels by data samples
-# markers = pd.read_csv(path + fname_markers)  # event markers
-# # time signature of the EEG signal
-# ts_sig = (data['TimeStamp'] - data['TimeStamp'][0]).to_numpy()
-# # array of time signature of the markers
-# ts_markers = (markers['TimeStamp'] - markers['TimeStamp'][0]).to_numpy()
-# groundtruth = markers['Code'].to_numpy()  # array of marker IDs
+import numpy as np
 
 
-# # Preprocessing
-# # Band-pass filter
-# # filt_sig = custom_filter_band(sig, lf, hf, fs, 'bandpass')
-# # extract epochs based on marker IDs
-# epochs, ts_epoch = extract_epochs(sig, ts_sig, ts_markers, t_min, t_max, fs)
-#from data_processing.eeg import EEG
-#from data_processing.preprocessing import Preprocessor
-#from data_processing.cca import Classifier
+#from src.data_processing.eeg import EEG
+#from src.data_processing.preprocessing import Preprocessor
+#from src.data_processing.cca import Classifier
 
 
 class BrainServR:
 
     def __init__(self) -> None:
         DEVICENAME = "Explore_849D"
-        self.explore = self.connectHeadset(DEVICENAME)
-        #self.eeg = EEG(CHANNELS, WINDOW_LENGTH, SAMPLING_RATE)
-        #self.preprocessor = Preprocessor(SAMPLING_RATE)
-        #self.cca = Classifier(freqs,n_chan,t_min,t_max,SAMPLING_RATE)
+        CHANNEL_MASK = "01101000"
+        WINDOW_LENGTH = 2
+        SAMPLING_RATE = 250
+        STREAM_DURATION = 60
+        FOCUS_LENGTH = 2
+        THRESHOLD = 0.7
+        CHANNELS = CHANNEL_MASK.count('1') # get number of active channels
+        FREQS = [8,10,12,14]
 
-    def connectHeadset(self,deviceName):
+        self.explore = self.connectHeadset(DEVICENAME,CHANNEL_MASK)
+        self.eeg = EEG(CHANNELS, WINDOW_LENGTH, SAMPLING_RATE)
+        self.preprocessor = Preprocessor(SAMPLING_RATE)
+        self.cca = Classifier(FREQS,CHANNELS,0,WINDOW_LENGTH,SAMPLING_RATE)
+
+    def connectHeadset(self,deviceName,channelMask):
         explore = explorepy.Explore()
+        explore.set_channels(channel_mask=channelMask)
         explore.connect(device_name=deviceName)
         return explore
 
     async def connect(self, websocket):
-        for i in range(100):
-            temp = input('N P L or Q :').capitalize()
-            if temp == 'Q':
-                break
-            elif temp == 'N' or temp == 'P' or temp == 'L' or temp == 'O':
-                await websocket.send(json.dumps())
-            else:
-                print('Enter p, q, l or n ')
->>>>>>> Stashed changes
+        scores_stored = np.zeros((FOCUS_LENGTH, len(FREQS)))
+        eeg = self.eeg
+        preprocessor = self.preprocessor
+        cca = self.cca
 
+        while True:
+            eeg.gather_data(self.explore, CHANNEL_MASK)
+       
+            # preprocessing the window 
+            preprocessor.update_stored_data(eeg.stored_data)
+            preprocessor.notch_filter(notch_freq=50) #set notch according to region
+            preprocessor.filter_band(low_freq=0.5, high_freq=35, type_of_filter="bandpass", order_of_filter=5) #bandpass ROI
+            stored_data = preprocessor.get_data()
+        
+            # classifying the window
+            n_samples = np.shape(stored_data)[1]
+            cca.update_number_of_samples(n_samples)
+            scores = cca.classify_single_regular(stored_data, return_scores=True)
+            scores_stored = np.vstack([scores_stored,scores])
+            scores_stored = np.delete(scores_stored,0,0)
+            print(scores_stored)
+            index = Thresholding(THRESHOLD, scores_stored)
+            if Thresholding != False:
+                print(index)
 
+    async def start(self):
+        async with websockets.serve(self.connect,"",8002):
+            await asyncio.Future()
 
-# n_epochs = np.shape(epochs)[0]
-# frequencies = list(set(gt_dict.values()))
-
-
-async def handler(websocket):
-    await runningApplication(websocket)
-
-
-async def runningApplication(websocket):
-        # input('klik maar')
-        # epoch = epochs[i, :, :]
-        # scores = perform_CCA(epoch, frequencies, fs)
-        # print(scores)
-        # prediction = choose_best_match(scores)[0] 
-        # if prediction == 9 :
-        #     await websocket.send(json.dumps('N'))
-        #     print("N")
-        # if prediction == 11 :
-        #     await websocket.send(json.dumps('P'))
-        #     print("P")
-        # if prediction == 13 :
-        #     await websocket.send(json.dumps('L'))
-        #     print("L")
-        # if prediction == 15 :
-        #     await websocket.send(json.dumps('O')) 
-        #     print("O")      
-
-
-    for i in range(100):
-        temp = input('N P L or Q :').capitalize()
-        if temp == 'Q':
-            break
-        elif temp == 'N' or temp == 'P' or temp == 'L' or temp == 'O':
-            await websocket.send(json.dumps(temp))
-        else:
-            print('Enter p, q, l or n ')
-        # time.sleep(4)
-
-
-async def main():
-    async with websockets.serve(handler, "", 8002):
-        await asyncio.Future()  # run forever
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    ## Establish connection with the headset
+    server = BrainServR()
+    ## Run the websocket server
+    asyncio.run(server.start())
