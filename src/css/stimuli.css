@@ -1,31 +1,33 @@
 .stimuli {
-  --border-radius: 3rem;
+  --border-radius: 0.1rem; 
+  /* --border-radius: 3rem;  */
   --border-size: 0.3rem;
-  /* --border-bg: conic-gradient(red , white ,  white, white, red); */
-  --padding: .2rem;
+  --padding: .5rem;
   --offset: 15px;
 
   position: fixed;
-  width: 150px;
-  height: 150px;
-
-  /* animation: blink var(--freq) steps(1, end) infinite; */
-  animation: blink var(--freq) linear infinite; 
-  padding: calc(var(--padding) + var(--border-size));
+  width: 200px;
+  height: 200px;
+  animation: blink var(--freq) steps(1, end) infinite !important;
+  /* animation-name : blink !important; */
+  /* animation: sine_blink var(--freq) linear infinite;  */
+  /* padding: calc(var(--padding) + var(--border-size)); */
   border-radius: var(--border-radius);
-  /* background: var(--border-bg); */
   background-color: var(--color); 
 }
 
 .like{
   --color: rgb(255, 0, 0); 
+  /* --color: rgb(0, 0, 0);  */
   --freq : .125s;
+  /* --freq : 1s; */
   left: var(--offset);
   top: var(--offset);
 }
 
 .comment{
   --color: rgb(63, 189, 63);  
+  /* --color: rgb(0, 0, 0);  */
   --freq : .1s;
   left: var(--offset);
   bottom: var(--offset);
@@ -33,13 +35,15 @@
 
 .up{
   --color: rgb(0, 0, 255);  
-  --freq : .083s;  
+  /* --color: rgb(0, 0, 0);  */
+  --freq : .08333s;  
   right: var(--offset);
   top: var(--offset); 
 }
 
 .down{
   --color: rgb(161, 36, 185);  
+  /* --color: rgb(0, 0, 0);  */
   --freq : .071s;  
   right: var(--offset);
   bottom: var(--offset);
@@ -50,17 +54,40 @@
   width: 200px;
   height: 200px;  
   right: 20px;
-  top: 40%;
+  top: 35%;
   opacity: 0.4;
 }
 
+
+.test_headset{
+  position: fixed;
+  left: 20px;
+  top: 35%;
+}
+@keyframes sine_blink {
+  0% {
+    opacity: 0.5;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
 
 @keyframes blink {
   0% {
     opacity: 1.0;
   }
   50% {
-    opacity: 0.25;
+    opacity: 0.0;
   }
   100% {
     opacity: 1.0;
