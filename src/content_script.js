@@ -12,7 +12,9 @@ function main() {
   
 }
 
-
+/*
+Starts the websockets connection that waits for messages from the server in server.py. When receiving a message it will perform an action
+*/
 function setUp() {
   var currentPost = getAndProcessPost(0);
   try {
@@ -55,7 +57,9 @@ function setUp() {
   }
 }
 
-
+/*
+Edit the page on startup of the extension. This removes some of the bars in instagram and inserts the stimuli
+*/
 function editPage() {
   // hide the menubar
   getAndHideElementByClassName("_acum");
