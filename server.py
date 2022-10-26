@@ -16,7 +16,7 @@ from src.data_processing.thresholding import Thresholding
 
 class BrainServR:
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.DEVICENAME = "Explore_849D"
         self.CHANNEL_MASK = "01101000"
         self.WINDOW_LENGTH = 4
