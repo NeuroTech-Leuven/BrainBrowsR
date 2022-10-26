@@ -18,6 +18,8 @@ There are two components to the project, a data-processing part that connects wi
 
 To run the Python code, first install it with pip: `pip install -r requirements.txt`. This will install all the necessary packages and their dependencies. Please check that your Python version is higher than 3.5. In the terminal, now run the local data-processing server using `python server.py`. This will first connect with the headset and then start a websocket server.
 
+To connect with the headset, do this...
+
 Once the server has initiated, you can start using the extension. At the moment, we are looking to make it possible to install the extension from Mozilla. Until then, you can use either web-ext or developer tools to run it.
 
 The instructions to install web-ext are found on [this webpage](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/) by Mozilla. To run, simply do `web-ext run`. Going to instagram and login in, will connect you to websocket server and allow the usage of the extension.
