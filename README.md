@@ -10,7 +10,11 @@ The [docs](./docs/) folder contains the entire explanation on how the project wo
 
 The icons folder, contains the PNG that are use for the stimuli in BrainBrowsR.
 
-The src folder contains the extension code.
+The src folder contains the extension code, this is organised in .
+
+The server.py is the back-end code, that connects the headset and does the data-processing.
+
+The manifest.json is the configuraton file for the extension. To learn more about this, you can read this [page](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json) by Mozilla.
 
 ## Installation & Usage
 

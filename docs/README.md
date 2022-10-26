@@ -4,7 +4,7 @@ This is the developer documentation for the BrainBrowsR project by NeuroTech Leu
 
 ## Back-end
 
-The back-end of BrainBrowR consists of two parts, a websockets server and the classification pipeline. To learn more about websockets, go to the documentation in [this document](websockets.md). To learn more about the classification pipeline, you can read it [here](classification.md).
+The back-end of BrainBrowR consists of two parts, a websockets server and the data-processing pipeline. To learn more about websockets, go to the documentation in [this document](websockets.md). To learn more about the data-processing pipeline, you can read it [here](data_processing.md).
 
 ## Front-end
 

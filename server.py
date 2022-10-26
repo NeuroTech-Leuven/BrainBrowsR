@@ -1,12 +1,9 @@
 #!/usr/bin/env python
-from distutils.command.config import config
-from tkinter import N
 import explorepy
 import asyncio
 import json
 import websockets
 import numpy as np
-from scipy import signal
 import time
 
 from src.data_processing.eeg import EEG
@@ -54,7 +51,7 @@ class BrainServR:
         """
         Run this function when the extension connects with the websockets server 
         """
-        await websocket.send(json.dumps("test"))
+        await websocket.send(json.dumps("Connected with the server"))
         scores_stored = np.zeros((self.FOCUS_LENGTH, len(self.FREQS)))
 
         # get the pipeline instances
