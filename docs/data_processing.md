@@ -1,6 +1,6 @@
 # Data processing
 
-On the surface data-processing consists of two main parts: classification and pre-processing. 
+On the surface data-processing consists of two main parts: classification and pre-processing.
 
 ## Pre-processing
 
