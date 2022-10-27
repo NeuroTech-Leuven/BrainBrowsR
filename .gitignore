@@ -4,4 +4,6 @@ node_modules
 .csv
 .json
 .mypy_cache
+.vscode
+src/data_processing/__pycache__
 
