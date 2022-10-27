@@ -10,7 +10,13 @@ The [docs](./docs/) folder contains the entire explanation on how the project wo
 
 The icons folder, contains the PNG that are use for the stimuli in BrainBrowsR.
 
-The src folder contains the extension code, this is organised in .
+The src folder contains the extension code, this is organised in 5 folders:
+
+1. css, containing the css files needed in the extension,
+2. data_processing, which contains all methods used to perform the data_processing pipeline,
+3. helpers, files that are used by the content_script.js to perform certain actions,
+4. html, the html code needed by the extension
+5. stimuli, some helper functions related to stimuli.
 
 The server.py is the back-end code, that connects the headset and does the data-processing.
 
