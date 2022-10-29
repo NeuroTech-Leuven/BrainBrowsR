@@ -59,7 +59,7 @@ you can then check the responsiveness of the signal by
 2) blinking your eyes repeatedly and rapidly
 Your signal should look stimilar to Figure 4. 
 
-![alt text](./images/eye_blinks_eeg.jpg)
+![alt text](./images/eye_blinks_EEG.jpg)
 
 *Figure 4: EEG signal with and without eye blinks*
 
