@@ -62,7 +62,7 @@ The general procedure is as follows:
 
 ```mermaid
 flowchart LR;
-first[<br>Processing] --> second[Training<br>] --> third[<br>Prediction]
+first[Processing] --> second[Training] --> third[Prediction]
 class first cssClass
 ```
 
