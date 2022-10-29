@@ -30,9 +30,9 @@ A Riemannian manifold is a differentiable manifold in which tangent space at eac
 
 The Euclidian distance does not consider the curvature of the space, while Riemannian distances follows the geodesic and are thus taking into account the shape of the space where covariance matrices lie.
 
-$S_n=\{S\in M_n, S^T=S\}$ represents the space of all $n×n$ symmetric matrices in the space of square matrices.
+$S_n={S\in M_n, S^T=S}$ represents the space of all $n×n$ symmetric matrices in the space of square matrices.
 
-$P_n=\{P \in S_n, P>0\}$ represents the set of all $n×n$ symmetric positive-definite (SPD) matrices.
+$P_n={P \in S_n, P>0}$ represents the set of all $n×n$ symmetric positive-definite (SPD) matrices.
 
 The Riemannian distance $\theta_n$ between two SPD matrices $P_1$ and $P_2$ in $P(n)$ is calculated using the following formula:
 
