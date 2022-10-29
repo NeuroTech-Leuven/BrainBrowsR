@@ -55,7 +55,7 @@ The more samples you have, to longer the processing of the signal will take. Sin
 
 ### Rereferencing of the signal
 
-The EEG signal is not being rereferenced in our application, because rereference to the Cz electrode will get reduce the SSVEP signal in the EEG data. 
+The EEG signal is not being rereferenced in our application, because rereference to the Cz electrode will reduce the SSVEP signal in the EEG data. 
 
 ### Interpolation of bad channels
 
