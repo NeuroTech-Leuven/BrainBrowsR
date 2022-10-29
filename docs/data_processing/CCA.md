@@ -20,7 +20,7 @@ A weighted linear combination is made from both the EEG-signals and the assumpti
 
 The maths behind the method can be best explained by the following figure: from [Pan et al](https://iopscience.iop.org/article/10.1088/1741-2560/8/3/036027/meta) ![alt text for screen readers](./images/CCA_scheme.JPG "Text to show on mouseover").
 
-In the following deriviations, three variables are defined: $$M$$ the number of EEG channels , $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
+In the following deriviations, three variables are defined: $M$ the number of EEG channels , $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
 
 As can be seen in the previous figure $ X\in {\rm I\!R}^{M \times Q} $ are the multichannel EEG signal which contains the SSVEP response at frequency $ f $, each row contains a EEG signal across time for a specific channel. $ Y(f) \in {\rm I\!R}^{2N_h \times Q}$ is the reference signal that consist of the sine and cosine signals with frequencies including the stimulus frequency $ f $ and its harmonics.
 
