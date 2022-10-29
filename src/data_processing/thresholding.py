@@ -2,7 +2,7 @@ import numpy as np
 ###############
 # Threshold #
 ###############
-def Thresholding(threshold, data):
+def Thresholding(threshold, data): #thresholding with consecutive addition
     Certainty = np.zeros(np.shape(data))
     for i in range(np.shape(data)[0]):
         dominant_frequency = np.partition(data[i], -2)[-1]
@@ -13,13 +13,13 @@ def Thresholding(threshold, data):
     print(Certainty)
     print(threshold)
     for j in range(len(Certainty[-1])):
-        if Certainty[-1,j] > threshold:
+        if Certainty[-1,j] > threshold[j]:
             return Certainty[-1,j], j
     
     return -1,-1
 
 
-def Thresholding2(threshold, scores):
+def Thresholding2(threshold, scores): #without consecutive addition
     pred = np.argmax(scores)
     scores_sorted = scores.copy()
     scores_sorted.sort()

@@ -25,7 +25,7 @@ class BrainServR:
         self.WINDOW_LENGTH = 4
         self.SAMPLING_RATE = 250
         self.FOCUS_LENGTH = 3
-        self.THRESHOLD = 0.10
+        self.THRESHOLD = [0.10, 0.1, 0.1, 0.1]
         self.CHANNELS = self.CHANNEL_MASK.count('1') # get number of active channels
         self.FREQS = [8,13,10,12]
 
