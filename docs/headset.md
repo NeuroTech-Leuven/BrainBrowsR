@@ -55,7 +55,7 @@ Make sure that the signal looks steady (stay still and don't move), see Figure 3
 *Figure 3: Shows the difference between a good and bad EEG signal*
 
 you can then check the responsiveness of the signal by 
-1) setting the scale of the y-axis to 100 mV
+1) setting the scale of the y-axis scale to 100 uV
 2) blinking your eyes repeatedly and rapidly
 Your signal should look stimilar to Figure 4. 
 
