@@ -26,7 +26,7 @@ The manifest.json is the configuraton file for the extension. To learn more abou
 
 There are two components to the project, a data-processing part that connects with the EEG-headset, coded in Python, and the software part written in JavaScript.
 
-To run the Python code, first install it with pip: `pip install -r requirements.txt`. This will install all the necessary packages and their dependencies. Please check that your Python version is higher than 3.5. In the terminal, now run the local data-processing server using `python server.py`. This will first connect with the headset and then start a websocket server.
+To run the Python code, first go to the right directory command and install with pip: `pip install -r requirements.txt`. This will install all the necessary packages and their dependencies. Please check that your Python version is higher than 3.5. In the terminal, now run the local data-processing server using `python server.py`. This will first connect with the headset and then start a websocket server.
 
 To connect with the headset, do this...
 
