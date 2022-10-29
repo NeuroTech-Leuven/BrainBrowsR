@@ -69,10 +69,7 @@ class first cssClass
 1. **Processing**.
 Some processing of the data should be done after the preprocessing steps to accomodate the signal as required.
 Processing consists of two steps that are handled together with the function extend signal.
-First step is a **Filter bank**  
-The filter bank is composed of bandpass filters for each stimulation frequency that is applied. This is done using the scipy library, of which the functions [butter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html) and [filtfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html) were. The `SSVEPFilterBank()` function accepts the EEG signal as a numpy array of shape (number of channels, number of samples) and returns the filtered signal of the form (number of frequencies, number of channels, number of samples))
-For the second step we **Stack the filtered signals to build an extended signal**.
-As the filtered signal is a 3-dimensional tensor, it needs to be modified in order to be 2-dimensional (number of frequencies x number of channels, number of samples) in order to compute the covariance matrices. Therefore it will output a signal in a numpy array of shape (number of frequencies* number of channels, number of samples).
+First step is a **Filter bank**. The filter bank is composed of bandpass filters for each stimulation frequency that is applied. This is done using the scipy library, of which the functions [butter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html) and [filtfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html) were. The EEG signal as a numpy array (`number of channels, number of samples`) is transferred to the filtered signal (`number of frequencies, number of channels, number of samples`). For the second step we **Stack the filtered signals to build an extended signal**, by modifying the array in the shape of `number of frequencies x number of channels, number of samples`. in order to compute the covariance matrices. Therefore it will output a signal in a numpy array of shape (number of frequencies* number of channels, number of samples).
 
 2. **Training**
 Further we train our model, for that we will first **Estimate covariance matrices by using Ledoit-Wolf shrinkage estimator on the extended signal**.
