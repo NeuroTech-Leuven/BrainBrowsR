@@ -22,7 +22,7 @@ I will explain the preprocessing steps that we took in our project and explain w
 Filtering of the signal is a crucial step as Electroencephalogram (EEG) electrodes record much noise. We can distinguish four types of noise: 
 1) Environmental noise: this is noise picked up by EEG electrodes from electrical devices around us. These devices work on a powerline of 50 Hz (60 Hz in the US).
 2) Electrode noise: if an electrode is lose or has a bad conductance between the scalp and the electrode this can cause a very noise signal. 
-3) User noise: noise coming from the users themselves such as muscle movement (eye winks, jaw clenching, arm movement, ...). 
+3) User noise: noise coming from the users themselves such as muscle movement (eye blinks, jaw clenching, arm movement, ...). 
 4) Brain noise: the brain signal that we collect is a combination of many brain processes going on at the same time. We are often only interested in one or a few brain processes. So all the irrelevant brain processes to our application can be considered as well to be noise. 
 
 In the BrainBrowsR application, the incoming EEG signal, see Figure 1, is filtered by a notch filter at 50 Hz and a 5th order bandpass butterworth filter between 0.5 and 35 Hz.
