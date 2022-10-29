@@ -2,11 +2,14 @@
 document.body.style.border = "10px solid lightblue";
 
 // wait a bit
-setTimeout(main, 500);
+setTimeout(main, 1000);
+var stimuli_on = 0;
 
 function main() {
   editPage();
+  stimuli_on = 1;
   setUp();
+  
 }
 
 
@@ -18,16 +21,31 @@ function setUp() {
       const event = JSON.parse(data);
       console.log(event);
       switch (event) {
-        case "N":
+        case "3":
           currentPost = nextFromCurrent(currentPost);
           confirmAction("green");
+          testHeadset(event);
           break;
-        case "P":
+        case "2":
           currentPost = previousFromCurrent(currentPost);
           confirmAction("green");
+          testHeadset(event);
           break;
-        case "L" :
+        case "0" :
           likePost(currentPost);
+          confirmAction("green");
+          testHeadset(event);
+          break;
+        case "1" :
+          if (stimuli_on == 0) {
+            stimuli_on = 1;
+            displayStimuli();           
+          } else {
+            stimuli_on = 0;
+            hideStimuli();          
+          } 
+          testHeadset(event);
+                   
           confirmAction("green");
           break;
       } 
@@ -58,6 +76,15 @@ function editPage() {
 
   // document.body.style.backgroundColor = "lightblue";
   setBackground("lightblue");
+
+  setTimeout(insertStimuli, 1000);
+  enableFlicker();
+  // centerPosts();
+
+  var test_headset = document.createElement("div");
+  test_headset.innerHTML = "Waiting for headset data"
+  test_headset.className = "test_headset";
+  document.body.appendChild(test_headset);
 }
 
 
