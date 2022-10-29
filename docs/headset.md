@@ -48,3 +48,18 @@ explorer.connect(device_name="Explore_XXXX")  # Put your device Bluetooth name
 explorer.visualize(bp_freq=(.5, 30), notch_freq=50)
 ```
 
+Make sure that the signal looks steady (stay still and don't move), see Figure 3. 
+
+![alt text](./images/good_bad_eeg.jpg)
+
+*Figure 3: Shows the difference between a good and bad EEG signal*
+
+you can then check the responsiveness of the signal by 
+1) setting the scale of the y-axis to 100 mV
+2) blinking your eyes repeatedly and rapidly
+Your signal should look stimilar to Figure 4. 
+
+![alt text](./images/eye_blinks_eeg.jpg)
+
+*Figure 4: EEG signal with and without eye blinks*
+
