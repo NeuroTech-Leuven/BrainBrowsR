@@ -6,7 +6,7 @@ Written by: Joppe Van Rumst
 
 Canonical correlation analysis is still a state-of-the-art classification method for SSVEP. The goal of the method is to find the optimal linear transformation such that the correlation between 2 matrices is maximized.
 
-The method was first applied by the [paper](https://ieeexplore.ieee.org/document/4203016) from Lin et al. where they show it outperforms the at that time best methods for SSVEP classification, such as power spectrum density analysis.
+The method was first applied by [Lin et al.](https://ieeexplore.ieee.org/document/4203016) where they show it outperforms the, at that time, best methods for SSVEP classification, such as power spectrum density analysis.
 
 ## Methodology
 
@@ -44,7 +44,7 @@ The correlation value is saved for all the different stimulation frequencies. Th
 
 ![Extended CCA diagram](./images/extended_CCA_diagram.JPG "Text to show on mouseover")
 
-To explain extended you first have to understand the basic principles of Individual template CCA (IT-CC).
+To explain extended CCA you first have to understand the basic principles of Individual template CCA (IT-CC).
 
 This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template signals $$\bar{\mathcal X}={\frac{1}{N_t}}{\sum_{h=1}^{N_t}{\mathcal X}}$$ when using code modulated visual evoked potential.
 
