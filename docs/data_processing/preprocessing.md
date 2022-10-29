@@ -25,8 +25,9 @@ Filtering of the signal is a crucial step as Electroencephalogram (EEG) electrod
 3) User noise: noise coming from the users themselves such as muscle movement (eye winks, jaw clenching, arm movement, ...). 
 4) Brain noise: the brain signal that we collect is a combination of many brain processes going on at the same time. We are often only interested in one or a few brain processes. So all the irrelevant brain processes to our application can be considered as well to be noise. 
 
-In the BrainBrowsR application, the incoming EEG signal is filtered by a notch filter at 50 Hz and a 5th order bandpass butterworth filter between 0.5 and 35 Hz. The reason we choose this filter is because the buttons in the browser
-extension flicker at a rate of 7.5 Hz, 8.5 Hz, 10 Hz, and 12 Hz (i.e., target frequencies)  This filter will get rid of the powerline noise at 50 Hz (60 Hz in the US), and get rid of strong EEG drifts and offsets. 
+In the BrainBrowsR application, the incoming EEG signal is filtered by a notch filter at 50 Hz and a 5th order bandpass butterworth filter between 0.5 and 35 Hz. The reason we still need to use a notch filter is because the 50 Hz powerline noise is otherwise still leaking through our brandpass filter, since the roll-off (steepness of the transfer function) has not yet hit zero when reaching the 50 Hz. 
+
+The reason we choose this filter is because the buttons in the BrainBrowsR application flicker at a rate between the 6 - 12 Hz (i.e., target frequencies). This filter will get rid of strong EEG drifts and offsets. 
 
 User noise is more difficult to get rid of. Although muscle noise is most noticeable at the range of 110-140 Hz, it will also contaminate the frequency band that we are interested in: the alpha band.
 There are many movement artefact removal methods such as independent component analysis (ICA), Denoising source seperation (DSS), ... but these methods take would take up to much time in a online-system. Thus, the best approach is to tell the user to be as still as possible when using the BrainBrowsR application.
@@ -46,9 +47,9 @@ The EEG signal is not being rereferenced in our application, because rereference
 
 channel/electrode selection, SSVEP is a visual evoked response such that the visual cortex is the most important area for our analysis. This is why we select occipital channels: [add channels].
 
-### Averaging over trials
+### Averaging over electrode channels
 
-Averaging over trials is another method that can drastically reduce noise
+Averaging over electrode channels is another method that can drastically reduce noise but our classification algorithm make use of the different channels so we do not use any averaging in our preprocessing steps.  
 
 ## Implementation
 

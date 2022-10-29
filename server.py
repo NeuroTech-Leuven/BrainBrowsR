@@ -9,7 +9,7 @@ import time
 from src.data_processing.eeg import EEG
 from src.data_processing.preprocessing import Preprocessor
 from src.data_processing.cca import Classifier
-from src.data_processing.thresholding import Thresholding
+from src.data_processing.thresholding import Thresholding2
 
 class BrainServR:
     """
@@ -25,9 +25,9 @@ class BrainServR:
         self.WINDOW_LENGTH = 4
         self.SAMPLING_RATE = 250
         self.FOCUS_LENGTH = 3
-        self.THRESHOLD = 0.15
+        self.THRESHOLD = 0.10
         self.CHANNELS = self.CHANNEL_MASK.count('1') # get number of active channels
-        self.FREQS = [6,12,10,8]
+        self.FREQS = [8,14,10,12]
 
         self.explore = self.connectHeadset()
         # Class to read EEG data
@@ -74,12 +74,13 @@ class BrainServR:
             cca.update_number_of_samples(n_samples)
             scores = cca.classify_single_regular(stored_data, return_scores=True)
             # do thresholding
-            scores_stored = np.vstack([scores_stored,scores])
-            scores_stored = np.delete(scores_stored,0,0)
-            print(scores_stored)
-            final_certainty, index = Thresholding(self.THRESHOLD, scores_stored)
+            # scores_stored = np.vstack([scores_stored,scores])
+            # scores_stored = np.delete(scores_stored,0,0)
+            print(scores)
+            # final_certainty, index = Thresholding(self.THRESHOLD, scores_stored)
+            index = Thresholding2(0.1, scores)
             print(index)
-            print(final_certainty)
+            # print(final_certainty)
             # send a message on each classification
             await websocket.send(json.dumps('classification running'))
             if index != -1:

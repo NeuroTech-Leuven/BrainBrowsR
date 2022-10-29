@@ -115,9 +115,9 @@ TODO fix for English instagram
 */
 function likePost(post) {
 
-    post.querySelectorAll('svg[aria-label="Vind ik leuk"]').forEach(svg => svg.closest("button").click());
+    post.querySelectorAll('svg[aria-label="Like"]').forEach(svg => svg.closest("button").click());
 
-    post.querySelectorAll('svg[aria-label="Vind ik niet meer leuk"]').forEach(svg => svg.closest("button").click());
+    post.querySelectorAll('svg[aria-label="Unlike"]').forEach(svg => svg.closest("button").click());
 
 }
 

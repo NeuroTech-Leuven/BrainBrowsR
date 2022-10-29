@@ -18,7 +18,7 @@ function insertStimuli() {
   var comment = document.createElement("img");
   comment.setAttribute("src", makeURL("icons/test_on.png"));
   comment.className = "stimuli comment";
-  document.body.appendChild(comment);
+  // document.body.appendChild(comment);
 
   var up = document.createElement("img");
   up.setAttribute("src", makeURL("icons/test_up.png"));
