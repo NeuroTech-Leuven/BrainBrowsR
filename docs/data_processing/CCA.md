@@ -22,9 +22,9 @@ The maths behind the method can be best explained by the following figure: from 
 
 In the following deriviations, three variables are defined: $M$ the number of EEG channels , $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
 
-As can be seen in the previous figure $X\in {\rm IR}^{M \times Q}$ are the multichannel EEG signal which contains the SSVEP response at frequency $ f $, each row contains a EEG signal across time for a specific channel. $ Y(f) \in {\rm I\!R}^{2N_h \times Q}$ is the reference signal that consist of the sine and cosine signals with frequencies including the stimulus frequency $ f $ and its harmonics.
+As can be seen in the previous figure $X\in {\rm I\!R}^{M \times Q}$ are the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. $Y(f) \in {\rm I\!R}^{2N_h \times Q}$ is the reference signal that consist of the sine and cosine signals with frequencies including the stimulus frequency $ f $ and its harmonics.
 
-The first row of the matrix $ Y(f) $ contains the signal: $ sin(2 \cdot \pi \cdot f \cdot q \cdot T_s) $ and the final row: $ sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h) $. Were $q$ = $ [1,2,..,Q]$ and $T_s$ denotes the time interval between consecutive sample points.
+The first row of the matrix $Y(f)$ contains the signal: $ sin(2 \cdot \pi \cdot f \cdot q \cdot T_s) $ and the final row: $ sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h) $. Were $q$ = $ [1,2,..,Q]$ and $T_s$ denotes the time interval between consecutive sample points.
 
 Now we define the weights: $W_x \in {\rm I\!R}^{M*1}$ and $W_y \in {\rm I\!R}^{2N_h*1}$ wich are respectively the weighting vectors for $X$ and $Y(f)$. $X$ and $Y(f)$ are filtered by the weighting vectors to obtain a scalar value, denoted as $x = W_x^{T}X$ and $y = W_y^{T}Y(f)$. These values are called the canonical variables in the literature.
 
