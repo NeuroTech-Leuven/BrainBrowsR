@@ -66,19 +66,19 @@ first[Processing] --> second[Training] --> third[Prediction]
 class first cssClass
 ```
 
-1. **Processing**.
+1. **Processing**.  
 Some processing of the data should be done after the preprocessing steps to accomodate the signal as required.
 Processing consists of two steps that are handled together with the function extend signal.
 First step is a **Filter bank**. The filter bank is composed of bandpass filters for each stimulation frequency that is applied. This is done using the scipy library, of which the functions [butter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html) and [filtfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html) were. The EEG signal as a numpy array (`number of channels, number of samples`) is transferred to the filtered signal (`number of frequencies, number of channels, number of samples`). For the second step we **Stack the filtered signals to build an extended signal**, by modifying the array in the shape of `number of frequencies x number of channels, number of samples`. In order to compute the covariance matrices, we extract the epochs from the raw data. Noted that the shape of numpy array (epoch data) here is `number of epochs, number of frequencies x number of channels, number of samples`.
 
-2. **Training**
+2. **Training**.  
 We first **Estimate covariance matrices by using Ledoit-Wolf shrinkage estimator on the extended signal**.
 For this, the [covariance estimation]([https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.utils.covariance.covariances.html#pyriemann.utils.covariance.covariances]) is used.
 This function performs a covariance matrix estimation for each given input, it accepts the epoched extended signal and returns the covariance matrix.
 From this we **Estimate the centroids for MDM classification model**.
 The classification is done by Minimum Distance to the Mean, which works as follows: during training a set of SPD matrices encoding BCI trials for the available classes are created. For each class a center of mass of the available trials is estimated.
 
-3. **Prediction**.
+3. **Prediction**.  
 The BCI trial is estimated in the same way as in training, and is assigned to the class whose center of mass is the closest. Return predictions for each matrix according to the closest centroid. The detail is in [pyriemann](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM.fit)
 
 ## Results
