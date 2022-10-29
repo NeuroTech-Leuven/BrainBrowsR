@@ -28,7 +28,7 @@ There are two components to the project, a data-processing part that connects wi
 
 To run the Python code, first go to the right directory command and install with pip: `pip install -r requirements.txt`. This will install all the necessary packages and their dependencies. Please check that your Python version is higher than 3.5. In the terminal, now run the local data-processing server using `python server.py`. This will first connect with the headset and then start a websocket server.
 
-To set-up the headset and connect with it, read our [headset guide](docs/headset.md)
+To set-up the headset and connect with it, read our [headset guide](docs/headset.md).
 
 Once the server has initiated, you can start using the extension. At the moment, we are looking to make it possible to install the extension from Mozilla. Until then, you can use either web-ext or developer tools to run it.
 
