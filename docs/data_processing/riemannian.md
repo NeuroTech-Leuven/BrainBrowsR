@@ -76,10 +76,10 @@ We first **Estimate covariance matrices by using Ledoit-Wolf shrinkage estimator
 For this, the [covariance](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.utils.covariance.covariances.html#pyriemann.utils.covariance.covariances) is used.
 This function performs a covariance matrix estimation for each given input. It accepts the epoched extended signal and returns the covariance matrix.
 From this we **Estimate the centroids for MDM classification model**.
-The classification is done by [MDM](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM), which works as follows: during training a set of SPD matrices encoding BCI trials for the available classes are created. For each class a center of mass of the available trials is estimated.
+The classification is done by [MDM](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM), which works as follows: for each given class, a centroid is estimated according to 'riemann' metric and each data is classified into the nearest centroid.
 
 3. **Prediction**.  
-The BCI trial is estimated in the same way as in training, and is assigned to the class whose center of mass is the closest. Return predictions for each matrix according to the closest centroid. The detail is in [pyriemann](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM.fit)
+For new inpput data, we firstly compute the corresponding SPD matrices. We then make a prediction using the fitted model, and calculate the [euclidean distance](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.utils.distance.distance.html#pyriemann.utils.distance.distance) between the centroid and the matric. The distance is one indicator of the certainty of the classification.    #The BCI trial is estimated in the same way as in training, and is assigned to the class whose center of mass is the closest. Return predictions for each matrix according to the closest centroid. The detail is in [pyriemann](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM.fit)
 
 ## Results
 
