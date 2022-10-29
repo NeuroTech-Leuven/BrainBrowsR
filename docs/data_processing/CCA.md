@@ -22,13 +22,13 @@ The maths behind the method can be best explained by the following figure: from 
 
 In the following deriviations, three variables are defined: $M$ the number of EEG channels , $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
 
-As can be seen in the previous figure $X\in {\rm I\!R}^{M \times Q}$ are the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. $Y(f) \in {\rm I\!R}^{2N_h \times Q}$ is the reference signal that consist of the sine and cosine signals with frequencies including the stimulus frequency $ f $ and its harmonics.
+As can be seen in the previous figure $X\in {\rm I\!R}^{M \times Q}$ are the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. $Y(f) \in {\rm I\!R}^{2N_h \times Q}$ is the reference signal that consist of the sine and cosine signals with frequencies including the stimulus frequency $f$ and its harmonics.
 
-The first row of the matrix $Y(f)$ contains the signal: $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s)$ and the final row: $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$. Were $q$ = $ [1,2,..,Q]$ and $T_s$ denotes the time interval between consecutive sample points.
+The first row of the matrix $Y(f)$ contains the signal: $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s)$ and the final row: $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$. Were $q$ = $[1,2,..,Q]$ and $T_s$ denotes the time interval between consecutive sample points.
 
 Now we define the weights: $W_x \in {\rm I\!R}^{M*1}$ and $W_y \in {\rm I\!R}^{2N_h*1}$ wich are respectively the weighting vectors for $X$ and $Y(f)$. $X$ and $Y(f)$ are filtered by the weighting vectors to obtain a scalar value, denoted as $x = W_x^{T}X$ and $y = W_y^{T}Y(f)$. These values are called the canonical variables in the literature.
 
-The idea of CCA is to find $W_x$ and $W_y$ such that the correlation between the filtered signals x and y are maximized. The optimalization problem: $$ \rho (f) = \max_{W_x, W_y}\frac{E[x \cdot y^{T}]}{\sqrt{E[x \cdot x^{T}]E[y \cdot y^{T}]}}$$ $$ \rho (f) = \max_{W_x, W_y}\frac{E[W_x^{T}X \cdot Y(f)^{T} \cdot W_y]}{\sqrt{E[W_x^{T}XX^{T}W_x]E[W_y^{T}Y(f) \cdot Y(f)^{T}W_y]}}$$ The correlation value is saved for all the different stimulation frequencies. The one with the highest correlation value is the winner.
+The idea of CCA is to find $W_x$ and $W_y$ such that the correlation between the filtered signals x and y are maximized. The optimalization problem: $$ \rho (f) = \max_{W_x, W_y}\frac{E[x \cdot y^{T}]}{\sqrt{E[x \cdot x^{T}]E[y \cdot y^{T}]}}$$ $$\rho (f) = \max_{W_x, W_y}\frac{E[W_x^{T}X \cdot Y(f)^{T} \cdot W_y]}{\sqrt{E[W_x^{T}XX^{T}W_x]E[W_y^{T}Y(f) \cdot Y(f)^{T}W_y]}}$$ The correlation value is saved for all the different stimulation frequencies. The one with the highest correlation value is the winner.
 
 ### Extended CCA
 
@@ -37,7 +37,7 @@ The idea of CCA is to find $W_x$ and $W_y$ such that the correlation between the
 
 To explain extended you first have to understand the basic principles of Individual template CCA (IT-CC).
 
-This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template $\bar{\mathcal X} = \frac{1}{N_t} \sum_{h=1}^{N_t} \mathcal X $ signals when using code modulated visual evoked potential.
+This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template $\bar{\mathcal X} = \frac{1}{N_t} \sum_{h=1}^{N_t} \mathcal X$ signals when using code modulated visual evoked potential.
 
 In case of SSVEP, for each target a individual template is obtained by averaging multiple training trials $ \bar{\mathcal X}_n$. Now we can replace the reference signals $Y(f)$ of the standard CCA with the individual template $ \bar{\mathcal X}_n$. This will give us: $$ \rho (f) = \max_{W_x, W_y}\frac{E[W_x^{T}X \cdot \bar{\mathcal X}_n^{T} \cdot W_y]}{\sqrt{E[W_x^{T}XX^{T}W_x]E[W_y^{T} \bar{\mathcal X_n} \cdot \bar{\mathcal X_n^{T}}W_y]}}$$
 
