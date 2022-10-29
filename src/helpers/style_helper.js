@@ -7,6 +7,7 @@ function hideElement(element) {
 function displayElement(element) {
     element.style.display = "initial";
 }
+
 /*
 Gets an element by classname and then hides it if it exists
 */
@@ -32,6 +33,9 @@ function makeURL(img_path) {
     return browser.runtime.getURL(img_path);
 }
 
+/*
+Add the logo png to the webpage
+*/
 function addLogo(logo_png) { 
     var logo = document.createElement("img");
     logo.setAttribute("src", makeURL(logo_png));

@@ -1,9 +1,0 @@
-{
-  "python.linting.mypyEnabled": true,
-  "python.linting.enabled": true,
-  "python.pythonPath": "/Users/wout/miniconda3/bin/python",
-  "python.analysis.extraPaths": [
-    "./src",
-    "./src"
-  ]
-}

@@ -8,7 +8,7 @@
   position: fixed;
   width: 200px;
   height: 200px;
-  animation: blink var(--freq) steps(1, end) infinite !important;
+  animation: sine_blink var(--freq) linear infinite !important;
   /* animation-name : blink !important; */
   /* animation: sine_blink var(--freq) linear infinite;  */
   /* padding: calc(var(--padding) + var(--border-size)); */
@@ -19,7 +19,7 @@
 .like{
   --color: rgb(255, 0, 0); 
   /* --color: rgb(0, 0, 0);  */
-  --freq : 0.16666666666666666666s;
+  --freq : 0.125s;
   /* --freq : 1s; */
   left: var(--offset);
   top: var(--offset);
@@ -28,7 +28,7 @@
 .comment{
   --color: rgb(63, 189, 63);  
   /* --color: rgb(0, 0, 0);  */
-  --freq : .08333333s;
+  --freq : .076923s;
   left: var(--offset);
   bottom: var(--offset);
 }
@@ -44,7 +44,7 @@
 .down{
   --color: rgb(0, 0, 0);  
   /* --color: rgb(0, 0, 0);  */
-  --freq : .125s;  
+  --freq : .08333333s;  
   right: var(--offset);
   bottom: var(--offset);
 }

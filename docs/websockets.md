@@ -18,7 +18,10 @@ When the client receives a message from the server, it can respond and vice vers
 
 In BrainBrowsR, the client code is written in Javascript and the server in Python using [the websockets package](https://websockets.readthedocs.io/en/stable/).
 
-On startup the client initializes a connection. The server sends the label of the SSVEP response that was detected. In Javascript a listener is added that runs a certain function depending on the message.
+On startup the client initializes a connection. The server, written in Python, sends the label of the SSVEP response that was detected. In Javascript a listener is added that runs a certain function depending on the message.
+
+![Python/javascript](images/python_send_messages.png)
+![Python/javascript](images/javascript_action.png)
 
 ## Results
 

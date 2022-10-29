@@ -17,3 +17,18 @@ def Thresholding(threshold, data):
             return Certainty[-1,j], j
     
     return -1,-1
+
+
+def Thresholding2(threshold, scores):
+    pred = np.argmax(scores)
+    scores_sorted = scores.copy()
+    scores_sorted.sort()
+    if scores_sorted[-1] >= 1.3*scores_sorted[-2] and scores_sorted[-1] >= threshold:
+        classify = "certain enough"
+    elif not scores_sorted[-1] >= 1.3*scores_sorted[-2]:
+        classify = "difference too small"
+        pred = -1
+    else:
+        classify = "correlation too small"
+        pred = -1
+    return pred
