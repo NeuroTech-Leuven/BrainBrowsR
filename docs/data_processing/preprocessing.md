@@ -27,17 +27,20 @@ Filtering of the signal is a crucial step as Electroencephalogram (EEG) electrod
 
 In the BrainBrowsR application, the incoming EEG signal, see Figure 1, is filtered by a notch filter at 50 Hz and a 5th order bandpass butterworth filter between 0.5 and 35 Hz.
 
-![alt text](./images/unfiltered_signal.png)
+![alt text](./images/unfiltered_signal.jpg)
+
 *Figure 1: unfiltered incoming EEG signal in the frequency spectrum*
 
 You might think: why do we still need a use a 50 Hz notch filter if we are already using a 0.5-35 Hz bandpass filter? The reason is that even when using the bandpass filter, the 50 Hz powerline will still leak through the filter due to the roll-off (steepness of the transfer function) not being steep enough, see Figure 2. 
 
-![alt text](./images/filtered_signal_bandpass.png)
+![alt text](./images/filtered_signal_bandpass.jpg)
+
 *Figure 2: filtered EEG signal iusing a 5th order butterworth bandpass filter between 0.5-35 Hz *
 
 When combining the butterworth filter with the notch filter we get a cleaner signal, see Figure 3. 
 
-![alt text](./images/filtered_signal_notch_bandpass.png)
+![alt text](./images/filtered_signal_notch_bandpass.jpg)
+
 *Figure 3: filtered EEG signal iusing a 5th order butterworth bandpass filter between 0.5-35 Hz and a 50 Hz notch filter. *
 
 The range of the bandpass filter was chosen because the target frequencies of our BrainBrowsR application are between 6-18 Hz. Furthermore, this bandpass filter also gets rid of strong EEG drifts and offsets that are present in frequencies < 0.5 Hz. 

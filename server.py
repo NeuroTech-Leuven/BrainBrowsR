@@ -27,7 +27,7 @@ class BrainServR:
         self.FOCUS_LENGTH = 3
         self.THRESHOLD = 0.10
         self.CHANNELS = self.CHANNEL_MASK.count('1') # get number of active channels
-        self.FREQS = [8,14,10,12]
+        self.FREQS = [8,13,10,12]
 
         self.explore = self.connectHeadset()
         # Class to read EEG data
