@@ -25,27 +25,41 @@ Filtering of the signal is a crucial step as Electroencephalogram (EEG) electrod
 3) User noise: noise coming from the users themselves such as muscle movement (eye winks, jaw clenching, arm movement, ...). 
 4) Brain noise: the brain signal that we collect is a combination of many brain processes going on at the same time. We are often only interested in one or a few brain processes. So all the irrelevant brain processes to our application can be considered as well to be noise. 
 
-In the BrainBrowsR application, the incoming EEG signal is filtered by a notch filter at 50 Hz and a 5th order bandpass butterworth filter between 0.5 and 35 Hz. The reason we still need to use a notch filter is because the 50 Hz powerline noise is otherwise still leaking through our brandpass filter, since the roll-off (steepness of the transfer function) has not yet hit zero when reaching the 50 Hz. 
+In the BrainBrowsR application, the incoming EEG signal, see Figure 1, is filtered by a notch filter at 50 Hz and a 5th order bandpass butterworth filter between 0.5 and 35 Hz.
 
-The reason we choose this filter is because the buttons in the BrainBrowsR application flicker at a rate between the 6 - 12 Hz (i.e., target frequencies). This filter will get rid of strong EEG drifts and offsets. 
+![alt text](./images/unfiltered_signal.png)
+*Figure 1: unfiltered incoming EEG signal in the frequency spectrum*
+
+You might think: why do we still need a use a 50 Hz notch filter if we are already using a 0.5-35 Hz bandpass filter? The reason is that even when using the bandpass filter, the 50 Hz powerline will still leak through the filter due to the roll-off (steepness of the transfer function) not being steep enough, see Figure 2. 
+
+![alt text](./images/filtered_signal_bandpass.png)
+*Figure 2: filtered EEG signal iusing a 5th order butterworth bandpass filter between 0.5-35 Hz *
+
+When combining the butterworth filter with the notch filter we get a cleaner signal, see Figure 3. 
+
+![alt text](./images/filtered_signal_notch_bandpass.png)
+*Figure 3: filtered EEG signal iusing a 5th order butterworth bandpass filter between 0.5-35 Hz and a 50 Hz notch filter. *
+
+The range of the bandpass filter was chosen because the target frequencies of our BrainBrowsR application are between 6-18 Hz. Furthermore, this bandpass filter also gets rid of strong EEG drifts and offsets that are present in frequencies < 0.5 Hz. 
 
 User noise is more difficult to get rid of. Although muscle noise is most noticeable at the range of 110-140 Hz, it will also contaminate the frequency band that we are interested in: the alpha band.
-There are many movement artefact removal methods such as independent component analysis (ICA), Denoising source seperation (DSS), ... but these methods take would take up to much time in a online-system. Thus, the best approach is to tell the user to be as still as possible when using the BrainBrowsR application.
+There are many movement artefact removal methods such as principal component analysis (PCA), independent component analysis (ICA), Denoising source seperation (DSS), ... but these methods take would take up to much time in our online-system, where we work with 4-second long windows. Thus, the best approach is to tell the user to be as still as possible when using the BrainBrowsR application.
 
 ### Downsampling the signal
 
 Usually EEG signals are downsampled as research-grade EEG headset have a sampling rate of 1000 - 8000 Hz.
-The more samples you have, to longer the processing of the signal will take. Since we only sample at 250 Hz and processes only 6 seconds of data at a time there is no need for us to downsample the signal even more.
+The more samples you have, to longer the processing of the signal will take. Since we only sample at 250 Hz and processes only windows of ~4 seconds of data, there is no need for us to downsample the signal even more.
 
 ### Rereferencing of the signal
 
-The EEG signal is not being rereferenced in our application, because rereference to the Cz electrode will get rid of our signal.
+The EEG signal is not being rereferenced in our application, because rereference to the Cz electrode will get reduce the SSVEP signal in the EEG data. 
 
 ### Interpolation of bad channels
 
+
 ### Channel selection
 
-channel/electrode selection, SSVEP is a visual evoked response such that the visual cortex is the most important area for our analysis. This is why we select occipital channels: [add channels].
+channel/electrode selection, SSVEP is a visual evoked response such that the visual cortex is the most important area for our analysis. This is why we only use occipital placed electrodes: O1, Oz, and O2. The electrode selection is already made on the hardware such that we do not need to include a channel selection in the preprocessing of the signal. 
 
 ### Averaging over electrode channels
 
@@ -54,16 +68,6 @@ Averaging over electrode channels is another method that can drastically reduce 
 ## Implementation
 
 The implementation of the preprocessing is done using the Python programming language.
-The recorded brain activity with our [Mentalab](https://mentalab.com/)
-headset is read into python by using the [explorepy](https://github.com/Mentalab-hub/explorepy) package,
-for further information on reading in data, I refer you to our read-in data documentation (coming soon).
+The recorded brain activity with the [Mentalab](https://mentalab.com/)
+headset is read into python by using the [explorepy](https://github.com/Mentalab-hub/explorepy) package.
 
-For the bandpass filter we use the scipy python package.
-N = 4
-b, a = signal.butter(N, [lf / (fs/2), hf / (fs/2)], type)
-return signal.filtfilt(b, a, data)
-scipy.signal.butter creates a butterworth filter which we then execute on our EEG data by using scipt.signal.filtfilt.
-
-Channel selection we can do because we know which channel number correspond to which electrodes. For our headset configuration [add EEG electrode selection image].
-
-## Results
