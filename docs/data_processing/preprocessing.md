@@ -4,7 +4,7 @@ Writen by: Rien Sonck
 
 ## Goal
 
-The aim of this document is to explain the rationale behind our preprocessing steps.
+The aim of this document is to explain our rationale behind our preprocessing steps.
 
 ## Details
 
@@ -59,6 +59,7 @@ The EEG signal is not being rereferenced in our application, because rereference
 
 ### Interpolation of bad channels
 
+A high RMS value of a channel means that there is alot of variability in the channel. These channels contain not much useful information on its own but by interpolationg them with nearby channels, we can still extract their information. We only use three channels so if one or more channels are bad, the data would be useless. Therfore this is not included in the pre-processing.
 
 ### Channel selection
 
