@@ -4,7 +4,7 @@ Writen by: Rien Sonck
 
 ## Goal
 
-The aim of this document is to explain our rationale behind our preprocessing steps.
+The aim of this document is to explain the rationale behind our preprocessing steps.
 
 ## Details
 
