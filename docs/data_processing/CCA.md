@@ -46,7 +46,7 @@ The correlation value is saved for all the different stimulation frequencies. Th
 
 To explain extended you first have to understand the basic principles of Individual template CCA (IT-CC).
 
-This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template $\bar{\mathcal X}=\frac{1}{N_t} \times {\sum_{h=1}^{N_t}{\mathcal X}}$ signals when using code modulated visual evoked potential.
+This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template $\bar{\mathcal X}$=$\frac{1}{N_t}$${\sum_{h=1}^{N_t}{\mathcal X}}$ signals when using code modulated visual evoked potential.
 
 In case of SSVEP, for each target a individual template is obtained by averaging multiple training trials $\bar{\mathcal X}_n$. Now we can replace the reference signals $Y(f)$ of the standard CCA with the individual template $\bar{\mathcal X}_n$. This will give us:
 
