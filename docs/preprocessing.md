@@ -9,23 +9,23 @@ The aim of this document is to explain our rationale behind our preprocessing st
 ## Details
 
 Preprocessing of electroencephalogram (EEG) usually consists out of the following steps: 
-1) Filtering of the signal
-2) Downsampling the signal
-3) Rereferencing of the signal 
-4) Interpolation of bad channels
-5) Channel selection 
-6) Averaging over trials 
+1) Filtering of the signal (Did we do it: Yes)
+2) Downsampling the signal (Did we do it: No)
+3) Rereferencing of the signal (Did we do it: No)
+4) Interpolation of bad channels (Did we do it: No)
+5) Channel selection (Did we do it: Yes)
+6) Averaging over trials (Did we do it: No)
 
-I will explain the preprocessing steps that we took in our project and explain why.
+I will explain the preprocessing steps that we took in our project and explain why we took certain decisions. 
 
 ### Filtering of the signal 
-Filtering of the signal is a crucial step as EEG electrodes record a lot of noise. We can distinguish four types of noise: 
-1) Environmental noise: this is noise picked up from electrical devices around us. These devices work on a powerline of 50 Hz (60 Hz in the US) and the EEG electrodes pick this up. 
-2) Electrode noise: if an electrode is lose or there is a bad conductance between the scalp and the electrode this can cause a very noise signal. 
+Filtering of the signal is a crucial step as Electroencephalogram (EEG) electrodes record much noise. We can distinguish four types of noise: 
+1) Environmental noise: this is noise picked up by EEG electrodes from electrical devices around us. These devices work on a powerline of 50 Hz (60 Hz in the US).
+2) Electrode noise: if an electrode is lose or has a bad conductance between the scalp and the electrode this can cause a very noise signal. 
 3) User noise: noise coming from the users themselves such as muscle movement (eye winks, jaw clenching, arm movement, ...). 
 4) Brain noise: the brain signal that we collect is a combination of many brain processes going on at the same time. We are often only interested in one or a few brain processes. So all the irrelevant brain processes to our application can be considered as well to be noise. 
 
-In the BrainBrowsR application, the incoming EEG signal is filtered by a bandpass butterworth filter between 0.5 and 20 Hz. The reason we choose this filter is because the buttons in the browser
+In the BrainBrowsR application, the incoming EEG signal is filtered by a notch filter at 50 Hz and a 5th order bandpass butterworth filter between 0.5 and 35 Hz. The reason we choose this filter is because the buttons in the browser
 extension flicker at a rate of 7.5 Hz, 8.5 Hz, 10 Hz, and 12 Hz (i.e., target frequencies)  This filter will get rid of the powerline noise at 50 Hz (60 Hz in the US), and get rid of strong EEG drifts and offsets. 
 
 User noise is more difficult to get rid of. Although muscle noise is most noticeable at the range of 110-140 Hz, it will also contaminate the frequency band that we are interested in: the  alpha band. 

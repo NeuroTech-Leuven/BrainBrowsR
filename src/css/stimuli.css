@@ -8,7 +8,7 @@
   position: fixed;
   width: 200px;
   height: 200px;
-  animation: blink var(--freq) steps(1, end) infinite !important;
+  animation: sine_blink var(--freq) linear infinite !important;
   /* animation-name : blink !important; */
   /* animation: sine_blink var(--freq) linear infinite;  */
   /* padding: calc(var(--padding) + var(--border-size)); */
