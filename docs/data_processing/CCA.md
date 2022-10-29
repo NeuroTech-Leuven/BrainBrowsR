@@ -46,7 +46,7 @@ The correlation value is saved for all the different stimulation frequencies. Th
 
 To explain extended you first have to understand the basic principles of Individual template CCA (IT-CC).
 
-This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template $\bar{\mathcal X}={\frac{1}{N_t}}{\sum_{h=1}^{N_t}{\mathcal X}}$ signals when using code modulated visual evoked potential.
+This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template signals $$\bar{\mathcal X}={\frac{1}{N_t}}{\sum_{h=1}^{N_t}{\mathcal X}}$$ when using code modulated visual evoked potential.
 
 In case of SSVEP, for each target a individual template is obtained by averaging multiple training trials $\bar{\mathcal X}_n$. Now we can replace the reference signals $Y(f)$ of the standard CCA with the individual template $\bar{\mathcal X}_n$. This will give us:
 
@@ -57,7 +57,7 @@ $$
 Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients between projections of a test set $\hat{X}$ and a individual template $\bar{\mathcal X_n}$ using CCA-based spatial filters are used as features for target identification. The three weight vectors that are used as spatial filters to enhance the SNR of SSVEP are: $W_x(\hat{X}\bar{\mathcal X})$ between test set $\hat{X}$ and the individual template $\bar{\mathcal X_n}$, $W_x(\hat{X}Y_n)$ between the test set $ \hat{X} $ and sine-cosine reference signals $Y_n$ and $W_x(\bar{\mathcal X}Y_n)$ between the individual template $\bar{\mathcal X}$ and sine-cosine reference signal $Y_n$. Afterwards a correlation vector is obtained, $r_n$
 
 $$
-r_n = \begin{bmatrix} r_{n,1} \\ r_{n,2} \\ r_{n,3} \\ r_{n,4} \end{bmatrix} = \begin{bmatrix} r(\hat{X^{T}}W_x(\hat{X}Y_n), Y^{T}W_y(\hat{X}Y_n)) \\ r(\hat{X^{T}}W_x(\hat{X}\bar{\mathcal X_n}), \bar{\mathcal X_n^{T}}W_x(\hat{X}Y_n)) \\ r(\hat{X^{T}}W_x(\hat{X}Y_n), \bar{\mathcal X_n^{T}}W_x(\bar{\mathcal X_n}Y_n)) \\ r(\hat{X^{T}}W_x(\bar{\mathcal X_n^{T}}Y_n),\bar{\mathcal X_n^{T}}W_x( \bar{\mathcal X_n}Y_n)) \end{bmatrix}
+r_n = {\left\lbrack \matrix{r_{n,1} \cr r_{n,2} \cr r_{n,3} \cr r_{n,4}} \right\rbrack} = \left\lbrack \matrix{r(\hat{X^{T}}W_x(\hat{X}Y_n) & Y^{T}W_y(\hat{X}Y_n)) \cr r(\hat{X^{T}}W_x(\hat{X}\bar{\mathcal X_n}) & \bar{\mathcal X_n^{T}}W_x(\hat{X}Y_n)) \cr r(\hat{X^{T}}W_x(\hat{X}Y_n) & \bar{\mathcal X_n^{T}}W_x(\bar{\mathcal X_n}Y_n)) \cr r(\hat{X^{T}}W_x(\bar{\mathcal X_n^{T}}Y_n) & \bar{\mathcal X_n^{T}}W_x( \bar{\mathcal X_n}Y_n))} \right\rbrack
 $$
 
 , where $r(a,b)$ indicates the Pearson's correlation coefficient between two one-dimensional signals $a$ and $b$. For the classification an ensemble classifier is used to combine the 4 features. In practice the weighted correlation coefficient $\rho_n$ is employed for the final feature identification.
