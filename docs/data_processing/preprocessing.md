@@ -43,7 +43,7 @@ When combining the butterworth filter with the notch filter we get a cleaner sig
 
 *Figure 3: filtered EEG signal iusing a 5th order butterworth bandpass filter between 0.5-35 Hz and a 50 Hz notch filter. *
 
-The range of the bandpass filter was chosen because the target frequencies of our BrainBrowsR application are between 6-18 Hz. Furthermore, this bandpass filter also gets rid of strong EEG drifts and offsets that are present in frequencies < 0.5 Hz. 
+The range of the bandpass filter was chosen because the target frequencies and one of their harmonics of our BrainBrowsR application are between 6-18 Hz. Furthermore, this bandpass filter also gets rid of strong EEG drifts and offsets that are present in frequencies < 0.5 Hz. 
 
 User noise is more difficult to get rid of. Although muscle noise is most noticeable at the range of 110-140 Hz, it will also contaminate the frequency band that we are interested in: the alpha band.
 There are many movement artefact removal methods such as principal component analysis (PCA), independent component analysis (ICA), Denoising source seperation (DSS), ... but these methods take would take up to much time in our online-system, where we work with 4-second long windows. Thus, the best approach is to tell the user to be as still as possible when using the BrainBrowsR application.
