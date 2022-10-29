@@ -26,7 +26,7 @@ As can be seen in the previous figure $X\in {\rm IR}^{M \times Q}$ are the multi
 
 The first row of the matrix $Y(f)$ contains the signal: $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s)$ and the final row: $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$. Were $q$ = $[1,2,..,Q]$ and $T_s$ denotes the time interval between consecutive sample points.
 
-Now we define the weights: $W_x \in \rm I\!R^{M_1}$ and $W_y \in {\rm IR}^{2N_{h_1}}$ which are respectively the weighting vectors for $X$ and $Y(f)$. $X$ and $Y(f)$ are filtered by the weighting vectors to obtain a scalar value, denoted as $x = W_x^{T}X$ and $y = W_y^{T}Y(f)$. These values are called the canonical variables in the literature.
+Now we define the weights: $W_x \in \rm IR^{M_1}$ and $W_y \in {\rm IR}^{2N_{h_1}}$ which are respectively the weighting vectors for $X$ and $Y(f)$. $X$ and $Y(f)$ are filtered by the weighting vectors to obtain a scalar value, denoted as $x = W_x^{T}X$ and $y = W_y^{T}Y(f)$. These values are called the canonical variables in the literature.
 
 The idea of CCA is to find $W_x$ and $W_y$ such that the correlation between the filtered signals x and y are maximized. The optimalization problem:
 
