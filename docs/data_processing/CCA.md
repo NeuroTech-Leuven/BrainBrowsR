@@ -1,6 +1,6 @@
 # Canonical Correlation Analysis
 
-Written by: Joppe Van Rumst, Nils Van Rompaey
+Written by: Joppe Van Rumst
 
 ## Goal
 
