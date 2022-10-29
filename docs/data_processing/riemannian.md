@@ -73,10 +73,10 @@ First step is a **Filter bank**. The filter bank is composed of bandpass filters
 
 2. **Training**.  
 We first **Estimate covariance matrices by using Ledoit-Wolf shrinkage estimator on the extended signal**.
-For this, the [covariance]([https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.utils.covariance.covariances.html#pyriemann.utils.covariance.covariances]) is used.
+For this, the [covariance](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.utils.covariance.covariances.html#pyriemann.utils.covariance.covariances) is used.
 This function performs a covariance matrix estimation for each given input. It accepts the epoched extended signal and returns the covariance matrix.
 From this we **Estimate the centroids for MDM classification model**.
-The classification is done by [MDM]([https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM]), which works as follows: during training a set of SPD matrices encoding BCI trials for the available classes are created. For each class a center of mass of the available trials is estimated.
+The classification is done by [MDM](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM), which works as follows: during training a set of SPD matrices encoding BCI trials for the available classes are created. For each class a center of mass of the available trials is estimated.
 
 3. **Prediction**.  
 The BCI trial is estimated in the same way as in training, and is assigned to the class whose center of mass is the closest. Return predictions for each matrix according to the closest centroid. The detail is in [pyriemann](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM.fit)
