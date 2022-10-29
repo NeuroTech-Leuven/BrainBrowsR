@@ -35,7 +35,7 @@ You might think: why do we still need a use a 50 Hz notch filter if we are alrea
 
 ![alt text](./images/filtered_signal_bandpass.jpg)
 
-*Figure 2: filtered EEG signal iusing a 5th order butterworth bandpass filter between 0.5-35 Hz *
+*Figure 2: filtered EEG signal using a 5th order butterworth bandpass filter between 0.5-35 Hz *
 
 When combining the butterworth filter with the notch filter we get a cleaner signal, see Figure 3. 
 
