@@ -47,7 +47,7 @@ Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients betwee
 
 The implementation can be explained by the following flowchart.
 
-![CCA_diagram](./images/CCA_diagram.JPG "Text to show on mouseover")
+![CCA_diagram](./images/CCA_diagram.jpg "Text to show on mouseover")
 
 
 The filtered data from the preprocessing together with a template containing sine and cosine signals from one reference frequency and its harmonics is put into the CCA module. The CCA module is imported from the sklearn library [link](https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.CCA.html). This function returns the corresponding weighting vectors explained above. Afterwards, we apply these weighting vectors on the template and the data. Finally, we van calculate the correlation between the signals and the template, this value is stored. The process is repeated for every reference signal. The reference with the highest correlation value is picked as the winner. 
