@@ -28,7 +28,7 @@ Each stimulus is a flickering button with a size of 200x200 pixels that has a di
 
 ### Recordings
 
-For user comfort and to prevent fatigue, each recording lasted 60 seconds. These recordings were later cut into 4s epochs, resulting in 15 epochs per recording. The  can be found [here](sample/sample_data).
+For user comfort and to prevent fatigue, each recording lasted 60 seconds. These [recordings](sample/sample_data) were later cut into 4s epochs, resulting in 15 epochs per recording.
 
 ## Results
 
