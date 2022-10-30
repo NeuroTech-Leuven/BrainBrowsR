@@ -20,7 +20,7 @@ The maths behind the method can be best explained by the following figure: from 
 
 In the following deriviations, three variables are defined: $M$ the number of EEG channels, $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
 
-As can be seen in the previous figure $X\in \mathbb{R}^{M \times Q}$ is the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. For each of the frequencies, we construct a reference signal $Y_f \in {\rm IR}^{2N_h \times Q}$. This reference signal that consist of a sine and cosine signals for that frequency and each of the harmonics harmonics:
+As can be seen in the previous figure $X\in \mathbb{R}^{M \times Q}$ is the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. For each of the frequencies, we construct a reference signal $Y_f \in \mathbb{R}^{2N_h \times Q}$. This reference signal that consist of a sine and cosine signals for that frequency and each of the harmonics harmonics:
 
 $$ 
 Y_f = {\left\lbrack \matrix{
@@ -34,7 +34,7 @@ sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h) \cr
 } \right\rbrack}
 $$
 
-Now we define the weights: $W_x \in \rm IR^{M_1}$ and $W_y \in {\rm IR}^{2N_{h_1}}$ which are respectively the weighting vectors for $X$ and $Y(f)$. $X$ and $Y(f)$ are filtered by the weighting vectors to obtain a scalar value, denoted as $x = W_x^{T}X$ and $y = W_y^{T}Y(f)$. These values are called the canonical variables in the literature.
+Now we define the weights: $W_{x,f} \in \mathbb{R} ^{M_1}$ and $W_{y,f} \in \mathbb{R}^{2N_{h_1}}$ which are respectively the weighting vectors for $X$ and $Y_f$. $X$ and $Y_f$ are filtered by the weighting vectors to obtain a scalar value, denoted as $x = W_{x,f}^\intercal X$ and $y = W_y^\intercal Y(f)$. These values are called the canonical variables in the literature.
 
 The idea of CCA is to find $W_x$ and $W_y$ such that the correlation between the filtered signals x and y are maximized. The optimalization problem:
 
