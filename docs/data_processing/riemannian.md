@@ -50,7 +50,7 @@ Using the Riemannian Log map, we first project the whole dataset in tangent spac
 
 ## Implementation
 
-The general procedure is as follows:
+Our implementation can be found in [here](../../src/data_processing/riemann.py). The general procedure is as follows:
 
 ```mermaid
 flowchart LR;
@@ -76,4 +76,3 @@ class first cssClass
 The frequency we use in the frequency is 8Hz for "sroll-up", 10Hz for "comment" and 8Hz for "like". The performance of the **riemann+MDM** is visualized by confusion matrix. The plot below shows the performance of prediction with accuracy 78%. The 95% confidence interval of the accuracy is (0.656, 0.899), meaning that there is 95% unseen data will be classified correctly.
 
 ![alt text](./images/riemann_cm.png "Text to show on mouseover")
-

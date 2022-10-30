@@ -30,11 +30,11 @@ To find the posts in the html code, it's is recommended to use developer tools i
 
 Next, a query function is used to collect to collect them. For this, we need to know what makes a post unique from other elements. For instagram, either the class or the article tag can be used. The selection function is then either getElementByClassName or getElementByTagName, both function roughly the same as [get element by id][4]. The result of this function is a html-collection. This can be converted to an array or just used as is.
 
+The implementation can be found in [here](../../src/helpers/helper_script.js) as the getPosts. On Instagram, you can select the posts using the article tag. A small issue that is faced here, is that the [Document-Object-Model](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) only loads a limited amount of posts at once. To navigate between posts, there is some extra logic needed as opposed to using an index. This logic is implemented in nextFromCurrent and previousFromCurrent and works as follows: first all the posts currently in the dom are parsed, then the index of the current post is found in this array and this new index is then used to find either next or previous.
+
 ## Results
 
-We can succesfully find all the posts inside instagram. This can be extended to other website, such as reddit, twitter, ... The above methodology is very easy to extend to websites, structured similarly to instagram (a feed).
-
-## Sources
+We can succesfully find all the posts inside instagram. The parsed posts can then be used inside the other functions to implement functionality on the posts. This can be extended to other website, such as reddit, twitter, ... The above methodology is very easy to extend to websites, structured similarly to instagram (a feed).
 
 [1]: https://en.wikipedia.org/wiki/HTML "HTML"
 [2]: https://en.wikipedia.org/wiki/CSS "CSS"

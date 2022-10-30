@@ -70,11 +70,10 @@ Where the $sign()$ is used to retain discrimitive information from negative corr
 
 ## Implementation
 
-The implementation can be explained by the following flowchart.
+The implementation can be explained by the following flowchart. The code implementing this method can be found [here](../../src/data_processing/cca.py). This contains both regular cca and extended cca. In the current implementation only regular cca is used.
 
 ![CCA_diagram](./images/CCA_diagram.jpg "Text to show on mouseover")
 
 The filtered data from the preprocessing together with a template containing sine and cosine signals from one reference frequency and its harmonics is put into the CCA module. The CCA module is imported from the sklearn library [link](https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.CCA.html). This function returns the corresponding weighting vectors explained above. Afterwards, we apply these weighting vectors on the template and the data. Finally, we can calculate the correlation between the signals and the template, this value is stored. The process is repeated for every reference signal. The reference with the highest correlation value is picked as the winner.
 
 The dots indicate how we could upgrade the regular CCA to the extended CCA. By adding training data to the template matrix, we could increase the accuracy of the method. This data is first averaged for each frequency while keeping the different channels separated. The final template will have dimensions (`number of frequencies x number of channels x number of samples`).
-
