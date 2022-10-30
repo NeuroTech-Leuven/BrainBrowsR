@@ -49,9 +49,8 @@ This means our implementation rarely performs an action when none should be take
 
 For Riemannian geometry, there is some difference compared with CCA: 
 - 0Hz. We do not classify 0Hz since we defined the filter bank to extend signal which can not applied to 0Hz.
-- 2s epoch. The epoch length we extracted from raw data is shorter since we need large dataset to train and test the classifier.
 
-In this case, we have total 90 epochs, 80% for training and 20% for testing. The mean score of 10-fold cross validation in training data is 68%. The performance in test data is visualized by the following confusion matrix. The plot below shows the performance of prediction with accuracy 67%. The 95% confidence interval of the accuracy is (0.449, 0.884). 
+We extend the raw signal at first. Then we extract 4-second epochs from the extended data. We have total 45 epochs. Since the dataset is small, in offline pipeline, we use [LeaveOneOut](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html) cross validation for training and predicton. The performance is visualized by the confusion matrix. The plot below shows the performance of prediction with accuracy 64%. The 95% confidence interval of the accuracy is (0.505, 0.784).
 
 ![alt text](../images/Riemannian_4s.svg "Confusion matrix of Riemannian geometry")
 
