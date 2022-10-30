@@ -1,8 +1,5 @@
-# Project-22
-
-This is the project code of NeuroTechLeuven's BrainBrowsR.
-
-Soon, you can find a full description on our website [website](https://ntxl.org) of the project as well as our final product video.
+# BrainBrowsR
+Brainbrowsr
 
 ## Repo structure
 
