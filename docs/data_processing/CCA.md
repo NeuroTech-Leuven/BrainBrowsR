@@ -53,29 +53,29 @@ The correlation value is saved for all the different stimulation frequencies. Th
 
 *Figure 2. Extended CCA scheme. ([Nakanishi et al., 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4610694/))*
 
-To explain extended CCA you first have to understand the basic principles of Individual template CCA (IT-CC).
+To explain extended CCA you first have to understand the basic principles of Individual template CCA (IT-CC). This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template signals.
+Here, the correlation is not calculated between the signal and precalculated template signals, but between the signal and template signals determined from responses obtained in a training phase.
 
-This method was first introduced to detect temporal features of EEG signals using canonical correlation between the test data and an individual template signals $$\bar{\mathcal X}={\frac{1}{N_t}}{\sum_{h=1}^{N_t}{\mathcal X}}$$ when using code modulated visual evoked potential.
-
-In case of SSVEP, for each target a individual template is obtained by averaging multiple training trials $\bar{\mathcal X}_n$. Now we can replace the reference signals $Y(f)$ of the standard CCA with the individual template $\bar{\mathcal X}_n$. This will give us:
-
-$$
-\rho(f)=\max{W_x,W_y}\frac{E[W_x^{T}X \cdot \bar{\mathcal X}_n^{T} \cdot W_y]}{\sqrt{E[W_x^{T}XX^{T}W_x]E[W_y^{T} \bar{\mathcal X_n} \cdot \bar{\mathcal X_n^{T}}W_y]}}
-$$
-
-Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients between projections of a test set $\hat{X}$ and a individual template $\bar{\mathcal X_n}$ using CCA-based spatial filters are used as features for target identification. The three weight vectors that are used as spatial filters to enhance the SNR of SSVEP are: $W_x(\hat{X}\bar{\mathcal X})$ between test set $\hat{X}$ and the individual template $\bar{\mathcal X_n}$, $W_x(\hat{X}Y_n)$ between the test set $\hat{X}$ and sine-cosine reference signals $Y_n$ and $W_x(\bar{\mathcal X}Y_n)$ between the individual template $\bar{\mathcal X}$ and sine-cosine reference signal $Y_n$. Afterwards a correlation vector is obtained, $r_n$
+In the case of SSVEP, the template signal is calculated for each frequency. For a given set of $N_t$ training signal trials $\mathcal{X} = \{X_i \in \mathbb{M\times Q}\}_{i = 0 \ldots N_t}$, the template signals are $$\bar{X}_f={\frac{1}{N_{t,f}}}{\sum_f{\mathcal X}}$$ when using code modulated visual evoked potential.
+Now we can replace the reference signals $Y_f$ of the standard CCA with the individual template $\bar{X}_f$. This will give us:
 
 $$
-r_n = {\left\lbrack \matrix{r_{n,1} \cr r_{n,2} \cr r_{n,3} \cr r_{n,4}} \right\rbrack} = \left\lbrack \matrix{r(\hat{X^{T}}W_x(\hat{X}Y_n) & Y^{T}W_y(\hat{X}Y_n)) \cr r(\hat{X^{T}}W_x(\hat{X}\bar{\mathcal X_n}) & \bar{\mathcal X_n^{T}}W_x(\hat{X}Y_n)) \cr r(\hat{X^{T}}W_x(\hat{X}Y_n) & \bar{\mathcal X_n^{T}}W_x(\bar{\mathcal X_n}Y_n)) \cr r(\hat{X^{T}}W_x(\bar{\mathcal X_n^{T}}Y_n) & \bar{\mathcal X_n^{T}}W_x( \bar{\mathcal X_n}Y_n))} \right\rbrack
+\rho_f = \max{W_{x,f},W_{y,f}}\frac{E[W_{x,f}^\intercal X \bar{X}_f^\intercal W_{y,f}]}{\sqrt{E[W_{x,f}^\intercal XX\^intercal W_{x,f}]E[W_{y,f}^\intercal \bar{\mathcal X_n} \bar{X}_f^\intercal W_{y,f}]}}
 $$
 
-Where $r(a,b)$ indicates the Pearson's correlation coefficient between two one-dimensional signals $a$ and $b$. For the classification an ensemble classifier is used to combine the 4 features. In practice the weighted correlation coefficient $\rho_n$ is employed for the final feature identification.
+Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients between projections of a test set $\hat{X}$ and a individual template $\bar{x}$ using CCA-based spatial filters are used as features for target identification. The three weight vectors that are used as spatial filters to enhance the SNR of SSVEP are: $W_x(X,\bar{X})$ between test data $X$ and the individual template $\bar{X}$, $W_x(X,Y)$ between the test data $X$ and sine-cosine reference signals $Y$ and $W_x(\bar{X},Y)$ between the individual template $\bar{X}$ and sine-cosine reference signal $Y$. Afterwards a correlation vector $r$ is obtained:
 
 $$
-\rho_n = \sum_{l = 1}^{4} sign(r_{n,l}) \cdot r_{n,l}^2
+r_f = {\left\lbrack \matrix{r_1 \cr r_2 \cr r_3 \cr r_4} \right\rbrack} = \left\lbrack \matrix{r(X^\intercal W_x(X,Y_f), Y^\intercal W_y(X,Y)) \cr r(X^\intercal W_x(X,\bar{X}_f), \bar{X}_f^\intercal W_x(X,Y_f)) \cr r(X^\intercal W_x(X,Y_f), \bar{X}_f^\intercal W_x(\bar{X}_f, Y_f)) \cr r(X^\intercal W_x(\bar{X}_f^\intercal Y_f), \bar{X}_f^\intercal W_x(\bar{X}_f, Y_f))} \right\rbrack
 $$
 
-Where the $sign()$ is used to retain discrimitive information from negative correlation coefficients between test set $\hat{X}$ and individual template $\bar{\mathcal X_n}$. The individual template that maximizes the weigth correlation value is selected as the reference signal corresponding to the target. [Nakanishi et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4610694/)
+where $r(a,b)$ indicates the Pearson's correlation coefficient between two one-dimensional signals $a$ and $b$. For the classification an ensemble classifier is used to combine the 4 features. In practice the weighted correlation coefficient $\rho_n$ is employed for the final feature identification.
+
+$$
+\rho_f = \sum_{l = 1}^{4} sign(r_{f,l}) \cdot r_{f,l}^2
+$$
+
+Where the $sign()$ is used to retain discrimitive information from negative correlation coefficients between the test trial $X$ and individual template $\bar{X}$. The individual template that maximizes the weigth correlation value is selected as the reference signal corresponding to the target. [Nakanishi et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4610694/)
 
 ## Implementation
 
@@ -85,6 +85,6 @@ The implementation can be explained by the following flowchart. The code impleme
 
 *Figure 3. CCA implementation scheme.*
 
-The filtered data from the preprocessing together with a template containing sine and cosine signals from one reference frequency and its harmonics is put into the CCA module. The CCA module is imported from the sklearn library [link](https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.CCA.html). This function returns the corresponding weighting vectors explained above. Afterwards, we apply these weighting vectors on the template and the data. Finally, we can calculate the correlation between the signals and the template, this value is stored. The process is repeated for every reference signal. The reference with the highest correlation value is picked as the winner.
+The filtered data from the preprocessing together with a template containing sine and cosine signals from one reference frequency and its harmonics is put into the CCA module. The CCA module is imported from the  [Scikit-Learn library](https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.CCA.html). This function returns the corresponding weighting vectors explained above. Afterwards, we apply these weighting vectors on the template and the data. Finally, we can calculate the correlation between the signals and the template, this value is stored. The process is repeated for every reference signal. The reference with the highest correlation value is picked as the winner.
 
 The dots indicate how we could upgrade the regular CCA to the extended CCA. By adding training data to the template matrix, we could increase the accuracy of the method. This data is first averaged for each frequency while keeping the different channels separated. The final template will have dimensions (`number of frequencies x number of channels x number of samples`).

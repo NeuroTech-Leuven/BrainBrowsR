@@ -22,9 +22,9 @@ Covariance matrices are symmetric positive-definite (SPD) and are thus constrain
 
 A Riemannian manifold is a differentiable manifold in which tangent space at each point is a finite-dimensional Euclidean space. Euclidean space is a space in any finite number of dimensions, in which points are designated by coordinates (one for each dimension) and the distance between two points is given by a distance formula (see in [Definition](https://www.britannica.com/science/Euclidean-space)).
 
-From the Figure 1, we can see that the Euclidean distance is the red dashed line which does not consider the curvature of the space. The Riemannian distance is in plain blue and the Log-Euclidean in dashed-dotted green, both of which follows the geodesic, therefore taking into account the shape of the space where covariance matrices lie. According to [Conjendo et al.](https://hal.archives-ouvertes.fr/hal-02315131/document), the Riemannian minimum distance to the mean of classifiers is simple, fully deterministic, robust to noise, computationally efficient and prone to transfer learning. Therefore in the project, we use it for BCI applications.
+From the Figure 1, we can see that the Euclidean distance is the red dashed line which does not consider the curvature of the space. The Riemannian distance is in plain blue and the Log-Euclidean in dashed-dotted green, both of which follows the geodesic, therefore taking into account the shape of the space where covariance matrices lie. According to [Congedo et al.](https://hal.archives-ouvertes.fr/hal-02315131/document), the Riemannian minimum distance to the mean of classifiers is simple, fully deterministic, robust to noise, computationally efficient and prone to transfer learning. Therefore in the project, we use it for BCI applications.
 
-$S_n={S\in M_n, S^T=S}$ represents the space of all $n×n$ symmetric matrices in the space of square matrices.
+$S_n={S\in M_n, S^\intercal=S}$ represents the space of all $n×n$ symmetric matrices in the space of square matrices.
 
 $P_n={P \in S_n, P>0}$ represents the set of all $n×n$ symmetric positive-definite (SPD) matrices.
 
@@ -59,7 +59,7 @@ class first cssClass
 ```
 
 1. **Processing**.
-   Some processing of the data should be done after the preprocessing steps to accomodate the signal as required. Processing consists of two steps that are handled together with the function extend signal. First step is a **Filter bank**. The filter bank is composed of bandpass filters for each stimulation frequency that is applied. This is done using the scipy library, of which the functions [butter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html) and [filtfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html) are.
+   Some processing of the data should be done after the preprocessing steps to accomodate the signal as required. Processing consists of two steps that are handled together with the function extend signal. The first step is a **Filter bank**. The filter bank is composed of bandpass filters for each stimulation frequency that is applied. This is done using the scipy library, using the functions [butter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html) and [filtfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html) are.
    
    The EEG signal as a numpy array (`number of channels, number of samples`) is transferred to the filtered signal (`number of frequencies, number of channels, number of samples`). For the second step we **Stack the filtered signals to build an extended signal**, by modifying the array in the shape of `number of frequencies x number of channels, number of samples`. In order to compute the covariance matrices, we extract the epochs from the raw data. Noted that the shape of numpy array (epoch data) here is `number of epochs, number of frequencies x number of channels, number of samples`.
 2. **Training**.
