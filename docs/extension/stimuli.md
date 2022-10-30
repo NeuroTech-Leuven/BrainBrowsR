@@ -12,7 +12,7 @@ Images on a website are defined as html elements as explained in [the parsing se
 
 ## Implementation
 
-In the [content script](../../src/content_script.js), we create an html image element that we append to the body of the web page, using the insertStimuli function in the [stimuli_helper](../../src/helpers/stimuli_helper.js). The element is given a class name, that can be used to define its style in the [CSS file](../../src/css/stimuli.css). It is possible to add multiple classes to elements, so they all share one class that defines the flickering animation (the simuli class below) but some variables are changed in their unique class.
+In the [content script](../../src/content_script.js), we create an html image element that we append to the body of the web page, using the insertStimuli function in the [stimuli_helper](../../src/helpers/stimuli_helper.js). The element is given a class name, that can be used to define its style in the [CSS file](../../src/css/stimuli.css). It is possible to add multiple classes to elements, so they all share one class that defines the flickering animation (the simuli class below) and the size of the stimuli but some variables are changed in their unique class. 
 
 <img src="./images/stimuli_class.png" width="400"/>
 
