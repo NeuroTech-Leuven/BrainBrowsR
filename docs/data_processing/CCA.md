@@ -38,13 +38,10 @@ Now we define the weights: $W_{x,f} \in \mathbb{R} ^{M_1}$ and $W_{y,f} \in \mat
 
 The idea of CCA is to find $W_x$ and $W_y$ such that the correlation between the filtered signals x and y are maximized. The optimalization problem:
 
-$$
-\rho_f = \max_{W_{x,f}, W_{y,f}}\frac{E[x_f \cdot y_f^{T}]}{\sqrt{E[x_f \cdot x_f^\intercal]E[y_f \cdot y_f^\intercal]}}
-$$
-
-$$
- =\max_{W_{x,f}, W_{y,f}}\frac{E[W_{x,f}^\intercal X \cdot Y_f^\intercal \cdot W_{y,f}]}{\sqrt{E[W_{x,f}^\intercal XX^\intercal W_{x,f}]E[W_{y,f}^\intercal Y_f \cdot Y_f^\intercal W_{y,f}]}}
-$$
+$$\eqalign{
+\rho_f &= \max_{W_{x,f}, W_{y,f}}\frac{E[x_f y_f^{T}]}{\sqrt{E[x_f  x_f^\intercal]E[y_f y_f^\intercal]}} \\
+ &=\max_{W_{x,f}, W_{y,f}}\frac{E[W_{x,f}^\intercal X \cdot Y_f^\intercal \cdot W_{y,f}]}{\sqrt{E[W_{x,f}^\intercal XX^\intercal W_{x,f}]E[W_{y,f}^\intercal Y_f \cdot Y_f^\intercal W_{y,f}]}}
+}$$
 
 The correlation value is saved for all the different stimulation frequencies. The one with the highest correlation value is the winner.
 
