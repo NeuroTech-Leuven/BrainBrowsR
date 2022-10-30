@@ -63,19 +63,19 @@ $$
 \rho_f = \max{W_{x,f},W_{y,f}}\frac{E[W_{x,f}^\intercal X \bar{X}_f^\intercal W_{y,f}]}{\sqrt{E[W_{x,f}^\intercal XX\^intercal W_{x,f}]E[W_{y,f}^\intercal \bar{\mathcal X_n} \bar{X}_f^\intercal W_{y,f}]}}
 $$
 
-Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients between projections of a test set $\hat{X}$ and a individual template $\bar{x}$ using CCA-based spatial filters are used as features for target identification. The three weight vectors that are used as spatial filters to enhance the SNR of SSVEP are: $W_x(X,\bar{X})$ between test data $X$ and the individual template $\bar{X}$, $W_x(X,Y)$ between the test data $X$ and sine-cosine reference signals $Y$ and $W_x(\bar{X},Y)$ between the individual template $\bar{X}$ and sine-cosine reference signal $Y$. Afterwards a correlation vector is obtained, $r$
+Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients between projections of a test set $\hat{X}$ and a individual template $\bar{x}$ using CCA-based spatial filters are used as features for target identification. The three weight vectors that are used as spatial filters to enhance the SNR of SSVEP are: $W_x(X,\bar{X})$ between test data $X$ and the individual template $\bar{X}$, $W_x(X,Y)$ between the test data $X$ and sine-cosine reference signals $Y$ and $W_x(\bar{X},Y)$ between the individual template $\bar{X}$ and sine-cosine reference signal $Y$. Afterwards a correlation vector $r$ is obtained:
 
 $$
-r_f = {\left\lbrack \matrix{r_1 \cr r_2 \cr r_3 \cr r_4} \right\rbrack} = \left\lbrack \matrix{r(X^\intercal W_x(X,Y_f), Y^\intercal W_y(X,Y)) \cr r(X^\intercal W_x(X,\bar{X}_f), \bar{X}_f^\intercal W_x(X,Y_f)) \cr r(X^\intercal W_x(X,Y_f), \bar{X}_f^\intercal W_x(\bar{X}_f, Y_f)) \cr r(\X^\intercal W_x(\bar{X}_f^\intercal Y_f), \bar{X}_f^\intercal W_x(\bar{X}_f, Y_f))} \right\rbrack
+r_f = {\left\lbrack \matrix{r_1 \cr r_2 \cr r_3 \cr r_4} \right\rbrack} = \left\lbrack \matrix{r(X^\intercal W_x(X,Y_f), Y^\intercal W_y(X,Y)) \cr r(X^\intercal W_x(X,\bar{X}_f), \bar{X}_f^\intercal W_x(X,Y_f)) \cr r(X^\intercal W_x(X,Y_f), \bar{X}_f^\intercal W_x(\bar{X}_f, Y_f)) \cr r(X^\intercal W_x(\bar{X}_f^\intercal Y_f), \bar{X}_f^\intercal W_x(\bar{X}_f, Y_f))} \right\rbrack
 $$
 
-Where $r(a,b)$ indicates the Pearson's correlation coefficient between two one-dimensional signals $a$ and $b$. For the classification an ensemble classifier is used to combine the 4 features. In practice the weighted correlation coefficient $\rho_n$ is employed for the final feature identification.
+where $r(a,b)$ indicates the Pearson's correlation coefficient between two one-dimensional signals $a$ and $b$. For the classification an ensemble classifier is used to combine the 4 features. In practice the weighted correlation coefficient $\rho_n$ is employed for the final feature identification.
 
 $$
-\rho_n = \sum_{l = 1}^{4} sign(r_{n,l}) \cdot r_{n,l}^2
+\rho_f = \sum_{l = 1}^{4} sign(r_{f,l}) \cdot r_{f,l}^2
 $$
 
-Where the $sign()$ is used to retain discrimitive information from negative correlation coefficients between test set $\hat{X}$ and individual template $\bar{\mathcal X_n}$. The individual template that maximizes the weigth correlation value is selected as the reference signal corresponding to the target. [Nakanishi et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4610694/)
+Where the $sign()$ is used to retain discrimitive information from negative correlation coefficients between the test trial $X$ and individual template $\bar{X}$. The individual template that maximizes the weigth correlation value is selected as the reference signal corresponding to the target. [Nakanishi et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4610694/)
 
 ## Implementation
 
