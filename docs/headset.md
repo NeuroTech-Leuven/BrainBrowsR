@@ -28,7 +28,7 @@ _Figure 1: Electrode locations for the BrainBrowsR application according to the 
 
 #### 2) Electrode type
 
-The Mentalab headset comes with two types of dry electrodes. Comb electrodes and flat electrodes, see Figure 2. Comb electrodes are ideal for locations that contain hair, thus if you are using the BrainBrowsR application with someone that has is not bald, install the comb electrodes. If the person is bald, flat electrodes can be used.
+The Mentalab headset comes with two types of dry electrodes. Comb electrodes and flat electrodes, see Figure 2. Comb electrodes are ideal for locations that contain hair, thus if you are using the BrainBrowsR application with someone that has hair, install the comb electrodes. If the person is bald, flat electrodes can be used instead.
 
 ![alt text](./images/electrode_types.jpg)
 
@@ -38,10 +38,9 @@ _Figure 2: Dry electrode types for the Mentalab Explore headset_
 
 Once the cap has been put on the head make sure all electrodes are touching the scalp for better conductance. When using comb electrodes, you can push on comb electrode and gently wiggle it to make sure that the comb is getting through the hair to the scalp.
 
-Once done, you power on the headset (Mentalab has already written a great quick start documentation, which you can find here: [Quick start guide (pdf)](https://wiki.mentalab.com/pdfs/Mentalab_Explore_Quick_Start_Guide.pdf).
-) and you can run the windows explore application or use the following command in your ipython ([Read how to install ipython here](https://ipython.org/install.html)) to check the incoming EEG signal in your browser:
+Once done, you power on the headset (Mentalab has already written a great quick start documentation, which you can find here: [Quick start guide (pdf)](https://wiki.mentalab.com/pdfs/Mentalab_Explore_Quick_Start_Guide.pdf).) and you can run the windows explore application or use the following command in your ipython ([Read how to install ipython here](https://ipython.org/install.html)) to check the incoming EEG signal in your browser:
 
-```
+```python
 import explorepy
 explorer = explorepy.Explore()
 explorer.connect(device_name="Explore_XXXX")  # Put your device Bluetooth name

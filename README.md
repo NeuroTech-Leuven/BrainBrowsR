@@ -1,10 +1,44 @@
-# Project-22
+# BrainBrowsR
 
-This is the project code of NeuroTechLeuven's BrainBrowsR.
+This is the project code of NeuroTechLeuven's BrainBrowsR!
+BrainBrowsR is a software stack that allows a user to control the browser through SSVEP. We want to unlock the social media for people with extreme paralysis, ALS or locked-in syndrome.
+
+To achieve this, we build a web-extension that inserts stimuli into the web-page. Looking at these flickering elements generates a specific electrical signal in the brain, which we can measure commercially available neurotechnology.
+
+![BrainBrowsR](./images/BrainBrowsR.png)
 
 ## Project Overview
 
-## NeuroTech Leuven 
+This is a very brief overview of our project. For people interested in more details, checkk out [our documentation](docs/README.md).
+
+### Our technology stack
+
+The technology behind BrainBrowsR consists of three parts, as shown on the diagram below.
+
+![techstack](./images/stack.png)
+
+The headset is a commercially available headset 
+
+### NeuroTech Leuven
+
+[NeuroTech Leuven](ntxl.org) is an organization based in Leuven, where students work together on projects and events are organised to promote neurotechnology in Belgium.
+
+### The team
+
+![the team](./images/theTeam.jpg)
+
+The BrainBrowsR team consists of the following people, mentioned alphabetically:
+
+- Rochelle Aubry
+- Samuel Berton
+- Yitong Li
+- Jone Liekens
+- Rien Sonck
+- Arne Staes
+- Wout Van Droogenbroeck
+- Nils Van Rompaey
+- Joppe Van Rumst
+- Anthony Vorias
 
 ## Repo structure
 
@@ -28,7 +62,21 @@ The [manifest.json](manifest.json) is the configuraton file for the extension. T
 
 There are two components in the project, a data-processing part that connects with the EEG-headset, coded in Python, and the software part written in JavaScript.
 
-To run the Python code, first go to the right directory command and install with pip: `pip install -r requirements.txt`. This will install all the necessary packages and their dependencies. Please check that your Python version is higher than 3.5. In the terminal, now run the local data-processing server using `python server.py`. This will first connect with the headset and then start a websocket server.
+To run the Python code, we recommend creating a virtual environment and then installing the dependencies in it, using:
+
+```bash
+pip install -r requirements.txt
+```
+
+To create a virtual environment, you can use [this document](docs/virtual_environments.md) in our documentation.
+
+This will install all the necessary packages and their dependencies. Please check that your Python version is higher than 3.5. In the terminal, now run the local data-processing server using
+
+```bash
+python server.py
+```
+
+This will first connect with the headset and then start a websocket server.
 
 To set-up the headset and connect with it, read our [headset guide](docs/headset.md).
 
@@ -37,6 +85,16 @@ Once the server has initiated, you can start using the extension. At the moment,
 The instructions to install web-ext are found on [this webpage](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/) by Mozilla. To run, simply do `web-ext run`. Going to instagram and login in, will connect you to websocket server and allow the usage of the extension.
 
 The other option is temporarily installing it, using [these instructions](https://extensionworkshop.com/documentation/develop/temporary-installation-in-firefox/) and proceeding similar as with web-ext.
+
+## Limitation and future plans
+
+There is still a lot that has to happen before BrainBrowsR reaches its end-users. Firstly, not all persons with locked-in syndrome may want to use social-media. A thorough check-up is required with a trained psychologist or doctor to assess this.
+
+Secondly, there is a limit on the number of interactive elements that can be shown on one screen. Better visualization of these stimuli and more precise measuring equipment could be beneficial.
+
+Thirdly, more measures have to be taken into account for errors in our software. It can be very frustrating for the user when something does not work correctly, and while our service to help would be as swift as possible in that case, more mechanisms can be implemented for a smoother user experience for both the user and the user’s caretakers.
+
+Finally, a keyboard that works on different classifying algorithms, maybe the ones made by other NeuroTechX teams, can be readily implemented in our software. Doing so, and testing which works best, would make the user experience smoother.
 
 ## Further development
 

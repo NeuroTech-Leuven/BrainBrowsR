@@ -1,5 +1,7 @@
 # Documentation
 
+[Return to the mainpage](../README.md)
+
 This is the developer documentation for the BrainBrowsR project by NeuroTech Leuven. The project consists of two main parts, a back-end and and a front-end. These are then connected through [websockets](websockets.md). The global structure that connects everything can be found in the following diagram.
 
 ```mermaid
@@ -7,7 +9,7 @@ This is the developer documentation for the BrainBrowsR project by NeuroTech Leu
         subgraph BrainBrowsR
         subgraph Frontend
         subgraph On start
-        Start[Start the browser extension]-->pre[Preprocess html]
+        Start[Start the browser extension]-->pre[Preprocess html and insert stimuli]
         pre-->init[set current_post to first post in DOM]
         init-->connect[start websocket connection]
         end
@@ -62,3 +64,5 @@ The back-end of BrainBrowR consists of two parts, the websockets server and the 
 ## Front-end
 
 The front-end is the extension. This inserts the stimuli and interacts with the webpage using the input from the back-end. To learn more about the extension, see [here](extension.md)
+
+[Return to the mainpage](../README.md)
