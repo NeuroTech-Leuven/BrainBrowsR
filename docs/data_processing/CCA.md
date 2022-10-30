@@ -20,7 +20,7 @@ The maths behind the method can be best explained by the following figure: from 
 
 In the following deriviations, three variables are defined: $M$ the number of EEG channels, $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
 
-As can be seen in the previous figure $X\in {\rm IR}^{M \times Q}$ is the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. For each of the frequencies, we construct a reference signal $Y_f \in {\rm IR}^{2N_h \times Q}$ is the reference signal that consist of the sine and cosine signals with frequencies including the stimulus frequency $f$ and its harmonics:
+As can be seen in the previous figure $X\in \mathbb{R}^{M \times Q}$ is the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. For each of the frequencies, we construct a reference signal $Y_f \in {\rm IR}^{2N_h \times Q}$. This reference signal that consist of a sine and cosine signals for that frequency and each of the harmonics harmonics:
 
 $$ 
 Y_f = {\left\lbrack \matrix{
@@ -29,12 +29,10 @@ sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 1) \cr
 cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 2) \cr
 sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 2) \cr
 ... \cr
-cos(2 \cdot \pi \cdot f \cdot q \cdot N_h\cdot 2) \cr
-sin(2 \cdot \pi \cdot f \cdot q \cdot N_h\cdot 2) \cr
+cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h) \cr
+sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h) \cr
 } \right\rbrack}
 $$
-
-The first two rows of the matrix $Y_f$ contain the signals: $$ and $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s)$ and the final two rows $cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$ and $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$ with $q \in \{1,2,..,Q \}$ and $T_s$ the time interval between consecutive sample points.
 
 Now we define the weights: $W_x \in \rm IR^{M_1}$ and $W_y \in {\rm IR}^{2N_{h_1}}$ which are respectively the weighting vectors for $X$ and $Y(f)$. $X$ and $Y(f)$ are filtered by the weighting vectors to obtain a scalar value, denoted as $x = W_x^{T}X$ and $y = W_y^{T}Y(f)$. These values are called the canonical variables in the literature.
 
