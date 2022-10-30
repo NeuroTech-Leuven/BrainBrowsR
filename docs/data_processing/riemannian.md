@@ -59,21 +59,13 @@ class first cssClass
 ```
 
 1. **Processing**.
-   Some processing of the data should be done after the preprocessing steps to accomodate the signal as required.
-   Processing consists of two steps that are handled together with the function extend signal.
-   First step is a **Filter bank**. The filter bank is composed of bandpass filters for each stimulation frequency that is applied. This is done using the scipy library, of which the functions [butter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html) and [filtfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html) are. The EEG signal as a numpy array (`number of channels, number of samples`) is transferred to the filtered signal (`number of frequencies, number of channels, number of samples`). For the second step we **Stack the filtered signals to build an extended signal**, by modifying the array in the shape of `number of frequencies x number of channels, number of samples`. In order to compute the covariance matrices, we extract the epochs from the raw data. Noted that the shape of numpy array (epoch data) here is `number of epochs, number of frequencies x number of channels, number of samples`.
+   Some processing of the data should be done after the preprocessing steps to accomodate the signal as required. Processing consists of two steps that are handled together with the function extend signal. First step is a **Filter bank**. The filter bank is composed of bandpass filters for each stimulation frequency that is applied. This is done using the scipy library, of which the functions [butter](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html) and [filtfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.filtfilt.html) are.
+   
+   The EEG signal as a numpy array (`number of channels, number of samples`) is transferred to the filtered signal (`number of frequencies, number of channels, number of samples`). For the second step we **Stack the filtered signals to build an extended signal**, by modifying the array in the shape of `number of frequencies x number of channels, number of samples`. In order to compute the covariance matrices, we extract the epochs from the raw data. Noted that the shape of numpy array (epoch data) here is `number of epochs, number of frequencies x number of channels, number of samples`.
 2. **Training**.
-   We first **Estimate covariance matrices by using Ledoit-Wolf shrinkage estimator on the extended signal**.
-   For this, the [covariance](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.utils.covariance.covariances.html#pyriemann.utils.covariance.covariances) is used.
-   This function performs a covariance matrix estimation for each given input. It accepts the epoched extended signal and returns the covariance matrix.
-   From this we **Estimate the centroids for MDM classification model**.
-   The classification is done by [MDM](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM), which works as follows: for each given class, a centroid is estimated according to 'riemann' metric and each data is classified into the nearest centroid. The evaluation of performance is done by cross validation (K-fold and Leave-One-Out).
+   We first **Estimate covariance matrices by using Ledoit-Wolf shrinkage estimator on the extended signal**. For this, the [covariance](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.utils.covariance.covariances.html#pyriemann.utils.covariance.covariances) is used. This function performs a covariance matrix estimation for each given input. It accepts the epoched extended signal and returns the covariance matrix.
+   From this we **Estimate the centroids for MDM classification model**. The classification is done by [MDM](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.classification.MDM.html#pyriemann.classification.MDM), which works as follows: for each given class, a centroid is estimated according to 'riemann' metric and each data is classified into the nearest centroid.
 3. **Prediction**.
    For new inpput data, we firstly compute the corresponding SPD matrices. We then make a prediction using the fitted model, and calculate the [euclidean distance](https://pyriemann.readthedocs.io/en/latest/generated/pyriemann.utils.distance.distance.html#pyriemann.utils.distance.distance) between the centroid and the matric.
 
-## Results
-
-The frequency we use in the frequency is 8Hz for "sroll-up", 10Hz for "comment" and 8Hz for "like". We extend the raw signal at first. Then we extract 2-second epochs from the extended data. For Riemannian geometry, we need large dataset to train and test the classifier so we use 2-second epochs rather than 4-second epochs in CCA classification. We have total 90 epochs, 80\% for training and 20\% for testing. The mean score of 10-fold cross validation in training data is 68\%. The performance of the **riemann+MDM** in test data is visualized by confusion matrix. The plot below shows the performance of prediction with accuracy 67%. The 95% confidence interval of the accuracy is (0.449 0.884).
-
-![alt text](./images/riemann_cm.png "Text to show on mouseover")
 

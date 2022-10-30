@@ -16,7 +16,9 @@ For better accuracy, the sine and cosine representation of the harmonics of the 
 
 A weighted linear combination is made from both the EEG-signals and the assumption matrix. So the weights will on one hand linearly combine the different EEG-channels into a scalar value and on the other hand combine the sine and cosine components of the target signals and harmonics. Afterwards, the weighted values are summed up to get a scalar value of the multichannel EEG signal and a scalar value of the assumptions. These weights change according to maximize the correlation between the two scalar values. This process is repeated for every target frequency, and the target with the highest correlation would be the target were the subject is gazing at.
 
-The maths behind the method can be best explained by the following figure: from [Pan et al](https://iopscience.iop.org/article/10.1088/1741-2560/8/3/036027/meta) ![alt text for screen readers](./images/CCA_scheme.JPG "Text to show on mouseover").
+The maths behind the method can be best explained by the following figure: from [Pan et al.](https://iopscience.iop.org/article/10.1088/1741-2560/8/3/036027/meta) ![alt text for screen readers](./images/CCA_scheme.JPG "Text to show on mouseover").
+
+*Figure 1. CCA scheme. ([Pan et al., 2011]([https://www.researchgate.net/publication/323358565_Riemannian_Classification_for_SSVEP-Based_BCI_Offline_versus_Online_Implementations](https://iopscience.iop.org/article/10.1088/1741-2560/8/3/036027/meta)))*
 
 In the following deriviations, three variables are defined: $M$ the number of EEG channels, $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
 
@@ -47,7 +49,9 @@ The correlation value is saved for all the different stimulation frequencies. Th
 
 ### Extended CCA
 
-![Extended CCA diagram](./images/extended_CCA_diagram.JPG "Text to show on mouseover")
+![Extended CCA diagram](./images/extended_CCA_diagram.JPG "Extended CCA diagram")
+
+*Figure 2. Extended CCA scheme. ([Nakanishi et al., 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4610694/))*
 
 To explain extended CCA you first have to understand the basic principles of Individual template CCA (IT-CC).
 
@@ -77,7 +81,9 @@ Where the $sign()$ is used to retain discrimitive information from negative corr
 
 The implementation can be explained by the following flowchart. The code implementing this method can be found [here](../../src/data_processing/cca.py). This contains both regular cca and extended cca. In the current implementation only regular cca is used.
 
-![CCA_diagram](./images/CCA_diagram.jpg "Text to show on mouseover")
+![CCA_diagram](./images/CCA_diagram.jpg "CCA+CCA extended implementation scheme")
+
+*Figure 3. CCA implementation scheme.*
 
 The filtered data from the preprocessing together with a template containing sine and cosine signals from one reference frequency and its harmonics is put into the CCA module. The CCA module is imported from the sklearn library [link](https://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.CCA.html). This function returns the corresponding weighting vectors explained above. Afterwards, we apply these weighting vectors on the template and the data. Finally, we can calculate the correlation between the signals and the template, this value is stored. The process is repeated for every reference signal. The reference with the highest correlation value is picked as the winner.
 
