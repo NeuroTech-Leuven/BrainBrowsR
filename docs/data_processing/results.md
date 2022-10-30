@@ -10,7 +10,7 @@ We recorded EEG data using the [Mentalab headset](../headset.md) with a sampling
 
 The user was seated in front of a laptop with their head about 50 cm away from the screen. We used a laptop with a screen that has a 1920x1080 resolution and a 60 Hz refresh rate.
 
-### Stimuli
+### [Stimuli](../extension/stimuli.md)
 
 The user was shown three stimuli that were overlayed on top of [Instagram](https://www.instagram.com).
 
@@ -50,10 +50,14 @@ This means our implementation rarely performs an action when none should be take
 
 ### [Riemannian geometry](riemannian.md)
 
-For Riemannian geometry, there is some difference compared with CCA:
+For Riemannian geometry, there is some difference compared to CCA:
 
-- 0Hz: We do not classify 0Hz since we defined the filter bank to extend signal which can not applied to 0Hz.
+- 0Hz: We do not classify 0Hz since we defined the filter bank to extend the signal which can not applied to 0Hz.
 
-We extend the raw signal at first. Then we extract 4-second epochs from the extended data. Since the dataset is small, in offline pipeline, we use [LeaveOneOut](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html) cross validation for training and predicton. The performance is visualized by the confusion matrix. The plot below shows the performance of prediction with accuracy 64%. The 95% confidence interval of the accuracy is (0.505, 0.784).
+We extend the raw signal at first. Then we extract 4-second epochs from the extended data. Since the dataset is small we use [LeaveOneOut](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html) cross validation in the offline pipeline for training and predicton. The performance is visualized by the confusion matrix. The plot below shows the performance of prediction with accuracy 64%. The 95% confidence interval of the accuracy is (0.505, 0.784).
 
 ![alt text](../images/Riemannian_4s.svg "Confusion matrix of Riemannian geometry")
+
+### Offline pipeline
+
+For CCA and Riemannian geometry, there are [sample data](sample/sample_data) and [offline pipeline](sample/offline_pipeline).
