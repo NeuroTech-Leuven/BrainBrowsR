@@ -14,13 +14,17 @@ The user was seated in front of a laptop with their head about 50 cm away from t
 
 The user was shown three stimuli that were overlayed on top of [Instagram](https://www.instagram.com).
 
-Each stimulus is a flickering button with a size of 200x200 pixels that has a distinct color and frequency. INSERT SCREENSHOT
+![alt_text](./images/image.png "Screenshot")
+
+Each stimulus is a flickering button with a size of 200x200 pixels that has a distinct color and frequency.
 
 | Button        | Color | Frequency |
 | ------------- | ----- | --------- |
 | Like/Unlike   | Red   | 8 Hz      |
 | Previous post | Blue  | 10 Hz     |
 | Next post     | Black | 12 Hz     |
+
+
 
 ### Recordings
 
@@ -37,7 +41,7 @@ The confusion matrix below shows the performance of CCA on the recorded data. 0 
 In our implementation, an epoch is classified as 0 Hz if none of the correlations are significantly larger than all the others.
 More concretely, a correlation is only significant if it is larger than 0.1 and larger than 1.3 times the second largest correlation.
 
-![alt_text](../images/CCA_4s.svg "Confusion matrix of CCA")
+![alt_text](./images/CCA_4s.svg "Confusion matrix of CCA")
 
 If we consider 0 Hz to be the negative class and the other frequencies as variations of the positive class, we can calculate the following performance metrics:
 
@@ -50,14 +54,12 @@ This means our implementation rarely performs an action when none should be take
 
 ### [Riemannian geometry](riemannian.md)
 
-For Riemannian geometry, there is some difference compared to CCA:
-
-- 0Hz: We do not classify 0Hz since we defined the filter bank to extend the signal which can not applied to 0Hz.
+In contrast to CCA, we do not classify 0Hz with Riemannian geometry since we defined the filter bank to extend the signal which can not applied to 0Hz.
 
 We extend the raw signal at first. Then we extract 4-second epochs from the extended data. Since the dataset is small we use [LeaveOneOut](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html) cross validation in the offline pipeline for training and predicton. The performance is visualized by the confusion matrix. The plot below shows the performance of prediction with accuracy 64%. The 95% confidence interval of the accuracy is (0.505, 0.784).
 
-![alt text](../images/Riemannian_4s.svg "Confusion matrix of Riemannian geometry")
+![alt text](./images/Riemannian_4s.svg "Confusion matrix of Riemannian geometry")
 
-### Offline pipeline
+### Reproducibility
 
-For CCA and Riemannian geometry, there are [sample data](sample/sample_data) and [offline pipeline](sample/offline_pipeline).
+There is an [offline pipeline](sample/offline_pipeline) and [sample data](sample/sample_data) that can be used to reproduce these figures.
