@@ -23,9 +23,15 @@ In the following deriviations, three variables are defined: $M$ the number of EE
 As can be seen in the previous figure $X\in {\rm IR}^{M \times Q}$ is the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. For each of the frequencies, we construct a reference signal $Y_f \in {\rm IR}^{2N_h \times Q}$ is the reference signal that consist of the sine and cosine signals with frequencies including the stimulus frequency $f$ and its harmonics:
 
 $$ 
-
 Y_f = {\left\lbrack \matrix{
-cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 1) \cr sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 1) \cr cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 2) \cr sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 2) \cr \cdots \cr cos(2 \cdot \pi \cdot f \cdot q \cdot N_h\cdot 2) \cr sin(2 \cdot \pi \cdot f \cdot q \cdot N_h\cdot 2) \cr }\right\rbrack}
+cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 1) \cr
+sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 1) \cr
+cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 2) \cr
+sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 2) \cr
+... \cr
+cos(2 \cdot \pi \cdot f \cdot q \cdot N_h\cdot 2) \cr
+sin(2 \cdot \pi \cdot f \cdot q \cdot N_h\cdot 2) \cr
+} \right\rbrack}
 $$
 
 The first two rows of the matrix $Y_f$ contain the signals: $$ and $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s)$ and the final two rows $cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$ and $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$ with $q \in \{1,2,..,Q \}$ and $T_s$ the time interval between consecutive sample points.
