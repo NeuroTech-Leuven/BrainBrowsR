@@ -50,7 +50,7 @@ Using the Riemannian Log map, we first project the whole dataset in tangent spac
 
 ## Implementation
 
-Our implementation can be found in [here](../../src/data_processing/riemann.py). The general procedure is as follows:
+The general procedure is as follows:
 
 ```mermaid
 flowchart LR;
@@ -73,6 +73,7 @@ class first cssClass
 
 ## Results
 
-The frequency we use in the frequency is 8Hz for "sroll-up", 10Hz for "comment" and 8Hz for "like". The performance of the **riemann+MDM** is visualized by confusion matrix. The plot below shows the performance of prediction with accuracy 78%. The 95% confidence interval of the accuracy is (0.656, 0.899), meaning that there is 95% unseen data will be classified correctly.
+The frequency we use in the frequency is 8Hz for "sroll-up", 10Hz for "comment" and 8Hz for "like". We extend the raw signal at first. Then we extract 2-second epochs from the extended data. For Riemannian geometry, we need large dataset to train and test the classifier so we use 2-second epochs rather than 4-second epochs in CCA classification. We have total 90 epochs, 80\% for training and 20\% for testing. The mean score of 10-fold cross validation in training data is 68\%. The performance of the **riemann+MDM** in test data is visualized by confusion matrix. The plot below shows the performance of prediction with accuracy 67%. The 95% confidence interval of the accuracy is (0.449 0.884).
 
 ![alt text](./images/riemann_cm.png "Text to show on mouseover")
+
