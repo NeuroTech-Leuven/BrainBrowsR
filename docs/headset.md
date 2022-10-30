@@ -62,3 +62,5 @@ you can then check the responsiveness of the signal by
 ![alt text](./images/eye_blinks_EEG.jpg)
 
 _Figure 4: EEG signal with and without eye blinks_
+
+[Return to mainpage](../README.md)

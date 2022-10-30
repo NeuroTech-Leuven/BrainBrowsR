@@ -11,17 +11,37 @@ To achieve this, we build a web-extension that inserts stimuli into the web-page
 
 This is a very brief overview of our project. For people interested in more details, check out [our documentation](docs/README.md).
 
-### Our technology stack
+### Top-down overview
 
-The technology behind BrainBrowsR consists of three parts, as shown on the diagram below.
+To represent BrainBrowsR we can use the following diagram:
 
 ![techstack](./images/data_flow.png)
 
+#### Stimuli
 
+![stimuli](images/stimuli.gif)
+
+The data starts from the stimuli. The stimuli are inserted by our extension into the web-page. The stimuli are inserted as html element and are animated by using CSS. This makes extremely simple for developers to change the frequency, icon, color and other properties. Moreover, it can be extended to other websites as well. When the user focuses on a certain element, the brain reacts accordingly. More details on the headset can be found in [our documentation](docs/extension/stimuli.md).
 
 #### Headset
 
-The headset is a commercially available headset produced by [Mentalab](https://mentalab.com). 
+![headset](images/headset.png)
+
+The stimuli excite the brain in such a way that the EEG signals at the visual cortex will have the same frequency. In order to measure this potential, we need an electroencephalogram headset. We tested out various headsets, but settled the headset produced by [Mentalab](https://mentalab.com). It does not require gel, it's easy and quick to put on and is comfortable to wear. More details can be found [here](docs/headset.md).
+
+#### [Data processing](docs/data_processing.md)
+
+The signals obtained from the headset are perturbed by noise, due to various effect, such as powerline noise, movement artifacts and other brain activity. This is filtered out by preprocessing. [More details](docs/data_processing/preprocessing.md) on which filters were used and why.
+
+After the data has been cleaned we can classify it. Here the most dominant frequency in the signal is found by using techniques from signal processing. The methodology of this, can be found [here](docs/data_processing/classification.md).
+
+#### Websockets
+
+The label obtained by classification is send over to the extension through websockets. Websockets is a technology similar to http, where you can send multiple messages in both directions. The websockets layer connects the extension with data-processing. To read more about websockets, see [here](docs/websockets.md)
+
+#### Extension
+
+The data-processing part will tell the extension to perform a certain action. For this we need a parsing function and a processing function. The parsing function will find elements in the page, while the processing function will use these elements to perform the action. In BrainBrowsr, we have currently implemented navigating between posts and liking a certain post. As a next action, we can both add new actions in instagram, such as commenting and implementing it for other websites as well. The methodology to do this can be found [here](docs/extension.md)
 
 ### NeuroTech Leuven
 
@@ -92,7 +112,7 @@ The other option is temporarily installing it, using [these instructions](https:
 
 ## Limitation and future plans
 
-There is still a lot that has to happen before BrainBrowsR reaches its end-users. We interviewed Steven Laureys, Neurologist who is specialzed working with LIS patients, and Ujwal Chaudhary, founder of ALS voice. They both underlined the potential positive impact our application could have on their patients and support our initiative. They indicated that there is a huge gap between getting our application work on healthy patients versus our intended patientgroup. Regarding the limited time and the ethical and regulatory challanges of working with real patients, this still needs to be done in the future with the help of the two specialists. 
+There is still a lot that has to happen before BrainBrowsR reaches its end-users. We interviewed Steven Laureys, Neurologist who is specialzed in working with LIS patients, and Ujwal Chaudhary, founder of ALS voice. They both underlined the potential positive impact our application could have on their patients and support our initiative. They indicated that there is a huge gap between getting our application to work on healthy patients versus our intended patient group. Regarding the limited time and the ethical and regulatory challenges of working with real patients, this still needs to be done in the future with the help of the two specialists. 
 
 Secondly, there is a limit on the number of interactive elements that can be shown on one screen. Better visualization of these stimuli and more precise measuring equipment could be beneficial.
 
