@@ -1,5 +1,6 @@
+![](/docs/images/BRAINBROWSR LOGO.png)
 # BrainBrowsR
-Brainbrowsr
+
 
 ## Repo structure
 
