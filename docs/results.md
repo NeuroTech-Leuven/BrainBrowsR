@@ -47,7 +47,11 @@ This means our implementation rarely performs an action when none should be take
 
 ### [Riemannian geometry](data_processing/riemannian.md)
 
-For Riemannian geometry, we need large dataset to train and test the classifier so we use 2-second epochs rather than 4-second epochs in CCA classification. We have total 90 epochs, 80% for training and 20% for testing. The mean score of 10-fold cross validation in training data is 68%. The performance of the riemann+MDM in test data is visualized by confusion matrix. The plot below shows the performance of prediction with accuracy 67%. The 95% confidence interval of the accuracy is (0.449 0.884).
+For Riemannian geometry, there is some difference compared with CCA: 
+- 0Hz. We do not classify 0Hz since we defined the filter bank to extend signal which can not applied to 0Hz.
+- 2s epoch. The epoch length we extracted from raw data is shorter since we need large dataset to train and test the classifier.
+
+In this case, we have total 90 epochs, 80% for training and 20% for testing. The mean score of 10-fold cross validation in training data is 68%. The performance in test data is visualized by the following confusion matrix. The plot below shows the performance of prediction with accuracy 67%. The 95% confidence interval of the accuracy is (0.449, 0.884). 
 
 ![alt text](./images/Riemannian_4s.svg "Confusion matrix of Riemannian geometry")
 
