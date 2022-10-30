@@ -58,7 +58,7 @@ Using the Riemannian Log map, we first project the whole dataset in tangent spac
 
 ## Implementation
 
-The general procedure is as follows:
+Our implementation can be found in [here](../../src/data_processing/riemann.py). The general procedure is as follows:
 
 ```mermaid
 flowchart LR;
@@ -84,4 +84,3 @@ class first cssClass
 The prediction result provides the class to which the new data belongs with a certainty measurement. We also visualize the performance of the classifer by confusion matrix. For example, the plot below shows the performance of prediction with accuracy 0.7778.
 
 ![alt text](./images/riemann_cm.png "Text to show on mouseover")
-
