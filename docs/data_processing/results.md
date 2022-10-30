@@ -57,3 +57,7 @@ For Riemannian geometry, there is some difference compared to CCA:
 We extend the raw signal at first. Then we extract 4-second epochs from the extended data. Since the dataset is small we use [LeaveOneOut](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html) cross validation in the offline pipeline for training and predicton. The performance is visualized by the confusion matrix. The plot below shows the performance of prediction with accuracy 64%. The 95% confidence interval of the accuracy is (0.505, 0.784).
 
 ![alt text](../images/Riemannian_4s.svg "Confusion matrix of Riemannian geometry")
+
+### Offline pipeline
+
+For CCA and Riemannian geometry, there are [sample data](sample/sample_data) and [offline pipeline](sample/offline_pipeline).
