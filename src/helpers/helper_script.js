@@ -1,7 +1,8 @@
+
 /*
 This function finds the next post from the current post and processes it
 */
-function nextFromCurrent(current) {
+function nextFromCurrent(current, targetClassList, targetAriaList, period_list) {
     // If the current post is none, get the first one in the dom
     if (!current) {
         return getPostByIndex(0);
@@ -13,14 +14,14 @@ function nextFromCurrent(current) {
     // calculate the next post
     let newCurrent = tempPosts[ind + 1];
     // process this post
-    processPost(newCurrent);
+    processPost(newCurrent, targetClassList, targetAriaList, period_list);
     return newCurrent;
 }
 
 /*
 This function finds the next post from the current post and processes it
 */
-function previousFromCurrent(current) {
+function previousFromCurrent(current, targetClassList, targetAriaList, period_list) {
     // If the current post is none, get the first on in the dom
     if (!current) {
         return getPostByIndex(0);
@@ -37,17 +38,17 @@ function previousFromCurrent(current) {
         newCurrent = current;
     }
     // process the post
-    processPost(newCurrent);
+    processPost(newCurrent, targetClassList, targetAriaList, period_list);
     return newCurrent;
 }
 
 /*
 Deprecated, gets a post by index and processes it
 */
-function getAndProcessPost(index) {
+function getAndProcessPost(index, targetClassList, targetAriaList, period_list) {
     var post = getPostByIndex(index);
     if (post) {
-        processPost(post);
+        processPost(post, targetClassList, targetAriaList, period_list);
         return post;
     }
 
@@ -56,18 +57,20 @@ function getAndProcessPost(index) {
 /*
 Processes a post in the following way, finds and formats the interactive elements, scrolls to the post and centers it in the page
 */
-function processPost(post) {
+function processPost(post, targetClassList, targetAriaList, period_list) {
     const interactive_elements = post.querySelectorAll("._abl-");
     formatInteractiveElements(interactive_elements);
     // scroll to the given post
     post.scrollIntoView({ behaviour: "smooth" });
-    centerPost(post)
+    centerPost(post);
+    assign_stimulus(post, targetClassList, targetAriaList, period_list);
+
 }
 
 /*
 Center a post in the page
 */
-function centerPost(post){
+function centerPost(post) {
     post.style.position = "static";
     post.style.left = "35%";
 }
@@ -103,7 +106,7 @@ Find the position of a given post in the dom
 function findByIndex(posts, current) {
     for (let i = 0; i < posts.length; i++) {
         if (current === posts[i]) {
-        return i;
+            return i;
         }
     }
     return 0;
@@ -134,15 +137,63 @@ function sleep(ms) {
 }
 
 /*
-This elements disables flickering of certain elements
+This class disabled flickering of certain elements (webpage specific)
 */
 function enableFlicker() {
     var elts = document.querySelectorAll('._8ykn');
-    for(i = 0; i < elts.length; i++) {      
-      elts[i].classList.remove('_8ykn');
+    for (i = 0; i < elts.length; i++) {
+        elts[i].classList.remove('_8ykn');
     }
-  }
+}
 
 function testHeadset(data) {
     document.getElementsByClassName("test_headset")[0].innerHTML = data
+}
+
+function generate_frequencies(targetClassList, targetAriaList, refreshRate) {
+    var iteration = 0;
+    var frequency_list = [];
+    const total_elements = targetAriaList.length + targetClassList.length;
+    for (i = 0; i < targetAriaList.length; i++) {
+        const frequency = 7.5 + iteration * refreshRate / 32;
+        frequency_list.push(frequency);
+        iteration += 1;
+    }
+
+    for (i = 0; i < targetClassList.length; i++) {
+        const frequency = 7.5 + iteration * refreshRate / 32;
+        frequency_list.push(frequency);
+        iteration += 1;
+    }
+    iteration = 0;
+
+    // now we return the frequencies as periods
+    const period_list = [];
+    frequency_list.forEach(freq => {
+        const period = 1 / freq;
+        period_list.push(period);
+    });
+    console.log(frequency_list)
+    return period_list;
+}
+
+//This function is more general than the "likePost" function
+// it takes in any aria label and interacts with it
+
+function interactWithAriaLabel(post, targetAriaList) {
+    for (i = 0; i < targetAriaList.length; i++) {
+        len = targetAriaList[i].length;
+        type = targetAriaList[i][len-1];
+        if (targetAriaList[i].length > 2){
+            post.querySelector(targetAriaList[i][0]).forEach(svg => svg.closest(type).click());
+            post.querySelector(targetAriaList[i][1]).forEach(svg => svg.closest(type).click());
+        }
+        else if (targetAriaList[i].length > 1){
+            post.querySelector(targetAriaList[i][0]).forEach(svg => svg.closest(type).click());
+        }
+        else {} //This one is used when the arialabel is the interactable itself
+            post.querySelector(targetAriaList[i][0]).click();
+
+
+    }
 }

@@ -1,4 +1,4 @@
-.stimuli {
+.stimuli_gui {
   --border-radius: 0.1rem; 
   /* --border-radius: 3rem;  */
   --border-size: 0.3rem;
@@ -8,7 +8,7 @@
   position: fixed;
   width: 200px;
   height: 200px;
-  animation: sine_blink var(--freq) linear infinite !important;
+  animation: sine_blink var(--freq) linear infinite;
   /* animation-name : blink !important; */
   /* animation: sine_blink var(--freq) linear infinite;  */
   /* padding: calc(var(--padding) + var(--border-size)); */
@@ -16,10 +16,15 @@
   background-color: var(--color); 
 }
 
+.non_gui_stimuli{
+  animation: sine_blink var(--freq) linear infinite;
+  background-color:rgb(255, 0, 0);
+}
+
+
 .like{
   --color: rgb(255, 0, 0); 
   /* --color: rgb(0, 0, 0);  */
-  --freq : 0.125s;
   /* --freq : 1s; */
   left: var(--offset);
   top: var(--offset);
@@ -28,7 +33,6 @@
 .comment{
   --color: rgb(63, 189, 63);  
   /* --color: rgb(0, 0, 0);  */
-  --freq : .076923s;
   left: var(--offset);
   bottom: var(--offset);
 }
@@ -36,7 +40,6 @@
 .up{
   --color: rgb(0, 0, 255);  
   /* --color: rgb(0, 0, 0);  */
-  --freq : .1s;  
   right: var(--offset);
   top: var(--offset); 
 }
@@ -44,7 +47,6 @@
 .down{
   --color: rgb(0, 0, 0);  
   /* --color: rgb(0, 0, 0);  */
-  --freq : .08333333s;  
   right: var(--offset);
   bottom: var(--offset);
 }
