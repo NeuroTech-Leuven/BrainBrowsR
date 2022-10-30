@@ -60,7 +60,7 @@ This method was first introduced to detect temporal features of EEG signals usin
 In case of SSVEP, for each target a individual template is obtained by averaging multiple training trials $\bar{\mathcal X}_n$. Now we can replace the reference signals $Y_f$ of the standard CCA with the individual template $\bar{\mathcal X}_n$. This will give us:
 
 $$
-\rho_f=\max{W_{x,f},W_{y,f}}\frac{E[W_{x,f}^\intercal X \bar{\mathcal X}_n^\intercal W_{y,f}]}{\sqrt{E[W_{x,f}^\intercal XX^intercal W_{x,f}]E[W_{y,f}^\intercal \bar{\mathcal X_n} \bar{\mathcal X_n^\intercal W_{y,f}]}}
+\rho_f = \max{W_{x,f},W_{y,f}}\frac{E[W_{x,f}^\intercal X \bar{\mathcal X}_n^\intercal W_{y,f}]}{\sqrt{E[W_{x,f}^\intercal XX^intercal W_{x,f}]E[W_{y,f}^\intercal \bar{\mathcal X_n} \bar{\mathcal X}_n^\intercal W_{y,f}]}}
 $$
 
 Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients between projections of a test set $\hat{X}$ and a individual template $\bar{\mathcal X_n}$ using CCA-based spatial filters are used as features for target identification. The three weight vectors that are used as spatial filters to enhance the SNR of SSVEP are: $W_x(\hat{X}\bar{\mathcal X})$ between test set $\hat{X}$ and the individual template $\bar{\mathcal X_n}$, $W_x(\hat{X}Y_n)$ between the test set $\hat{X}$ and sine-cosine reference signals $Y_n$ and $W_x(\bar{\mathcal X}Y_n)$ between the individual template $\bar{\mathcal X}$ and sine-cosine reference signal $Y_n$. Afterwards a correlation vector is obtained, $r_n$
