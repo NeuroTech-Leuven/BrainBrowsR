@@ -2,7 +2,7 @@
 
 This is the project code of NeuroTechLeuven's BrainBrowsR.
 
-On our [website](https://ntxl.org), you can find a full description of the project as well as our final product video.
+Soon, you can find a full description on our website [website](https://ntxl.org) of the project as well as our final product video.
 
 ## Repo structure
 
