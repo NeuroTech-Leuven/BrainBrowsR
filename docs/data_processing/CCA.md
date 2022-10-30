@@ -36,13 +36,13 @@ sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h) \cr
 } \right\rbrack}
 $$
 
-Now we define the weights: $_{x,f} \in \mathbb{R} ^M$ and $\mathbb{w}_{y,f} \in \mathbb{R}^{2N_h}$ which are respectively the weighting vectors for $X$ and $Y_f$. $X$ and $Y_f$ are filtered by the weighting vectors to obtain a scalar value over time, denoted as $x_f = \mathbb{w}_{x,f}^\intercal X$ and $y_f = \mathbb{w}_{y,f}^\intercal Y_f$. These values are called the canonical variables in the literature.
+Now we define the weights: $_{x,f} \in \mathbb{R} ^M$ and $\mathbf{w}_{y,f} \in \mathbb{R}^{2N_h}$ which are respectively the weighting vectors for $X$ and $Y_f$. $X$ and $Y_f$ are filtered by the weighting vectors to obtain a scalar value over time, denoted as $x_f = \mathbf{w}_{x,f}^\intercal X$ and $y_f = \mathbf{w}_{y,f}^\intercal Y_f$. These values are called the canonical variables in the literature.
 
-The idea of CCA is to find $_x$ and $\mathbb{w}_y$ such that the correlation between the filtered signals x and y are maximized. The optimalization problem:
+The idea of CCA is to find $_x$ and $\mathbf{w}_y$ such that the correlation between the filtered signals x and y are maximized. The optimalization problem:
 
 $$\eqalign{
-\rho_f &= \max_{_{x,f}, \mathbb{w}_{y,f}}\frac{E[x_f y_f^{T}]}{\sqrt{E[x_f  x_f^\intercal]E[y_f y_f^\intercal]}} \\
- &=\max_{_{x,f}, \mathbb{w}_{y,f}}\frac{E[\mathbb{w}_{x,f}^\intercal X  Y_f^\intercal \mathbb{w}_{y,f}]}{\sqrt{E[\mathbb{w}_{x,f}^\intercal XX^\intercal \mathbb{w}_{x,f}]E[\mathbb{w}_{y,f}^\intercal Y_f Y_f^\intercal \mathbb{w}_{y,f}]}}
+\rho_f &= \max_{_{x,f}, \mathbf{w}_{y,f}}\frac{E[x_f y_f^{T}]}{\sqrt{E[x_f  x_f^\intercal]E[y_f y_f^\intercal]}} \\
+ &=\max_{_{x,f}, \mathbf{w}_{y,f}}\frac{E[\mathbf{w}_{x,f}^\intercal X  Y_f^\intercal \mathbf{w}_{y,f}]}{\sqrt{E[\mathbf{w}_{x,f}^\intercal XX^\intercal \mathbf{w}_{x,f}]E[\mathbf{w}_{y,f}^\intercal Y_f Y_f^\intercal \mathbf{w}_{y,f}]}}
 }$$
 
 The correlation value is saved for all the different stimulation frequencies. The one with the highest correlation value is the winner.
@@ -60,13 +60,13 @@ In the case of SSVEP, the template signal is calculated for each frequency. For 
 Now we can replace the reference signals $Y_f$ of the standard CCA with the individual template $\bar{X}_f$. This will give us:
 
 $$
-\rho_f = \max{_{x,f},\mathbb{w}_{y,f}}\frac{E[\mathbb{w}_{x,f}^\intercal X \bar{X}_f^\intercal \mathbb{w}_{y,f}]}{\sqrt{E[\mathbb{w}_{x,f}^\intercal XX\^intercal \mathbb{w}_{x,f}]E[\mathbb{w}_{y,f}^\intercal \bar{\mathcal X_n} \bar{X}_f^\intercal \mathbb{w}_{y,f}]}}
+\rho_f = \max{_{x,f},\mathbf{w}_{y,f}}\frac{E[\mathbf{w}_{x,f}^\intercal X \bar{X}_f^\intercal \mathbf{w}_{y,f}]}{\sqrt{E[\mathbf{w}_{x,f}^\intercal XX\^intercal \mathbf{w}_{x,f}]E[\mathbf{w}_{y,f}^\intercal \bar{\mathcal X_n} \bar{X}_f^\intercal \mathbf{w}_{y,f}]}}
 $$
 
-Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients between projections of a test set $\hat{X}$ and a individual template $\bar{x}$ using CCA-based spatial filters are used as features for target identification. The three weight vectors that are used as spatial filters to enhance the SNR of SSVEP are: $_x(X,\bar{X})$ between test data $X$ and the individual template $\bar{X}$, $\mathbb{w}_x(X,Y)$ between the test data $X$ and sine-cosine reference signals $Y$ and $\mathbb{w}_x(\bar{X},Y)$ between the individual template $\bar{X}$ and sine-cosine reference signal $Y$. Afterwards a correlation vector $r$ is obtained:
+Extended CCA is a combination of CCA and IT-CCA. Correlation coefficients between projections of a test set $\hat{X}$ and a individual template $\bar{x}$ using CCA-based spatial filters are used as features for target identification. The three weight vectors that are used as spatial filters to enhance the SNR of SSVEP are: $_x(X,\bar{X})$ between test data $X$ and the individual template $\bar{X}$, $\mathbf{w}_x(X,Y)$ between the test data $X$ and sine-cosine reference signals $Y$ and $\mathbf{w}_x(\bar{X},Y)$ between the individual template $\bar{X}$ and sine-cosine reference signal $Y$. Afterwards a correlation vector $r$ is obtained:
 
 $$
-r_f = {\left\lbrack \matrix{r_1 \cr r_2 \cr r_3 \cr r_4} \right\rbrack} = \left\lbrack \matrix{r(X^\intercal _x(X,Y_f), Y^\intercal \mathbb{w}_y(X,Y)) \cr r(X^\intercal \mathbb{w}_x(X,\bar{X}_f), \bar{X}_f^\intercal \mathbb{w}_x(X,Y_f)) \cr r(X^\intercal \mathbb{w}_x(X,Y_f), \bar{X}_f^\intercal \mathbb{w}_x(\bar{X}_f, Y_f)) \cr r(X^\intercal \mathbb{w}_x(\bar{X}_f^\intercal Y_f), \bar{X}_f^\intercal \mathbb{w}_x(\bar{X}_f, Y_f))} \right\rbrack
+r_f = {\left\lbrack \matrix{r_1 \cr r_2 \cr r_3 \cr r_4} \right\rbrack} = \left\lbrack \matrix{r(X^\intercal _x(X,Y_f), Y^\intercal \mathbf{w}_y(X,Y)) \cr r(X^\intercal \mathbf{w}_x(X,\bar{X}_f), \bar{X}_f^\intercal \mathbf{w}_x(X,Y_f)) \cr r(X^\intercal \mathbf{w}_x(X,Y_f), \bar{X}_f^\intercal \mathbf{w}_x(\bar{X}_f, Y_f)) \cr r(X^\intercal \mathbf{w}_x(\bar{X}_f^\intercal Y_f), \bar{X}_f^\intercal \mathbf{w}_x(\bar{X}_f, Y_f))} \right\rbrack
 $$
 
 where $r(a,b)$ indicates the Pearson's correlation coefficient between two one-dimensional signals $a$ and $b$. For the classification an ensemble classifier is used to combine the 4 features. In practice the weighted correlation coefficient $\rho_n$ is employed for the final feature identification.
