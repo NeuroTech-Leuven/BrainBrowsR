@@ -28,7 +28,7 @@ Each stimulus is a flickering button with a size of 200x200 pixels that has a di
 
 ### Recordings
 
-For user comfort and to prevent fatigue, each recording lasted 60 seconds. These recordings were later cut into 4s epochs, resulting in 15 epochs per recording.
+For user comfort and to prevent fatigue, each recording lasted 60 seconds. These recordings were later cut into 4s epochs, resulting in 15 epochs per recording. The  can be found [here](sample/sample_data).
 
 ## Results
 
@@ -39,7 +39,7 @@ We classified these recordings using the algorithms we implemented and compared 
 The confusion matrix below shows the performance of CCA on the recorded data. 0 Hz means the user is looking at the content on the screen, not at any of the stimulations.
 
 In our implementation, an epoch is classified as 0 Hz if none of the correlations are significantly larger than all the others.
-More concretely, a correlation is only significant if it is larger than 0.1 and larger than 1.3 times the second largest correlation.
+More concretely, a correlation is only significant if it is larger than 0.1 and larger than 1.3 times the second largest correlation. This simple thresholding method can be extended to also include previous epochs in order to acquire a higher degree of certainty. How this is done is explained [here](thresholding.md).
 
 ![alt_text](./images/CCA_4s.svg "Confusion matrix of CCA")
 
