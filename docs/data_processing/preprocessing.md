@@ -8,7 +8,8 @@ The aim of this document is to explain our rationale behind our preprocessing st
 
 ## Details
 
-Preprocessing of electroencephalogram (EEG) usually consists out of the following steps: 
+Preprocessing of electroencephalogram (EEG) usually consists out of the following steps:
+
 1) Filtering of the signal (Did we do it: Yes)
 2) Downsampling the signal (Did we do it: No)
 3) Rereferencing of the signal (Did we do it: No)
@@ -20,6 +21,7 @@ Preprocessing of electroencephalogram (EEG) usually consists out of the followin
 In the following, the preprocessing steps considered in this project together with several important decisions are explained in more detail.
 
 ### Signal filtering 
+
 Filtering of the signal is a crucial step as Electroencephalogram (EEG) electrodes record much noise. We can distinguish four types of noise: 
 1) Environmental noise: this is noise picked up by EEG electrodes from electrical devices around us. These devices work on a powerline of 50 Hz (or 60 Hz).
 2) Electrode noise: if an electrode is loose or has a bad conductance between the scalp and the electrode, this can cause a very noise signal. 
@@ -30,21 +32,22 @@ In the BrainBrowsR application, the incoming EEG signal, see Figure 1, is filter
 
 ![alt text](./images/unfiltered_signal.jpg)
 
-*Figure 1: unfiltered incoming EEG signal in the frequency spectrum.*
+_Figure 1: unfiltered incoming EEG signal in the frequency spectrum._
 
-You might think: why do we still need to use a 50 Hz notch filter if we are already using a 0.5-35 Hz bandpass filter? The reason is that even when using the bandpass filter, the 50 Hz powerline will still leak through the filter due to the roll-off (steepness of the transfer function) not being steep enough, see Figure 2. 
+You might think: why do we still need to use a 50 Hz notch filter if we are already using a 0.5-35 Hz bandpass filter? The reason is that even when using the bandpass filter, the 50 Hz powerline will still leak through the filter due to the roll-off (steepness of the transfer function) not being steep enough, see Figure 2.
 
 ![alt text](./images/filtered_signal_bandpass.jpg)
 
-*Figure 2: filtered EEG signal using a 5th order butterworth bandpass filter between 0.5-35 Hz.*
+_Figure 2: filtered EEG signal using a 5th order butterworth bandpass filter between 0.5-35 Hz._
 
-When combining the butterworth filter with the notch filter we get a cleaner signal, see Figure 3. 
+When combining the butterworth filter with the notch filter we get a cleaner signal, see Figure 3.
 
 ![alt text](./images/filtered_signal_notch_bandpass.jpg)
 
 *Figure 3: filtered EEG signal using a 5th order butterworth bandpass filter between 0.5-35 Hz and a 50 Hz notch filter.*
 
-The range of the bandpass filter was chosen because the target frequencies and one of their harmonics of our BrainBrowsR application are between 6-18 Hz. Furthermore, this bandpass filter also gets rid of strong EEG drifts and offsets that are present in frequencies < 0.5 Hz. 
+
+The range of the bandpass filter was chosen because the target frequencies and one of their harmonics of our BrainBrowsR application are between 6-18 Hz. Furthermore, this bandpass filter also gets rid of strong EEG drifts and offsets that are present in frequencies < 0.5 Hz.
 
 User noise is more difficult to get rid of. Although muscle noise is most noticeable at the range of 110-140 Hz, it will also contaminate the frequency band that we are interested in: the alpha band.
 There are many movement artefact removal methods such as principal component analysis (PCA), independent component analysis (ICA), denoising source seperation (DSS), ... but these methods would take up too much time in our online-system, where we work with 4-second long windows. Thus, the best approach is to tell the user to be as quiet as possible when using the BrainBrowsR application.
@@ -57,6 +60,7 @@ The more samples you have, the longer the processing of the signal will take. Si
 ### Rereferencing of the signal
 
 The EEG signal is not being rereferenced in our application. We use the [Mentalab headset](../headset.md), with its reference electrode placed at one of the mastoids. This is already a pretty good reference location, since the thick bone structure prevents the reference electrode from picking up most of the SSVEP signal of interest, but the electrode still picks up a lot of environmental noise. Software rereferencing to another commonly used reference electrode, like CZ, would only reduce the signal-to-noise ratio of our SSVEP signal.
+
 
 ### Interpolation of bad channels
 
@@ -72,7 +76,9 @@ Averaging over electrode channels is another method that can drastically reduce 
 
 ## Implementation
 
-The implementation of the preprocessing is done using the Python programming language.
-The brain activity (recorded with the [Mentalab](https://mentalab.com/)
-headset) is read into python by using the [explorepy](https://github.com/Mentalab-hub/explorepy) package.
+The implementation of the preprocessing is done using the Python programming language. You can find the code for this in [here](../../src/data_processing/preprocessing.py). There is preprocessing class that contains the notch filter and the bandpass filter. Both are created using the [signal module from scipy](https://docs.scipy.org/doc/scipy/reference/signal.html).
+The brain activity (recorded with the [Mentalab](https://mentalab.com/) headset) is read into Python by using the [explorepy](https://github.com/Mentalab-hub/explorepy) package.
 
+## Result
+
+With preprocessing we can read out a signal from the headset in online fashion and pass a clean signal to the [classification](./classification.md) code, that will classify it.
