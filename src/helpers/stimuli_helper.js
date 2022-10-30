@@ -90,8 +90,8 @@ function assign_stimulus(post, targetClassList, targetAriaList, period_list) {
         stimulus.style.setProperty('--freq', period_list[i] + 's');
 
         // choose a random color
-        var colors = ['#ff0000', '#00ff00', '#0000ff'];
-        var randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        var randomColor = Math.floor(Math.random()*16777215).toString(16);
         stimulus.style.setProperty('background-color', randomColor);
         stimulus.style.setProperty('z-index', 9999);
       }
