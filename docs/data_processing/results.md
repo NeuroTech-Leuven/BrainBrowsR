@@ -50,7 +50,7 @@ If we consider 0 Hz to be the negative class and the other frequencies as variat
 - Accuracy: 38/60 = 63.33%
 - Accuracy (only positive predictions taken into account): 24/26 = 92.31%
 
-This means our implementation rarely performs an action when none should be taken (low FPR), and also that the algorithm rarely performs the wrong action (high accuracy when only positive predictions are taken into account). The downside is that it disregards quite a lot of samples (high FNR). However, we believe it is much more important the extension does not perform unwanted actions, rather than trying not to discard potentially useful epochs.
+This means our implementation rarely performs an action when none should be taken (low FPR), and also that the algorithm rarely performs the wrong action (high accuracy when only positive predictions are taken into account). The downside is that it disregards quite a lot of epochs (high FNR). However, we prioritise a high accuracy -such that few unwanted actions are performed- over speed, in which case as few samples as should be discarded.
 
 ### [Riemannian geometry](riemannian.md)
 
