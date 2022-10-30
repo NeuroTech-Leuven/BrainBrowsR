@@ -21,8 +21,7 @@ def Thresholding(threshold, data):
 
 def Thresholding2(threshold, scores):
     pred = np.argmax(scores)
-    scores_sorted = scores.copy()
-    scores_sorted.sort()
+    scores_sorted = sorted(scores)
     if scores_sorted[-1] >= 1.3*scores_sorted[-2] and scores_sorted[-1] >= threshold:
         classify = "certain enough"
     elif not scores_sorted[-1] >= 1.3*scores_sorted[-2]:
