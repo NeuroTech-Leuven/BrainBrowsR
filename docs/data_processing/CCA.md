@@ -20,7 +20,7 @@ The maths behind the method can be best explained by the following figure: from 
 
 In the following deriviations, three variables are defined: $M$ the number of EEG channels, $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
 
-To classify SSVEP signals with CCA, we construct a cca model $\text{CCA_f}$ per target frequency $f$. As can be seen in the previous figure $X\in \mathbb{R}^{M \times Q}$ is the multichannel EEG signal, each row contains a EEG signal across time for a specific channel. For each of the frequencies, we construct a reference signal $Y_f \in \mathbb{R}^{2N_h \times Q}$. This reference signal that consist of a sine and cosine signals for that frequency and each of the harmonics harmonics:
+To classify SSVEP signals with CCA, we construct a cca model $\text{CCA}_f$ per target frequency $f$. As can be seen in the previous figure $X\in \mathbb{R}^{M \times Q}$ is the multichannel EEG signal, each row contains a EEG signal across time for a specific channel. For each of the frequencies, we construct a reference signal $Y_f \in \mathbb{R}^{2N_h \times Q}$. This reference signal that consist of a sine and cosine signals for that frequency and each of the harmonics harmonics:
 
 $$ 
 Y_f = {\left\lbrack \matrix{
@@ -38,11 +38,11 @@ Now we define the weights: $W_{x,f} \in \mathbb{R} ^{M_1}$ and $W_{y,f} \in \mat
 
 The idea of CCA is to find $W_x$ and $W_y$ such that the correlation between the filtered signals x and y are maximized. The optimalization problem:
 
-$$\eqalign{
-\rho_f &= \max_{W_{x,f}, W_{y,f}}\frac{E[x_f \cdot y_f^{T}]}{\sqrt{E[x_f \cdot x_f^\intercal]E[y_f \cdot y_f^\intercal}]}} \\
+$$
+\rho_f = \max_{W_{x,f}, W_{y,f}}\frac{E[x_f \cdot y_f^{T}]}{\sqrt{E[x_f \cdot x_f^\intercal]E[y_f \cdot y_f^\intercal}]}} \\
 
- &=\max_{W_{x,f}, W_{y,f}}\frac{E[W_{x,f}^\intercal X \cdot Y_f^\intercal \cdot W_{y,f}]}{\sqrt{E[W_{x,f}^\intercal XX^\intercal W_{x,f}]E[W_{y,f}^\intercal Y_f \cdot Y_f^\intercal W_{y,f}]}}
-}$$
+ =\max_{W_{x,f}, W_{y,f}}\frac{E[W_{x,f}^\intercal X \cdot Y_f^\intercal \cdot W_{y,f}]}{\sqrt{E[W_{x,f}^\intercal XX^\intercal W_{x,f}]E[W_{y,f}^\intercal Y_f \cdot Y_f^\intercal W_{y,f}]}}
+$$
 
 The correlation value is saved for all the different stimulation frequencies. The one with the highest correlation value is the winner.
 
