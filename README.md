@@ -1,4 +1,4 @@
-![alt text](./images/BRAINBROWSR LOGO.png)
+![alt text](./images/BRAINBROWSR_LOGO.png)
 # BrainBrowsR
 
 
