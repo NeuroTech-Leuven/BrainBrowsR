@@ -1,10 +1,10 @@
 # Data processing
 
-On the surface data-processing consists of two main parts: classification and pre-processing.
+On the surface, data-processing consists of two main parts: pre-processing and classification.
 
 ## Pre-processing
 
-Pre-processing removes noise from the raw EEG-data. To learn more about pre-processing, see [dedicated page](./data_processing/preprocessing.md).
+Pre-processing prepares the raw EEG-data to be usable for classification. To learn more about pre-processing, see [dedicated page](./data_processing/preprocessing.md).
 
 ## Classifcation
 
