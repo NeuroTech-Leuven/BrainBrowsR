@@ -1,6 +1,6 @@
 # Riemannian Geometry
 
-Written by: Rochelle Aubry, Yitong Li
+Written by: Rochelle Aubry and Yitong Li
 
 ## Goal
 
