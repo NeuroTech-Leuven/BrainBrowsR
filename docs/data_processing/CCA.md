@@ -4,9 +4,7 @@ Written by: Joppe Van Rumst
 
 ## Goal
 
-Canonical correlation analysis is still a state-of-the-art classification method for SSVEP. The goal of the method is to find the optimal linear transformation such that the correlation between 2 matrices is maximized.
-
-The method was first applied by [Lin et al.](https://ieeexplore.ieee.org/document/4203016) where they show it outperforms the, at that time, best methods for SSVEP classification, such as power spectrum density analysis.
+Canonical correlation analysis (CCA) is a state-of-the-art classification method for SSVEP. The goal of the method is to find for each of the stimulated frequencies the optimal linear transformation such that the correlation between 2 matrices, the signal and an assumption matrix for a given frequency, is optimized. The optimized correlations between an unseen signal and the assumption matrices for all of the frequencies can then be used to determine which frequency was attended. CCA was first applied by [Lin et al.](https://ieeexplore.ieee.org/document/4203016). At that time, it outperformed the best methods for SSVEP classification, such as power spectrum density analysis.
 
 ## Methodology
 
@@ -20,11 +18,24 @@ A weighted linear combination is made from both the EEG-signals and the assumpti
 
 The maths behind the method can be best explained by the following figure: from [Pan et al](https://iopscience.iop.org/article/10.1088/1741-2560/8/3/036027/meta) ![alt text for screen readers](./images/CCA_scheme.JPG "Text to show on mouseover").
 
-In the following deriviations, three variables are defined: $M$ the number of EEG channels , $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
+In the following deriviations, three variables are defined: $M$ the number of EEG channels, $Q$ the number of samples in each time window , $N_h$ the number of harmonics being used.
 
-As can be seen in the previous figure $X\in {\rm IR}^{M \times Q}$ are the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. $Y(f) \in {\rm IR}^{2N_h \times Q}$ is the reference signal that consist of the sine and cosine signals with frequencies including the stimulus frequency $f$ and its harmonics.
+As can be seen in the previous figure $X\in {\rm IR}^{M \times Q}$ is the multichannel EEG signal which contains the SSVEP response at frequency $f$, each row contains a EEG signal across time for a specific channel. For each of the frequencies, we construct a reference signal $Y_f \in {\rm IR}^{2N_h \times Q}$ is the reference signal that consist of the sine and cosine signals with frequencies including the stimulus frequency $f$ and its harmonics:
 
-The first row of the matrix $Y(f)$ contains the signal: $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s)$ and the final row: $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$. Were $q$ = $[1,2,..,Q]$ and $T_s$ denotes the time interval between consecutive sample points.
+$$ 
+Y_f = \matrix{
+cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 1) \cr
+sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 1) \cr
+cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 2) \cr
+sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 2) \cr
+\cdots \cr
+cos(2 \cdot \pi \cdot f \cdot q \cdot N_h\cdot 2) \cr
+sin(2 \cdot \pi \cdot f \cdot q \cdot N_h\cdot 2) \cr
+
+}
+$$
+
+The first two rows of the matrix $Y_f$ contain the signals: $$ and $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s)$ and the final two rows $cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$ and $sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot N_h)$ with $q \in \{1,2,..,Q \}$ and $T_s$ the time interval between consecutive sample points.
 
 Now we define the weights: $W_x \in \rm IR^{M_1}$ and $W_y \in {\rm IR}^{2N_{h_1}}$ which are respectively the weighting vectors for $X$ and $Y(f)$. $X$ and $Y(f)$ are filtered by the weighting vectors to obtain a scalar value, denoted as $x = W_x^{T}X$ and $y = W_y^{T}Y(f)$. These values are called the canonical variables in the literature.
 
