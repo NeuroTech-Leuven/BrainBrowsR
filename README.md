@@ -1,16 +1,23 @@
 <img src="docs/images/BRAINBROWSR_LOGO.png" alt="Alt text" title="Optional title">
 
 # BrainBrowsR
+## Introduction
 
+Problem statements, solution, diagram and general overview (components of the project) => transition to repo
 
-## Repo structure
+## Presentation video
+
+Video here
+
+## Repo structure 
 
 The [docs](./docs/) folder contains the entire explanation on how the project works. This documentation is written primarily with other developers and researchers in mind.
 
-The icons folder, contains the PNG that are use for the stimuli in BrainBrowsR.
+The icons folder contain the PNGs that are use for the stimuli in BrainBrowsR.
 
 The src folder contains the extension code, this is organised in 5 folders:
 
+LINK TO FOLDERS
 1. css, containing the css files needed in the extension,
 2. data_processing, which contains all methods used to perform the data_processing pipeline,
 3. helpers, files that are used by the content_script.js to perform certain actions,
@@ -21,8 +28,14 @@ The server.py is the back-end code, that connects the headset and does the data-
 
 The manifest.json is the configuraton file for the extension. To learn more about this, you can read this [page](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json) by Mozilla.
 
-## Installation & Usage
 
+## Technical description
+### requirements
+
+### pipeline
+
+
+## Installation
 There are two components to the project, a data-processing part that connects with the EEG-headset, coded in Python, and the software part written in JavaScript.
 
 To run the Python code, first go to the right directory command and install with pip: `pip install -r requirements.txt`. This will install all the necessary packages and their dependencies. Please check that your Python version is higher than 3.5. In the terminal, now run the local data-processing server using `python server.py`. This will first connect with the headset and then start a websocket server.
@@ -38,3 +51,33 @@ The other option is temporarily installing it, using [these instructions](https:
 ## Further development
 
 If you wish to use this repo as a basis for your project, we recommend you install web-ext, by Mozilla. This tool makes it a picnic to develop webextensions.
+
+
+For each component of the pipeline, explain: -technological choices, reasoning, REFLECT UNDERSTANDING of the underlying science and project
+--> How to use it
+--> reference to other pages where more technical details are explained and how to reproduce it
+
+
+## Innovation and Complexity
+
+
+## Results
+
+### User experience
+
+### Prototype
+
+Prototype = results of using our own stimuli!
+Is it well designed?
+
+
+
+## Limitations and proposed improvements
+
+
+
+
+
+
+
+
