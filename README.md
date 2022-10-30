@@ -112,7 +112,7 @@ The other option is temporarily installing it, using [these instructions](https:
 
 ## Limitation and future plans
 
-There is still a lot that has to happen before BrainBrowsR reaches its end-users. Firstly, not all persons with locked-in syndrome may want to use social-media. A thorough check-up is required with a trained psychologist or doctor to assess this.
+There is still a lot that has to happen before BrainBrowsR reaches its end-users. We interviewed Steven Laureys, Neurologist who is specialzed in working with LIS patients, and Ujwal Chaudhary, founder of ALS voice. They both underlined the potential positive impact our application could have on their patients and support our initiative. They indicated that there is a huge gap between getting our application work on healthy patients versus our intended patient group. Regarding the limited time and the ethical and regulatory challenges of working with real patients, this still needs to be done in the future with the help of the two specialists. 
 
 Secondly, there is a limit on the number of interactive elements that can be shown on one screen. Better visualization of these stimuli and more precise measuring equipment could be beneficial.
 
