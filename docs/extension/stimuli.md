@@ -18,4 +18,6 @@ In the CSS file, we also define size, color, position etc. for each class, this 
 
 ## Results
 
-We can succesfully insert our stimuli on the web page. The stimuli are easy to change by editing 1 CSS file.
+We can succesfully insert our stimuli on the web page. The stimuli are easy to change by editing 1 CSS file. An example can be seen below.
+
+![stimuli](../../images/stimuli.gif)
