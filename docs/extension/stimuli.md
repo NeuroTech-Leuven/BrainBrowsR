@@ -21,7 +21,15 @@ Each stimulus thus also has its own class, so their position, color and frequenc
 <img src="./images/like_class.png" width="250"/>
 
 
-In the CSS file, we also define size, color, position etc. for each class, this way all the important properties can be altered in one place by changing just a few variables. The flickering animation is defined using a simple keyframe that sets the opacity to 1 at the start, 0 at the middle and back to 1 at the end. To choose a frequency, one can just set the duration of the animation.
+In the CSS file, we also define size, color, position etc. for each class, this way all the important properties can be altered in one place by changing just a few variables. The flickering animation is defined using a simple keyframe that sets the opacity to 1 at the start, 0 at the middle and back to 1 at the end.
+
+<img src="./images/blink.png" width="250"/>
+
+Changing the opacity according to a sine function can also be approximately implemented by defining the animation as below and setting a linear transition:
+ 
+<img src="./images/sine_blink.png" width="250"/>
+
+To choose a frequency, one can just set the duration of the animation.
 
 ## Results
 
