@@ -9,15 +9,19 @@ To achieve this, we build a web-extension that inserts stimuli into the web-page
 
 ## Project Overview
 
-This is a very brief overview of our project. For people interested in more details, checkk out [our documentation](docs/README.md).
+This is a very brief overview of our project. For people interested in more details, check out [our documentation](docs/README.md).
 
 ### Our technology stack
 
 The technology behind BrainBrowsR consists of three parts, as shown on the diagram below.
 
-![techstack](./images/stack.png)
+![techstack](./images/data_flow.png)
 
-The headset is a commercially available headset 
+
+
+#### Headset
+
+The headset is a commercially available headset produced by [Mentalab](https://mentalab.com). 
 
 ### NeuroTech Leuven
 
