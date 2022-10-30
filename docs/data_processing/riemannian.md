@@ -81,7 +81,7 @@ class first cssClass
 
 ## Results
 
-The prediction result provides the class to which the new data belongs with a certainty measurement. We also visualize the performance of the classifer by confusion matrix. For example, the plot below shows the performance of prediction with accuracy 0.7778.
+The prediction result provides the class to which the new data belongs with a certainty measurement. We also visualize the performance of the classifer by confusion matrix. For example, the plot below shows the performance of prediction with accuracy 76\%.
 
 ![alt text](./images/riemann_cm.png "Text to show on mouseover")
 
