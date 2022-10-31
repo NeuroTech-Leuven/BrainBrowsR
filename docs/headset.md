@@ -4,7 +4,7 @@ Written by: Rien Sonck
 
 ## Goal
 
-The aim of this document is to explain the Mentalab Explore headset we have been using and what to pay attention to when using the headset.
+This document aims to explain the Mentalab Explore headset we have been using and what to pay attention to when using the headset.
 
 ## Details
 
