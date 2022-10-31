@@ -1,7 +1,7 @@
 # Human practices
 ## Introduction
 
-Another important aspect that needs some consideration are the patients themselves. 
+Another important aspect that needs consideration are the patients themselves. 
 We contacted several health institutions and patient organizations in order to gather information that can be used in the design of our application.
 An interview was conducted with professor Steven Laureys, Director of the coma science group and the brain center at the university hospital of Liège and cofounder of the Mindcare international foundation,
 and with Ujwal Chaudhary, post doctoral researcher in Tübingen and founder of ALS voice.
