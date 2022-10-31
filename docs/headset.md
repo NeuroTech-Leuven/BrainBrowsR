@@ -20,7 +20,7 @@ Before using our application, we must ensure that electrodes are correctly place
 
 #### 1) Electrode location
 
-The Metalab Explore headset has eight electrodes that can be placed on its cap. For the BrainBrowsR application, which uses visual stimulation, we need to place the electrodes on the occipital cortex. We recommend placing three electrodes on O1, Oz, and O2. See Figure 1.
+The Metalab Explore headset has eight electrodes that can be placed on its cap. For the BrainBrowsR application, which uses visual stimulation, we need to place the electrodes on the occipital cortex. We recommend placing four electrodes on O1, Oz, O2, and AFz (the reference). See Figure 1.
 
 ![alt text](./images/electrode_selection.jpg)
 _Figure 1: Electrode locations for the BrainBrowsR application according to the 10-20 international electrode system_
