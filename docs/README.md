@@ -2,7 +2,7 @@
 
 [Return to the mainpage](../README.md)
 
-This is the developer documentation for the BrainBrowsR project by NeuroTech Leuven. The project consists of two main parts, a back-end and and a front-end. These are then connected through [websockets](websockets.md). The global structure that connects everything can be found in the following diagram.
+This is the developer documentation for the BrainBrowsR project by NeuroTech Leuven. The project consists of two main parts, a back-end and a front-end. These are then connected through [websockets](websockets.md). The global structure that connects everything can be found in the following diagram.
 
 ```mermaid
     flowchart TD;
