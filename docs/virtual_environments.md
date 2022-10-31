@@ -16,15 +16,13 @@ Proceed to create the virtual env using this command
 python -m venv .venv
 ```
 
-Finally, we need to activate the virtual environment using
-
-On Unix or Mac:
+Finally, we need to activate the virtual environment using on Unix or Mac:
 
 ```bash
 source .venv/bin/activate
 ```
 
-On Windows:
+and on Windows:
 
 ```powershell
 .\.venv\Scripts\activate
