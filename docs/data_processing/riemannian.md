@@ -12,7 +12,7 @@ Riemannian geometry is a branch of differential geometry that studies smooth man
 
 EEG data can be manipulated through their spatial covariances, then detected and classified by measuring the Riemannian distance between covariance matrices of signal epochs and covariance matrices of referenced epochs.
 
-The covariance captures the degree of linear dependence between several random variables, i.e. how the brain signals change relatively to each other. If two signals show the same variations, they are dependent. [read more](https://hal.uvsq.fr/hal-01710089)
+The covariance captures the degree of linear dependence between several random variables, i.e. how the brain signals change relative to each other. If two signals show the same variations, they are dependent. [read more](https://hal.uvsq.fr/hal-01710089)
 
 Covariance matrices are symmetric positive-definite (SPD) and are thus constrained to lie strictly inside a convex cone, which is the Riemannian manifold.
 
