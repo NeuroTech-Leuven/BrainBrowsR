@@ -27,7 +27,7 @@ The data starts from the stimuli. They are inserted in our extension as html ele
 
 ![headset](images/headset.png)
 
-The stimuli excite the brain in such a way that the EEG signals at the visual cortex will have the same frequency. In order to measure this potential, we need an electroencephalogram headset. We tested out various headsets, but decided on the headset produced by [Mentalab](https://mentalab.com). It does not require gel, it's easy and quick to put on and is comfortable to wear. More details can be found [here](docs/headset.md).
+The stimuli excite the brain in such a way that the electroencephalogram (EEG) signals at the visual cortex will have the same frequency. In order to measure this potential, we need an EEG headset. We tested out various headsets, but decided on the headset produced by [Mentalab](https://mentalab.com). It does not require gel, it's easy and quick to put on and is comfortable to wear. More details can be found [here](docs/headset.md).
 
 #### [Data processing](docs/data_processing.md)
 
