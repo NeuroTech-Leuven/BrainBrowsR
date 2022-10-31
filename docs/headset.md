@@ -1,6 +1,6 @@
 # Headset
 
-Writen by: Rien Sonck
+Written by: Rien Sonck
 
 ## Goal
 
