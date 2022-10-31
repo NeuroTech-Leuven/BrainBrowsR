@@ -54,7 +54,7 @@ This performance metric means our implementation rarely performs an action when 
 
 In contrast to CCA, we do not classify 0Hz with Riemannian geometry since we defined the filter bank to extend the signal, which can not be applied to 0Hz.
 
-We extend the raw signal at first. Then we extract 4-second epochs from the extended data. Since the dataset is small, we use [LeaveOneOut](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html) cross-validation in the offline pipeline for training and prediction. The confusion matrix visualizes the performance. The plot below shows the performance of prediction with accuracy 64% with a 95% confidence inerval of [50.5%,70.84$].
+We extend the raw signal at first. Then we extract 4-second epochs from the extended data. Since the dataset is small, we use [LeaveOneOut](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneOut.html) cross-validation in the offline pipeline for training and prediction. The confusion matrix visualizes the performance. The plot below shows the performance of prediction with accuracy 64% with a 95% confidence inerval of [50.5%,70.84%].
 
 ![alt text](./images/Riemannian_4s.svg "Confusion matrix of Riemannian geometry")
 
