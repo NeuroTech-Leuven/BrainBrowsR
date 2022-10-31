@@ -65,6 +65,6 @@ The back-end of BrainBrowR consists of two parts, the websockets server and the 
 
 The front-end is the extension. The front-end is written in JavaScript and with Firefox in mind as the browser. Firefox has created some useful tools to make the development of the extension easier. However, it should be easy to extend the extension to Chromium based browsers.
 
-The extension does three main things, first, detect that the user is looking at a certain stimulus. The extension will then respond appropriately by parsing the right post, described [here](extension/parsing.md) and then [processing this](extension/processing_posts.md).
+The extension does three main things, first, it inserts the stimuli in the webpage, the methodology for this is written [here](extension/stimuli.md). These stimuli will excite the brain so that the dataprocessing pipeline will detect that the user is looking at a certain stimulus. The extension will then respond appropriately by parsing the right post, described [here](extension/parsing.md) and then [processing this](extension/processing_posts.md).
 
 [Return to the mainpage](../README.md)
