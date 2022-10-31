@@ -1,22 +1,22 @@
 # Virtual Environments
 
-Virtual environments allow the user to manage depenedencies across multiple projects. Some projects might require different versions of different packages.
+Virtual environments allow the user to manage dependencies across multiple projects. Some projects might require different versions of different packages.
 
-To create virtual environment, we use a tool called venv.
+To create a virtual environment, we use a tool called venv.
 
-First create a new directory that will contain the virtual environment.
+First, create a new directory that will contain the virtual environment.
 
 ```bash
 mkdir .venv
 ```
 
-Proceed to create the virtualenv using this command
+Proceed to create the virtual env using this command
 
 ```bash
 python -m venv .venv
 ```
 
-Finally we need to activate the virtual environment using
+Finally, we need to activate the virtual environment using
 
 On Unix or Mac:
 
@@ -30,7 +30,7 @@ On Windows:
 .\.venv\Scripts\activate
 ```
 
-Now you can safely install the dependencies
+Now the dependencies can be safely installed
 
 ```bash
 pip install -r requirements.txt
