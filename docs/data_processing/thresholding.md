@@ -8,7 +8,7 @@ Our CCA algorithm returns a correlation (i.e. a value between 0 and 1) for each 
 + It should ensure that as many 'positive epochs' (where the user is looking at a stimulus)' as possible are classified correctly. This can be achieved by lowering the threshold.
 + It should ensure that as few 'negative epochs' (where the user is looking at content) as possible cause an action to be taken. This can be achieved by raising the threshold.
 
-## Implementation
+## [Implementation](../../src/data_processing/thresholding.py)
 The thresholding function takes into account the correlations of the current and of previous epochs. It calculates a measure of certainty for the current epoch by subtracting the second largest correlation from the largest correlation. If available, it also takes into account the previous score as $score[n] \* ( 1 + score[n-1]) + score[n-1]$
 
 Once the certainty of a certain frequency surpasses the threshold, it causes an action to be sent to the extension. 
