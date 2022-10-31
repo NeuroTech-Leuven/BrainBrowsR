@@ -1,7 +1,7 @@
 # BrainBrowsR
 
 This is the project code of NeuroTechLeuven's BrainBrowsR!
-BrainBrowsR is a software stack that allows a user to control the browser through SSVEP. We want to unlock the social media for people with extreme paralysis, ALS or locked-in syndrome.
+BrainBrowsR is a software stack that allows a user to control the browser through SSVEP. We want to unlock social media for people with extreme paralysis, ALS or locked-in syndrome.
 
 To achieve this, we built a web-extension that inserts stimuli into the web-page. Looking at these flickering elements generates a specific electrical signal in the brain, which we can measure with commercially available neurotechnology.
 
