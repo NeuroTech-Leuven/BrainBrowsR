@@ -6,8 +6,8 @@ Written by: Nils Van Rompaey
 
 Our CCA algorithm returns a correlation (i.e. a value between 0 and 1) for each of the three frequencies that could be present in the signal. However, we require a way to discriminate between when the user is looking at one of the stimuli rather than just looking at the content of the Instagram post. To this end, we implemented a thresholding function. It assigns a certainty based on the most recent epoch(s) correlations. This function should balance between two things:
 
-+ It should ensure that as many 'positive epochs' (where the user is looking at a stimulus)' as possible are classified correctly. This can be achieved by lowering the threshold.
-+ It should ensure that as few 'negative epochs' (where the user is looking at content) as possible cause an action to be taken. This can be achieved by raising the threshold.
++ It should ensure that as many 'positive epochs' (where the user is looking at a stimulus) are classified correctly, which can be achieved by lowering the threshold.
++ It should ensure that as few 'negative epochs' (where the user is looking at content) as possible cause an action to be taken, which can be achieved by raising the threshold.
 
 ## [Implementation](../../src/data_processing/thresholding.py)
 
