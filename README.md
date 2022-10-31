@@ -21,7 +21,7 @@ To represent BrainBrowsR we can use the following diagram:
 
 ![stimuli](images/stimuli.gif)
 
-The data starts from the stimuli. The stimuli are inserted by our extension into the web-page. The stimuli are inserted as html element and are animated by using CSS. This makes extremely simple for developers to change the frequency, icon, color and other properties. Moreover, it can be extended to other websites as well. When the user focuses on a certain element, the brain reacts accordingly. More details on the headset can be found in [our documentation](docs/extension/stimuli.md).
+The data starts from the stimuli. They are inserted in our extension as html element and are animated by using CSS into the web-page. This makes extremely simple for developers to change the frequency, icon, color and other properties. Moreover, it can be extended to other websites as well. When the user focuses on a certain element, the brain reacts accordingly. More details on the headset can be found in [our documentation](docs/extension/stimuli.md).
 
 #### Headset
 
