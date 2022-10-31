@@ -11,7 +11,11 @@ Our CCA algorithm returns a correlation (i.e. a value between 0 and 1) for each 
 
 ## [Implementation](../../src/data_processing/thresholding.py)
 
-The thresholding function takes into account the correlations of the current and previous epochs. It calculates a measure of certainty for the current epoch by subtracting the second-largest correlation from the largest correlation. If available, it also takes into account the previous score as $\frac{score_{w} * (1 + score_{w-1}) +  \sum_{i = 1}^{n} score_{t-i} }{n} $, where $w$ is the current window, and $n$ is the number of windows, i.e. focused length. After each epoch, the scores are compared to the threshold. This threshold can differ for each frequency, depending on the user's sensitivity to the different frequencies.
+The thresholding function takes into account the correlations of the current and previous epochs. It calculates a measure of certainty for the current epoch by subtracting the second-largest correlation from the largest correlation. If available, it also takes into account the previous score as 
+
+![alt text](./images/thresholding.jpg)
+
+, where $w$ is the current window, and $n$ is the number of windows, i.e. focused length. After each epoch, the scores are compared to the threshold. This threshold can differ for each frequency, depending on the user's sensitivity to the different frequencies.
 
 Once the certainty of one of the frequencies surpasses its threshold, it causes an action to be sent to the extension. After an action is performed, the thresholding starts anew without considering the epochs used for this action.
 
