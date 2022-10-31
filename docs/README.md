@@ -2,7 +2,7 @@
 
 [Return to the mainpage](../README.md)
 
-This is the developer documentation for the BrainBrowsR project by NeuroTech Leuven. The project consists of two main parts, a back-end and and a front-end. These are then connected through [websockets](websockets.md). The global structure that connects everything can be found in the following diagram.
+This is the developer documentation for the BrainBrowsR project by NeuroTech Leuven. The project consists of two main parts, a back-end and a front-end. These are then connected through [websockets](websockets.md). The global structure that connects everything can be found in the following diagram.
 
 ```mermaid
     flowchart TD;
@@ -59,7 +59,7 @@ This is the developer documentation for the BrainBrowsR project by NeuroTech Leu
 
 ## Back-end
 
-The back-end of BrainBrowR consists of two parts, the websockets server and the data-processing pipeline. The backend is written in Python is invisible to the user of the application. It collects the data from the headset, applies data-processing to it and sends the result to the extension through websockets. To learn more about websockets, go to the documentation in [this document](websockets.md). To learn more about the data-processing pipeline, go to the documentation [here](data_processing.md).
+The back-end of BrainBrowR consists of two parts, the websockets server and the data-processing pipeline. The backend is written in Python and is invisible to the user of the application. It collects the data from the headset, applies data-processing to it and sends the result to the extension through websockets. To learn more about websockets, go to the documentation in [this document](websockets.md). To learn more about the data-processing pipeline, go to the documentation [here](data_processing.md).
 
 ## Front-end
 
