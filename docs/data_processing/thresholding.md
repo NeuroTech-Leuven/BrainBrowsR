@@ -15,7 +15,7 @@ The thresholding function takes into account the correlations of the current and
 
 ![alt text](./images/thresholding.jpg)
 
-, where $w$ is the current window, and $n$ is the number of windows, i.e. focused length. After each epoch, the scores are compared to the threshold. This threshold can differ for each frequency, depending on the user's sensitivity to the different frequencies.
+, where $w$ is the current window, $n$ is the number of windows, i.e. focused length, and $score_w$ is a vector containing a threshold for each frequency. After each epoch, the scores are compared to the threshold. This threshold can differ for each frequency, depending on the user's sensitivity to the different frequencies.
 
 Once the certainty of one of the frequencies surpasses its threshold, it causes an action to be sent to the extension. After an action is performed, the thresholding starts anew without considering the epochs used for this action.
 
