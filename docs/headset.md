@@ -34,7 +34,7 @@ _Figure 2: Dry electrode types for the Mentalab Explore headset_
 
 #### 3) Checking the signal of the electrodes
 
-Once the cap has been put on the head make sure all electrodes are touching the scalp for better conductance. When using comb electrodes, you can push on comb electrode and gently wiggle it to make sure that the comb is getting through the hair to the scalp.
+Once the cap has been put on the head make sure all electrodes are touching the scalp for better conductance. When using comb electrodes, you can push on the comb electrode and gently wiggle it to make sure that the comb is getting through the hair to the scalp.
 
 Once done, you power on the headset (Mentalab has already written a great quick start documentation, which you can find here: [Quick start guide (pdf)](https://wiki.mentalab.com/pdfs/Mentalab_Explore_Quick_Start_Guide.pdf).) and you can run the windows explore application or use the following command in your ipython ([Read how to install ipython here](https://ipython.org/install.html)) to check the incoming EEG signal in your browser:
 
