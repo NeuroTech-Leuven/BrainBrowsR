@@ -40,6 +40,11 @@ Follow-up question: Do you think that the patients would suffer from seeing ever
 
 The experts were, in general, really happy with the effort we made to develop a new application for their patients. They would also like to help us to bring the application to the patients after optimizing the application for healthy participants.
 
+The interviews gave us insights into the patients needs and lifestyle. These insights are utterly helpful when tackling different challenges, as our first priority is to resolve patient needs by improving the application accordingly. At the same time, it gave us confidence on the approach taken, as social interaction has shown to improve many aspects of patients lifestyles. 
+
+<p align="center">"The quality of life is correlated with the capacity to connect to others", Steve Laureys.</p> 
+
+
 
 
 
