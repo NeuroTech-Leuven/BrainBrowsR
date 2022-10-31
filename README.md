@@ -45,7 +45,7 @@ The data-processing part will tell the extension to perform a certain action. Fo
 
 ### NeuroTech Leuven
 
-[NeuroTech Leuven](ntxl.org) is an organization based in Leuven, where students work together on projects and events are organised to promote neurotechnology in Belgium.
+[NeuroTech Leuven](https://www.ntxl.org) is an organization based in Leuven, where students work together on projects and events are organised to promote neurotechnology in Belgium.
 
 ### The team
 
