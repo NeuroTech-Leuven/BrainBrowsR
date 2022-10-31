@@ -24,13 +24,11 @@ Each stimulus is a flickering button with a size of 200x200 pixels that has a di
 | Previous post | Blue  | 10 Hz     |
 | Next post     | Black | 12 Hz     |
 
-
-
 ### Recordings
 
 For user comfort and to prevent fatigue, each recording lasted 60 seconds. These [recordings](sample/sample_data) were later cut into 4s epochs, resulting in 15 epochs per recording.
 
-## Results
+## Comparison
 
 We classified these recordings using the algorithms we implemented and compared the results.
 

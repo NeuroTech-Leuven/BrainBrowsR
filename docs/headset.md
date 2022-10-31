@@ -23,7 +23,6 @@ Before using our application, it is important to make sure that electrodes are p
 The Metalab Explore headset has 8 electrodes that you can place on their cap. For the BrainBrowsR application, which uses visual stimulation, we need to place the electrodes on the occipital cortex. We recommend placing three electrodes on O1, Oz, and O2, see Figure 1.
 
 ![alt text](./images/electrode_selection.jpg)
-
 _Figure 1: Electrode locations for the BrainBrowsR application according to the 10-20 international electrode system_
 
 #### 2) Electrode type
@@ -31,7 +30,6 @@ _Figure 1: Electrode locations for the BrainBrowsR application according to the 
 The Mentalab headset comes with two types of dry electrodes. Comb electrodes and flat electrodes, see Figure 2. Comb electrodes are ideal for locations that contain hair, thus if you are using the BrainBrowsR application with someone that has hair, install the comb electrodes. If the person is bald, flat electrodes can be used instead.
 
 ![alt text](./images/electrode_types.jpg)
-
 _Figure 2: Dry electrode types for the Mentalab Explore headset_
 
 #### 3) Checking the signal of the electrodes
@@ -50,7 +48,6 @@ explorer.visualize(bp_freq=(.5, 30), notch_freq=50)
 Make sure that the signal looks steady (stay still and don't move), see Figure 3.
 
 ![alt text](./images/good_bad_eeg.jpg)
-
 _Figure 3: Shows the difference between a good and bad EEG signal_
 
 you can then check the responsiveness of the signal by
@@ -60,7 +57,6 @@ you can then check the responsiveness of the signal by
    Your signal should look stimilar to Figure 4.
 
 ![alt text](./images/eye_blinks_EEG.jpg)
-
 _Figure 4: EEG signal with and without eye blinks_
 
 [Return to mainpage](../README.md)

@@ -24,7 +24,7 @@ In the following deriviations, three variables are defined: $M$ the number of EE
 
 To classify SSVEP signals with CCA, we construct a cca model $\text{CCA}_f$ per target frequency $f$. As can be seen in the previous figure $X\in \mathbb{R}^{M \times Q}$ is the multichannel EEG signal, each row contains a EEG signal across time for a specific channel. For each of the frequencies, we construct a reference signal $Y_f \in \mathbb{R}^{2N_h \times Q}$. This reference signal that consist of a sine and cosine signals for that frequency and each of the harmonics harmonics:
 
-$$ 
+$$
 Y_f = {\left\lbrack \matrix{
 cos(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 1) \cr
 sin(2 \cdot \pi \cdot f \cdot q \cdot T_s \cdot 1) \cr
