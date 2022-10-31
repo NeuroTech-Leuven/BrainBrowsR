@@ -1,4 +1,4 @@
-# Thresholding 
+# Thresholding
 
 Written by: Nils Van Rompaey
 
@@ -21,7 +21,7 @@ An example using three epochs and a uniform threshold of 0.15 is given below. In
 |-|:-:|:-:|:-:|
 | Epoch t-2 | 0.15 | 0.10 | 0.07 |
 | Epoch t-1 | 0.08 | 0.18  | 0.04 |
-| Epoch t (newest) | 0.07 | 0.15 | 0.09 | 
+| Epoch t (newest) | 0.07 | 0.15 | 0.09 |
 
 | *Certainty scores* | 8Hz | 10 Hz | 12 Hz |
 |-|:-:|:-:|:-:|
@@ -29,7 +29,7 @@ An example using three epochs and a uniform threshold of 0.15 is given below. In
 | Epoch t-1 | 0.05 | 0.10 | 0 |
 | Epoch t (newest) | 0.05 | ***0.16*** | 0 |
 
-The thresholds and the number of previous epochs that are considered can be adjusted to optimise the trade-off mentioned [above](#goal). In doing so, the odds that a random frequency is mistakenly chosen in consecutive epochs and that an unwanted action is performed accordingly, are reduced. 
+The thresholds and the number of previous epochs that are considered can be adjusted to optimise the trade-off mentioned [above](#goal). In doing so, the odds that a random frequency is mistakenly chosen in consecutive epochs and that an unwanted action is performed accordingly, are reduced.
 
 ## Results
 
