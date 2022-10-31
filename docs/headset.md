@@ -23,6 +23,7 @@ Before using our application, we must ensure that electrodes are correctly place
 The Metalab Explore headset has eight electrodes that can be placed on its cap. For the BrainBrowsR application, which uses visual stimulation, we need to place the electrodes on the occipital cortex. We recommend placing four electrodes on O1, Oz, O2, and AFz (the reference). See Figure 1.
 
 ![alt text](./images/electrode_selection.jpg)
+
 _Figure 1: Electrode locations for the BrainBrowsR application according to the 10-20 international electrode system_
 
 #### 2) Electrode type
@@ -30,6 +31,7 @@ _Figure 1: Electrode locations for the BrainBrowsR application according to the 
 The Mentalab headset comes with two types of dry electrodes. Comb electrodes and flat electrodes see Figure 2. Comb electrodes are ideal for locations that contain hair. Thus if you are using the BrainBrowsR application with someone with hair, install the comb electrodes. If the person is bald, flat electrodes can be used instead.
 
 ![alt text](./images/electrode_types.jpg)
+
 _Figure 2: Dry electrode types for the Mentalab Explore headset_
 
 #### 3) Checking the signal of the electrodes
