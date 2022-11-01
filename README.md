@@ -53,7 +53,7 @@ The data processing part will tell the extension to perform a specific action. F
 
 ### The team
 
-![the team](./images/theTeam.jpg)
+![the team](./images/theTeam.png)
 
 The BrainBrowsR team consists of the following people, mentioned alphabetically:
 
