@@ -2,6 +2,8 @@ import numpy as np
 ###############
 # Threshold #
 ###############
+#threshold is a vector!#
+
 def Thresholding(threshold, data):
     Certainty = np.zeros(np.shape(data))
     for i in range(np.shape(data)[0]):
@@ -13,7 +15,7 @@ def Thresholding(threshold, data):
     print(Certainty)
     print(threshold)
     for j in range(len(Certainty[-1])):
-        if Certainty[-1,j] > threshold:
+        if Certainty[-1,j] > threshold[j]:
             return Certainty[-1,j], j
     
     return -1,-1
