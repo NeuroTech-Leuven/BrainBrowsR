@@ -9,7 +9,7 @@ To achieve this, we built a web extension that inserts stimuli into the web page
 
 ## Project Video
 
-[![NeuroTech Leuven 2022 video](https://img.youtube.com/vi/eefQyHi1Bd8/0.jpg)](https://youtu.be/eefQyHi1Bd8)
+[![NeuroTech Leuven 2022 video](./images/visual_cue.png)](https://youtu.be/eefQyHi1Bd8)
 
 ## Project Overview
 
