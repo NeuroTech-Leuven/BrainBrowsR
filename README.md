@@ -120,9 +120,9 @@ A lot still has to happen before BrainBrowsR reaches its end-users. We interview
 
 Secondly, there is a limit on the number of interactive elements shown on one screen. Better visualization of these stimuli and more precise measuring equipment could be beneficial.
 
-Thirdly, more measures must be taken into account for errors in our software. It can be very frustrating for the user when something does not work correctly. Therefore we want to do our service as quickly as possible and implement more mechanisms for a smoother user experience for both the user and their caretakers.
+Thirdly, more measures must be taken into account for errors in our software. It can be very frustrating for the user when something does not work correctly. Therefore we would perform customer service as quickly as possible and implement more mechanisms for a smoother user experience for both the user and their caretakers.
 
-Finally, our software can readily implement a keyboard that works on different classifying algorithms, such as the ones made by other NeuroTechX teams. Doing so and testing which works best would make the user experience smoother.
+Finally, our software can readily implement a keyboard that works on different classifying algorithms, such as the ones made by other NeuroTechX teams. Doing so and testing which works best would open a lot of communication opportunites for our end-users.
 ## Further development
 
 If you wish to use this repo as a basis for your project, we recommend installing web-ext by Mozilla. This tool makes it easier to develop web extensions.
