@@ -116,13 +116,16 @@ The other option is temporarily installing it, using [these instructions](https:
 
 ## Limitation and future plans
 
-A lot still has to happen before BrainBrowsR reaches its end-users. We interviewed Steven Laureys, a Neurologist who worked with LIS patients, and Ujwal Chaudhary, founder of ALS voice. They underlined our application's potential positive impact on their patients and supported our initiative. They indicated a considerable gap between getting our application to work on healthy patients versus our intended patient group. Regarding the limited time and the ethical and regulatory challenges of working with actual patients, this still needs to be done in the future with the help of the two specialists. The interview with questions and answers of the specialist can be found [here](https://github.com/NeuroTech-Leuven/Project-22/blob/main/docs/Human%20practices.md).
+-A lot still has to happen before BrainBrowsR reaches its end-users. We interviewed Steven Laureys, a Neurologist who worked with LIS patients, and Ujwal Chaudhary, founder of ALS voice. They underlined our application's potential positive impact on their patients and supported our initiative. They indicated a considerable gap between getting our application to work on healthy patients versus our intended patient group. Regarding the limited time and the ethical and regulatory challenges of working with actual patients, this still needs to be done in the future with the help of the two specialists. The interview with questions and answers of the specialist can be found [here](https://github.com/NeuroTech-Leuven/Project-22/blob/main/docs/Human%20practices.md).
 
-Secondly, there is a limit on the number of interactive elements shown on one screen. Better visualization of these stimuli and more precise measuring equipment could be beneficial.
+- There is a limit on the number of interactive elements shown on one screen. Better visualization of these stimuli and more precise measuring equipment could be beneficial.
 
-Thirdly, more measures must be taken into account for errors in our software. It can be very frustrating for the user when something does not work correctly. Therefore we would perform customer service as quickly as possible and implement more mechanisms for a smoother user experience for both the user and their caretakers.
+- More measures must be taken into account for errors in our software. It can be very frustrating for the user when something does not work correctly. Therefore we would perform customer service as quickly as possible and implement more mechanisms for a smoother user experience for both the user and their caretakers.
 
-Finally, our software can readily implement a keyboard that works on different classifying algorithms, such as the ones made by other NeuroTechX teams. Doing so and testing which works best would open a lot of communication opportunites for our end-users.
+- Our software can readily implement a keyboard that works on different classifying algorithms, such as the ones made by other NeuroTechX teams. Doing so and testing which works best would open a lot of communication opportunites for our end-users.
+
+- We are working on BrainBrowsR 2.0, which is now in alpha. It contains several features, such as: Automatic frequency generation; based on harmonics of the refreshrate, The ability to transform any HTML element into a stimulus by merely typing it's class in a list and eyetracking integration.
+
 ## Further development
 
 If you wish to use this repo as a basis for your project, we recommend installing web-ext by Mozilla. This tool makes it easier to develop web extensions.
