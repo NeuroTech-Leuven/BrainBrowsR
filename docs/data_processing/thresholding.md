@@ -13,11 +13,11 @@ Our CCA algorithm returns a correlation (i.e. a value between 0 and 1) for each 
 
 The thresholding function takes into account the correlations of the current and previous epochs. It calculates a measure of certainty for the current epoch by subtracting the second-largest correlation from the largest correlation. If available, it also takes into account the previous score as 
 
-![alt text](./images/thresholding.jpg)
+![alt text](./images/Capture.PNG)
 
-, where $w$ is the current window, $n$ is the number of windows, i.e. focused length, and $score_w$ is a vector containing a threshold for each frequency. After each epoch, the scores are compared to the threshold. This threshold can differ for each frequency, depending on the user's sensitivity to the different frequencies.
+, where $w$ detones the current window, $n$ is the number of windows, i.e. focus length, and $score_w$ contains the CCA correlations for each frequency prediction. After each epoch, the scores are compared to a threshold vector, which contains thresholds for each frequency. Depending on the user's sensitivity to the different frequencies, the threshold for each frequency must be determined through calibration.
 
-Once the certainty of one of the frequencies surpasses its threshold, it causes an action to be sent to the extension. After an action is performed, the thresholding starts anew without considering the epochs used for this action.
+Once the certainty of one of the frequencies surpasses its threshold, the index of the frequency is send to XTENSION. After an action is performed, the thresholding restarts with a certainty matrix containing all zeroes.
 
 An example using three epochs and a uniform threshold of 0.15 is given below. In this example, 10 Hz is selected after three epochs.
 
@@ -30,8 +30,13 @@ An example using three epochs and a uniform threshold of 0.15 is given below. In
 | *Certainty scores* | 8Hz | 10 Hz | 12 Hz |
 |-|:-:|:-:|:-:|
 | Epoch w-2 | 0.05 | 0 | 0 |
-| Epoch w-1 | 0.05 | 0.10 | 0 |
-| Epoch w (newest) | 0.05 | ***0.16*** | 0 |
+| Epoch w-1 | 0 | 0.10 | 0 |
+| Epoch w (newest) | 0 | 0.066 | 0 |
+|  |  | |  |
+| Final certainty | 0.05 |**0.166** | 0 |
+| Threshold | 0.15 |**0.15** | 0.15 |
+| Action | / |**Send** | / |
+
 
 The thresholds and the number of previous epochs can be adjusted to optimise the trade-off mentioned [above](#goal). In doing so, the odds that a random frequency is mistakenly chosen in consecutive epochs and that an unwanted action is performed accordingly are reduced.
 
