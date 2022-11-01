@@ -7,6 +7,10 @@ To achieve this, we built a web extension that inserts stimuli into the web page
 
 ![BrainBrowsR](./images/BrainBrowsR.png)
 
+## Project Video
+
+[![NeuroTech Leuven 2022 video](./images/theTeam.png)](https://youtu.be/eefQyHi1Bd8)
+
 ## Project Overview
 
 This document is a very brief overview of our project. For people interested in more details, check out [our documentation](docs/README.md).
